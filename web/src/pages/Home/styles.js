@@ -6,6 +6,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
   /* z-index: unset; */
   
@@ -32,15 +33,25 @@ export const Header = styled.header`
   .right {
     padding: 12px;
   }
-  .right a {
+  .right #signup {
+    color: white;
+    height: 100%;
+    padding: 12px 22px;
+    background-color: #1A73E8;
+  }
+
+  .right .button-nav{
     color: rgba(0,0,0,0.65);
     margin-right: 24px;
   }
 
+  .right .button-nav:hover {
+    color: rgba(0,0,0,0.9);
+    transition: 300ms;
+  }
+
   .right button {
-    padding: 12px 22px;
     border: 0;
-    background-color: #1A73E8;
     color: white;
     font-size: 17px;
     letter-spacing: 0.2px;
@@ -62,12 +73,15 @@ export const Content = styled.div`
   height: 90%;
 
   button {
-    padding: 12px 22px;
     border: 0;
-    background-color: #1A73E8;
-    color: white;
     font-size: 17px;
     letter-spacing: 0.2px;
+  }
+
+  a{
+    padding: 12px 22px;
+    background-color: #1A73E8;
+    color: white;
   }
 
   button:hover {

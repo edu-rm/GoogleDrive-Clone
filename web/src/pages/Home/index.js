@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
 
@@ -13,9 +14,11 @@ function Home() {
           <h1>Duolc</h1>
         </div>
         <div className="right">
-          <a href="#">Iniciar sessão</a>
+          <Link className="button-nav" to="/signin">Iniciar sessão</Link>
           <button type="button">
-            Crie uma conta
+            <Link id='signup' to='/signup'>
+              Crie uma conta
+            </Link>
           </button>
         </div>
       </Header>
@@ -24,7 +27,9 @@ function Home() {
           <h1>Faça mais com o DuolcCloud</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi mollitia necessitatibus velit ipsum, placeat nulla sit? Laboriosam quam id facilis</p>
           <button type="button">
-            Crie uma conta
+            <Link to='/signup'>
+              Crie uma conta
+            </Link>
           </button>
         </div>
         <div className="image">
