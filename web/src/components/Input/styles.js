@@ -12,20 +12,28 @@ label {
   padding: 0 4px;
   color: rgba(0,0,0, 0.6);
   font-weight: 100;
+}
 
-  ${(props) => 
+input {
+  background-color: white;
+}
+
+${(props) => 
     props.focus ?
     css`
-      &{
+      label{
         top: -4px;
         font-size: 10px;
         transition: 300ms;
-        color: black;
+        color: #1A73E8;
+      }
+      input {
+        border: 1.5px solid #1A73E8;
       }
     ` 
     :
     css`
-      &{
+      label{
         /* top: -4px;
         font-size: 10px; */
         transition: 300ms;
@@ -33,20 +41,5 @@ label {
       }
     `
   }
-}
-
-
-
-
-
-#no-effect {
-  transition: 300ms;
-}
-
-#outline-effect {
-  border: 1px solid blue;
-  transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
 
 `;

@@ -6,7 +6,6 @@ import { InputStyle } from './styles';
 
 export default function Input({ id, type, labelContent }){
   const [isFocused, setIsFocused ]  = useState(false);
-  const [isFilled, setIsFilled ]  = useState(false);
 
   const inputRef = useRef(null);
 
