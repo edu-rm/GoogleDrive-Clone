@@ -16,7 +16,10 @@ export const Content = styled.div`
   align-items: center;
   width: 55%;
 
-
+  button {
+    border: 0;
+    background:none;
+  }
   /* left side */
 
   .left {
@@ -78,10 +81,6 @@ export const Content = styled.div`
       #signin {
         color: #1A73E8;
         font-weight: bold;
-      }
-
-      button {
-        border: 0;
       }
 
       button a {

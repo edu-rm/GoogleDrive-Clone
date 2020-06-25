@@ -4,7 +4,7 @@ import React, { useState, useRef, useCallback } from 'react';
 
 import { InputStyle } from './styles';
 
-export default function Input({ id, type, labelContent, size }){
+export default function Input({ id, type, labelContent, size, onChange }){
   const [isFocused, setIsFocused ]  = useState(false);
 
   const inputRef = useRef(null);
@@ -30,6 +30,7 @@ export default function Input({ id, type, labelContent, size }){
         type={type} 
         onBlur={handleBlur} 
         onFocus={handleFocus}
+        onChange={(e)=>onChange(e.target.value)}
       />
     </InputStyle>
     

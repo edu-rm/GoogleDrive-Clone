@@ -9,6 +9,25 @@ import Input from '../../components/Input';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 function SignUp() {
+  const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+
+  const [senhaVisible, setSenhaVisible] = useState(false);
+  const [inputSenhaType, setInputSenhaType] = useState('password');
+
+  function handleVisibility () {
+    setSenhaVisible(!senhaVisible);
+    if(inputSenhaType === 'password'){
+      setInputSenhaType('text');
+      console.log('aqui');
+    }else {
+      setInputSenhaType('password');
+    }
+  }
+
 
   return (
     <Container>
@@ -19,12 +38,12 @@ function SignUp() {
           <form>
             <div className="nomes">
               <div className="nome">
-                {/* <label htmlFor="input-nome">Nome</label> */}
                 <Input 
                   id="input-nome"
                   type="text"
                   labelContent="Nome"
                   size="small"
+                  onChange={setNome}
                 />
               </div>
               <div className="sobrenome">
@@ -33,6 +52,7 @@ function SignUp() {
                   id="input-sobrenome"
                   labelContent="Sobrenome"
                   size="small"
+                  onChange={setSobrenome}
                 />
               </div>
             </div>
@@ -42,29 +62,41 @@ function SignUp() {
                 id="email"   
                 labelContent="Email"
                 size="small"
+                onChange={setEmail}
               />
             </div>
 
             <div className="senha">
               <div className="primeira-senha">
                 <Input 
-                  type="password" 
+                  type={inputSenhaType} 
                   id="senha1"
                   labelContent="Senha"
                   size="small"
+                  onChange={setSenha}
                 />
               </div>
               <div className="confirmar-senha">
                 <Input 
-                  type="password" 
+                  type={inputSenhaType} 
                   id="senha2"
                   labelContent="Confirmar"
                   size="small"
+                  onChange={setConfirmarSenha}
                 />
               </div>
 
-            
-              <MdVisibility size={40} color="#000" />
+              {
+                !senhaVisible 
+                ?
+                <button onClick={handleVisibility}>
+                  <MdVisibility size={40} color="#000" />
+                </button>
+                :
+                <button onClick={handleVisibility}>
+                  <MdVisibilityOff size={40} color="#000" />
+                </button>
+              }
             </div>
             
             <div className="form-footer">

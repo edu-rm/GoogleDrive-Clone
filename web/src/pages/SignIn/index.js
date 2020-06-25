@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import Input from '../../components/Input';
 
 function SignIn() {
-  const [input, setInput] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
   return (
     <Container>
@@ -19,6 +20,7 @@ function SignIn() {
               id="email-login" 
               type="text"
               labelContent="Email"
+              onChange={setEmail}
             />
           </div>
           <div className="senha">
@@ -26,6 +28,7 @@ function SignIn() {
               id="senha-login" 
               type="text"
               labelContent="Senha"
+              onChange={setSenha}
             />
           </div>
         </form>
