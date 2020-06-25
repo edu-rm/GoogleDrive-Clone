@@ -16,42 +16,45 @@ export const Content = styled.div`
   align-items: center;
   width: 55%;
 
-  /* Efeitos */
-  label {
-    position : absolute;
-    left: 8px;
-    top: 8px;
-    cursor: text;
-    background-color: white;
-    padding: 0 4px;
-  }
 
-  #effect {
-    top: -4px;
-    /* right: 8px; */
-    font-size: 10px;
-    transition: 300ms;
-  }
-
-  #no-effect {
-    transition: 300ms;
-  }
-
-  #outline-effect {
-    border: 1px solid blue;
-    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
+  /* left side */
 
   .left {
     width: 60%;
 
-    .nome, .sobrenome {
+    .nome, .sobrenome, .email, .confirmar-senha, .primeira-senha {
       position: relative;
     }
 
-    .nomes .nome input {
-      /* width: 100%; */
+    /* Efeitos */
+
+    label {
+      position : absolute;
+      left: 8px;
+      top: 8px;
+      cursor: text;
+      background-color: white;
+      padding: 0 4px;
+      color: rgba(0,0,0, 0.5);
+      font-weight: 100;
     }
+
+    #effect {
+      top: -4px;
+      /* right: 8px; */
+      font-size: 10px;
+      transition: 300ms;
+    }
+
+    #no-effect {
+      transition: 300ms;
+    }
+
+    #outline-effect {
+      border: 1px solid blue;
+      transition:cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
 
 
     
@@ -74,7 +77,7 @@ export const Content = styled.div`
     input {
       padding: 7px 11px;
       border: 1px solid rgba(0,0,0,0.4);
-      border-radius: 6px;
+      border-radius: 4px;
       /* width: 200px; */
       width: 100%;
     }
@@ -82,12 +85,11 @@ export const Content = styled.div`
     .nomes {
       margin-bottom: 32px;
       display: flex;
-      /* justify-content: space-between; */
-      /* width: 100%; */
-      /* input {
-        width: 45%;
-      } */
+      div + div {
+        margin-left: 20px;
+      }
     }
+
     .email input {
       width: 100%;
       margin-bottom: 32px;
@@ -98,8 +100,8 @@ export const Content = styled.div`
       align-items: center;
       margin-bottom: 32px;
       
-      input {
-        margin-right: 16px;
+      div + div {
+        margin: 0 20px 0 20px;
       }
     }
 
@@ -134,6 +136,7 @@ export const Content = styled.div`
     flex-direction: column;
     align-items: center;
     margin-left: 10px;
+    text-align: center;
 
     img {
       width: 80%;      

@@ -25,15 +25,16 @@ function SignUp() {
 
   function handleFocusOut(e) {
     var label = null;
-
-    var labels = document.getElementsByTagName('LABEL');
-    for ( let i = 0 ; i < labels.length ; i++) {
-      if(labels[i].htmlFor === e.target.id){
-        label = labels[i];
-        break;
+    if(! e.target.value ){
+      var labels = document.getElementsByTagName('LABEL');
+      for ( let i = 0 ; i < labels.length ; i++) {
+        if(labels[i].htmlFor === e.target.id){
+          label = labels[i];
+          break;
+        }
       }
+      label.id = 'no-effect';
     }
-    label.id = 'no-effect';
     // e.target.id = 'no-outline-effect';
   }
   return (
@@ -64,13 +65,39 @@ function SignUp() {
               </div>
             </div>
             <div className="email">
-              <input type="email" placeholder="Email"/>
+              <label htmlFor="email">Email</label>
+              <input 
+                type="email" 
+                id="email"                   
+                onBlur={(event) => handleFocusOut(event)} 
+                onFocus={(event) => handleFocus(event)}
+              />
             </div>
+
             <div className="senha">
-              <input type="password" placeholder="Senha"/>
-              <input type="password" placeholder="Confirmar senha"/>
+              <div className="primeira-senha">
+                <label htmlFor="senha1">Senha</label>
+                <input 
+                  type="password" 
+                  id="senha1"                  
+                  onBlur={(event) => handleFocusOut(event)} 
+                  onFocus={(event) => handleFocus(event)}
+                />
+              </div>
+              <div className="confirmar-senha">
+                <label htmlFor="senha2">Confirmar</label>
+                <input 
+                  type="password" 
+                  id="senha2"
+                  onBlur={(event) => handleFocusOut(event)} 
+                  onFocus={(event) => handleFocus(event)}
+                />
+              </div>
+
+            
               <MdVisibility size={40} color="#000" />
             </div>
+            
             <div className="form-footer">
               <Link id="signin" to='/signin'>Faça login</Link>
               <button type="button">
