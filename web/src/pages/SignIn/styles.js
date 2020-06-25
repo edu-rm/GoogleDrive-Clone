@@ -58,7 +58,7 @@ export const Content = styled.div`
       width: 70%;
       margin-top: 45px;
       
-      #signin {
+      #signup {
         color: #1A73E8;
         font-weight: bold;
       }

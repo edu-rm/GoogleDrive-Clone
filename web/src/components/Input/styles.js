@@ -33,6 +33,7 @@ label {
 
 input {
   background-color: white;
+  border: 1px solid rgba(0,0,0,0.4);
 }
 
 ${(props) => 

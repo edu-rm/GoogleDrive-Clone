@@ -43,7 +43,6 @@ export const Content = styled.div`
 
     input {
       padding: 7px 11px;
-      border: 1px solid rgba(0,0,0,0.4);
       border-radius: 4px;
       /* width: 200px; */
       width: 100%;

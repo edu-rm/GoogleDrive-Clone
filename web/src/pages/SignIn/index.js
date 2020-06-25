@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Input from '../../components/Input';
 
 function SignIn() {
+  const [input, setInput] = useState('');
 
   return (
     <Container>
@@ -29,7 +30,7 @@ function SignIn() {
           </div>
         </form>
         <div className="footer-signin">
-          <Link id="signin" to='/signin'>Faça login</Link>
+          <Link id="signup" to='/signup'>Crie uma conta</Link>
           <button type="button">
             <Link to='/'>Próxima</Link>
           </button>
