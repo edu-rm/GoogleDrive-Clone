@@ -44,6 +44,7 @@ export const Content = styled.div`
       /* right: 8px; */
       font-size: 10px;
       transition: 300ms;
+      color: black;
     }
 
     #no-effect {
@@ -122,10 +123,9 @@ export const Content = styled.div`
         background-color: #1A65C8;
         color: white;
         letter-spacing: 0.2px;
-        padding: 10px 12px;
+        padding: 10px 40px;
         border-radius: 6px;
         font-weight: bold;
-
       }
     }
   }
