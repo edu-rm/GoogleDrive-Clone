@@ -3,10 +3,27 @@ import styled, { css } from 'styled-components';
 export const InputStyle = styled.div`
 /* Efeitos */
 
+
+${
+  (props)=> props.size === 'small'
+  ?
+  css`
+    label {
+      top: 8px;
+    }
+  `
+  :
+  css`
+    label {
+      top: 16px;
+    }
+  `
+}
+
 label {
   position : absolute;
   left: 8px;
-  top: 16px;
+  /* top: 8px; */
   cursor: text;
   background-color: white;
   padding: 0 4px;

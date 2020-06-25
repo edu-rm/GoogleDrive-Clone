@@ -7,35 +7,6 @@ import Input from '../../components/Input';
 
 function SignIn() {
 
-  function handleFocus(e) {
-    var label= null;
-
-    var labels = document.getElementsByTagName('LABEL');
-    for (var i = 0; i < labels.length; i++) {
-        if (labels[i].htmlFor === e.target.id) {
-          label = labels[i];   
-          break;   
-        }
-    }
-    label.id = 'effect';
-    // e.target.id = 'outline-effect';
-  }
-
-  function handleFocusOut(e) {
-    var label = null;
-    if(! e.target.value ){
-      var labels = document.getElementsByTagName('LABEL');
-      for ( let i = 0 ; i < labels.length ; i++) {
-        if(labels[i].htmlFor === e.target.id){
-          label = labels[i];
-          break;
-        }
-      }
-      label.id = 'no-effect';
-    }
-    // e.target.id = 'no-outline-effect';
-  }
-
   return (
     <Container>
       <Content>

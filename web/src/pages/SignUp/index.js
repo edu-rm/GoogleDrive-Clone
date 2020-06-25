@@ -1,42 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import { Container, Content } from './styles';
 
+import Input from '../../components/Input';
+
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 function SignUp() {
-  const [inputEffect, setInputEffect] = useState(false);
 
-  function handleFocus(e) {
-    var label= null;
-
-    var labels = document.getElementsByTagName('LABEL');
-    for (var i = 0; i < labels.length; i++) {
-        if (labels[i].htmlFor === e.target.id) {
-          label = labels[i];   
-          break;   
-        }
-    }
-    label.id = 'effect';
-    // e.target.id = 'outline-effect';
-  }
-
-  function handleFocusOut(e) {
-    var label = null;
-    if(! e.target.value ){
-      var labels = document.getElementsByTagName('LABEL');
-      for ( let i = 0 ; i < labels.length ; i++) {
-        if(labels[i].htmlFor === e.target.id){
-          label = labels[i];
-          break;
-        }
-      }
-      label.id = 'no-effect';
-    }
-    // e.target.id = 'no-outline-effect';
-  }
   return (
     <Container>
       <Content>
@@ -46,51 +19,47 @@ function SignUp() {
           <form>
             <div className="nomes">
               <div className="nome">
-                <label htmlFor="input-nome">Nome</label>
-                <input 
+                {/* <label htmlFor="input-nome">Nome</label> */}
+                <Input 
                   id="input-nome"
-                  onBlur={(event) => handleFocusOut(event)} 
-                  onFocus={(event) => handleFocus(event)} 
                   type="text"
+                  labelContent="Nome"
+                  size="small"
                 />
               </div>
               <div className="sobrenome">
-                <label htmlFor="input-sobrenome">Sobrenome</label>
-                <input 
+                <Input 
                   type="text" 
                   id="input-sobrenome"
-                  onBlur={(event) => handleFocusOut(event)} 
-                  onFocus={(event) => handleFocus(event)}
+                  labelContent="Sobrenome"
+                  size="small"
                 />
               </div>
             </div>
             <div className="email">
-              <label htmlFor="email">Email</label>
-              <input 
+              <Input 
                 type="email" 
-                id="email"                   
-                onBlur={(event) => handleFocusOut(event)} 
-                onFocus={(event) => handleFocus(event)}
+                id="email"   
+                labelContent="Email"
+                size="small"
               />
             </div>
 
             <div className="senha">
               <div className="primeira-senha">
-                <label htmlFor="senha1">Senha</label>
-                <input 
+                <Input 
                   type="password" 
-                  id="senha1"                  
-                  onBlur={(event) => handleFocusOut(event)} 
-                  onFocus={(event) => handleFocus(event)}
+                  id="senha1"
+                  labelContent="Senha"
+                  size="small"
                 />
               </div>
               <div className="confirmar-senha">
-                <label htmlFor="senha2">Confirmar</label>
-                <input 
+                <Input 
                   type="password" 
                   id="senha2"
-                  onBlur={(event) => handleFocusOut(event)} 
-                  onFocus={(event) => handleFocus(event)}
+                  labelContent="Confirmar"
+                  size="small"
                 />
               </div>
 
