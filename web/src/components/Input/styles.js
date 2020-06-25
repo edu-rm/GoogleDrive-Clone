@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const InputStyle = styled.div`
 /* Efeitos */
@@ -12,15 +12,32 @@ label {
   padding: 0 4px;
   color: rgba(0,0,0, 0.6);
   font-weight: 100;
+
+  ${(props) => 
+    props.focus ?
+    css`
+      &{
+        top: -4px;
+        font-size: 10px;
+        transition: 300ms;
+        color: black;
+      }
+    ` 
+    :
+    css`
+      &{
+        /* top: -4px;
+        font-size: 10px; */
+        transition: 300ms;
+        /* color: black; */
+      }
+    `
+  }
 }
 
-#effect {
-  top: -4px;
-  /* right: 8px; */
-  font-size: 10px;
-  transition: 300ms;
-  color: black;
-}
+
+
+
 
 #no-effect {
   transition: 300ms;

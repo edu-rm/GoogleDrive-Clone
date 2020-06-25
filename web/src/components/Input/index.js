@@ -1,47 +1,36 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useRef, useCallback } from 'react';
 
 
 import { InputStyle } from './styles';
 
 export default function Input({ id, type, labelContent }){
+  const [isFocused, setIsFocused ]  = useState(false);
+  const [isFilled, setIsFilled ]  = useState(false);
 
-  function handleFocus(e) {
-    var label= null;
+  const inputRef = useRef(null);
 
-    var labels = document.getElementsByTagName('LABEL');
-    for (var i = 0; i < labels.length; i++) {
-        if (labels[i].htmlFor === e.target.id) {
-          label = labels[i];   
-          break;   
-        }
+  function handleFocus(){
+    setIsFocused(true);
+    // console.log(isFocused);
+  };
+
+  function handleBlur(){
+    if(inputRef.current.value === ''){
+      setIsFocused(false);
     }
-    label.id = 'effect';
-    // e.target.id = 'outline-effect';
-  }
-
-  function handleFocusOut(e) {
-    var label = null;
-    if(! e.target.value ){
-      var labels = document.getElementsByTagName('LABEL');
-      for ( let i = 0 ; i < labels.length ; i++) {
-        if(labels[i].htmlFor === e.target.id){
-          label = labels[i];
-          break;
-        }
-      }
-      label.id = 'no-effect';
-    }
-    // e.target.id = 'no-outline-effect';
-  }
+    // console.log(isFocused);
+  };
 
   return (
-    <InputStyle>
+    <InputStyle focus={isFocused}>
       <label htmlFor={id}>{labelContent}</label>
       <input 
+        ref={inputRef}
         id={id}
         type={type} 
-        onBlur={(event) => handleFocusOut(event)} 
-        onFocus={(event) => handleFocus(event)}
+        onBlur={handleBlur} 
+        onFocus={handleFocus}
       />
     </InputStyle>
     
