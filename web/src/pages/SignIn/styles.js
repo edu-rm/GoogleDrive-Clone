@@ -18,23 +18,6 @@ export const Content = styled.div`
   width: 40%;
 
 
-  #effect {
-    top: -4px;
-    /* right: 8px; */
-    font-size: 10px;
-    transition: 300ms;
-    color: black;
-  }
-
-  #no-effect {
-    transition: 300ms;
-  }
-
-  #outline-effect {
-    border: 1px solid blue;
-    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-
   h1 {
     font-weight: 200;
     margin-bottom: 12px;
@@ -62,17 +45,6 @@ export const Content = styled.div`
   form div + div {
     margin-top: 30px;
   }
-
-  label {
-      position : absolute;
-      left: 8px;
-      top: 16px;
-      cursor: text;
-      background-color: white;
-      padding: 0 4px;
-      color: rgba(0,0,0, 0.6);
-      font-weight: 100;
-    }
 
 
   .email, .senha {

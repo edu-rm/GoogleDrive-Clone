@@ -3,6 +3,8 @@ import React from 'react';
 import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
 
+import Input from '../../components/Input';
+
 function SignIn() {
 
   function handleFocus(e) {
@@ -41,21 +43,17 @@ function SignIn() {
         <p>Ir para o Duolc</p>
         <form>
           <div className="email">
-            <label htmlFor="email-login">Email</label>
-            <input 
+            <Input 
               id="email-login" 
               type="text"
-              onBlur={(event) => handleFocusOut(event)} 
-              onFocus={(event) => handleFocus(event)}
+              labelContent="Email"
             />
           </div>
           <div className="senha">
-            <label htmlFor="senha-login">Senha</label>
-            <input 
+            <Input 
               id="senha-login" 
-              type="password"
-              onBlur={(event) => handleFocusOut(event)} 
-              onFocus={(event) => handleFocus(event)}
+              type="text"
+              labelContent="Senha"
             />
           </div>
         </form>
