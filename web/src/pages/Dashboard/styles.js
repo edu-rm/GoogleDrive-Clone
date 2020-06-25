@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 
+export const Container = styled.header`
+  .left-bar {
+    position: fixed;
+    width: 20%;
+  }
+`;
+
 export const Header = styled.header`
   /* margin: 8px 8px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   /* z-index: unset; */
   
   height: 10%;
@@ -31,7 +38,7 @@ export const Header = styled.header`
 
   .search {
     position: relative;
-    width: 500px;
+    width: 600px;
 
 
     button {
