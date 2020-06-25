@@ -6,6 +6,8 @@ export const Container = styled.div`
   /* width: 20%; */
   font-size: 12px;
   font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
 
   display: flex;
   flex-direction: column;
