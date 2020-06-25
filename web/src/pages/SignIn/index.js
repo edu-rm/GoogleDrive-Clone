@@ -35,7 +35,7 @@ function SignIn() {
         <div className="footer-signin">
           <Link id="signup" to='/signup'>Crie uma conta</Link>
           <button type="button">
-            <Link to='/'>Próxima</Link>
+            <Link to='/dashboard'>Próxima</Link>
           </button>
         </div>
 
