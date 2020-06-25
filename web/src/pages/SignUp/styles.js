@@ -16,8 +16,48 @@ export const Content = styled.div`
   align-items: center;
   width: 55%;
 
+  /* Efeitos */
+  label {
+    position : absolute;
+    left: 8px;
+    top: 8px;
+    cursor: text;
+    background-color: white;
+    padding: 0 4px;
+  }
+
+  #effect {
+    top: -4px;
+    /* right: 8px; */
+    font-size: 10px;
+    transition: 300ms;
+  }
+
+  #no-effect {
+    transition: 300ms;
+  }
+
+  #outline-effect {
+    border: 1px solid blue;
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
   .left {
-    width: 50%;
+    width: 60%;
+
+    .nome, .sobrenome {
+      position: relative;
+    }
+
+    .nomes .nome input {
+      /* width: 100%; */
+    }
+
+
+    
+
+
+
     h2 {
       font-size: 24px;
       color: rgba(0,0,0,0.92);
@@ -36,17 +76,17 @@ export const Content = styled.div`
       border: 1px solid rgba(0,0,0,0.4);
       border-radius: 6px;
       /* width: 200px; */
-      width: 40%;
+      width: 100%;
     }
 
     .nomes {
       margin-bottom: 32px;
       display: flex;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       /* width: 100%; */
-      input {
+      /* input {
         width: 45%;
-      }
+      } */
     }
     .email input {
       width: 100%;
@@ -89,10 +129,11 @@ export const Content = styled.div`
   }
 
   .right {
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 10px;
 
     img {
       width: 80%;      

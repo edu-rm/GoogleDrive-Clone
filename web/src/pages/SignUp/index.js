@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,35 @@ import { Container, Content } from './styles';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 function SignUp() {
+  const [inputEffect, setInputEffect] = useState(false);
+
+  function handleFocus(e) {
+    var label= null;
+
+    var labels = document.getElementsByTagName('LABEL');
+    for (var i = 0; i < labels.length; i++) {
+        if (labels[i].htmlFor === e.target.id) {
+          label = labels[i];   
+          break;   
+        }
+    }
+    label.id = 'effect';
+    // e.target.id = 'outline-effect';
+  }
+
+  function handleFocusOut(e) {
+    var label = null;
+
+    var labels = document.getElementsByTagName('LABEL');
+    for ( let i = 0 ; i < labels.length ; i++) {
+      if(labels[i].htmlFor === e.target.id){
+        label = labels[i];
+        break;
+      }
+    }
+    label.id = 'no-effect';
+    // e.target.id = 'no-outline-effect';
+  }
   return (
     <Container>
       <Content>
@@ -15,8 +44,24 @@ function SignUp() {
           <h3>Preencha seus dados</h3>
           <form>
             <div className="nomes">
-              <input type="text" placeholder="Nome"/>
-              <input type="text" placeholder="Sobrenome"/>
+              <div className="nome">
+                <label htmlFor="input-nome">Nome</label>
+                <input 
+                  id="input-nome"
+                  onBlur={(event) => handleFocusOut(event)} 
+                  onFocus={(event) => handleFocus(event)} 
+                  type="text"
+                />
+              </div>
+              <div className="sobrenome">
+                <label htmlFor="input-sobrenome">Sobrenome</label>
+                <input 
+                  type="text" 
+                  id="input-sobrenome"
+                  onBlur={(event) => handleFocusOut(event)} 
+                  onFocus={(event) => handleFocus(event)}
+                />
+              </div>
             </div>
             <div className="email">
               <input type="email" placeholder="Email"/>
@@ -24,7 +69,7 @@ function SignUp() {
             <div className="senha">
               <input type="password" placeholder="Senha"/>
               <input type="password" placeholder="Confirmar senha"/>
-              <MdVisibility size={24} color="#000" />
+              <MdVisibility size={40} color="#000" />
             </div>
             <div className="form-footer">
               <Link id="signin" to='/signin'>Faça login</Link>
