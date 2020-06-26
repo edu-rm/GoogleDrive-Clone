@@ -54,6 +54,7 @@ export const Files = styled.div`
   /* background-color: red; */
   height:100% ;
   padding: 12px 40px 0 12px;
+  font-size: 12px;
 
   .header {
     display: grid;
@@ -95,9 +96,23 @@ export const Files = styled.div`
     }
   }
 
-  ${(props) => css`
+  
 
+  /* .context-menu  */
 
-  `};
+`;
+
+export const ContextMenuStyle = styled.div`
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    /* display: flex; */
+    top: ${(props) => `${props.y}px`};
+    left: ${(props) => `${props.x + 5}px`};
+
+    ul::before {
+      content: ${(props) => props.y};
+      display: flex;
+    }
 
 `;

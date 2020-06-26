@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // import {useDropzone} from 'react-dropzone'
 import DropZone from '../DropZone';
 
 import { MdDelete, MdViewHeadline, MdFolder } from 'react-icons/md';
 
-import { Container, Header, Files } from './styles';
+import { Container, Header, Files, ContextMenuStyle } from './styles';
 
 function FileArea() {
+  const [contextMenu, setContextMenu] = useState(false);
+  // const contextMenuRef = useRef(null);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
+  function handleClick(e) {
+    e.preventDefault();
+    setX(e.clientX);
+    setY(e.clientY);
+
+    console.log(e.clientX);
+    console.log(e.clientY);
+
+
+    setContextMenu(!contextMenu);
+  }
+
+  function handleOutClick(e){
+    // console.log(e.parentNode);
+    // console.log(contextMenuRef.current);
+    // if(e.target != contextMenuRef.current){
+    //   setContextMenu(false);
+    // }
+  }
 
   return (
     <Container>
@@ -28,7 +51,7 @@ function FileArea() {
       </Header>
       <div className="dropzone">
         <DropZone /> 
-        <Files display="grade">
+        <Files onContextMenu={handleClick} onClick={handleOutClick} display="grade">
           <div className="header">
             <p id="name">
               Nome
@@ -65,13 +88,36 @@ function FileArea() {
               <div id="size">1mb</div>
           </div>
               
-              
-
         </Files>
       </div>
+      <ContextMenu show={contextMenu} x={x} y={y} />
       
     </Container>
   );
+}
+
+function ContextMenu({ show, x, y }) {
+
+
+  return (
+    <ContextMenuStyle x={x} y={y} >
+      {/* {show &&  */}
+        <ul>
+          <li>
+            item1
+          </li>
+          <li>
+            item2
+          </li>
+          <li>
+            item3
+          </li>
+        </ul>
+      {/* } */}
+  </ContextMenuStyle>
+    
+  );
+    
 }
 
 export default FileArea;
