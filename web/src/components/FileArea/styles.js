@@ -41,11 +41,11 @@ export const Header = styled.div`
 
   }
   
-  #drop-zone {
+  /* #drop-zone {
     padding: 500px 0;
     cursor: pointer;
     
   }
   
-   
+    */
 `;

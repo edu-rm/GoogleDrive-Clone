@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 // import {useDropzone} from 'react-dropzone'
 import DropZone from '../DropZone';
 import { MdDelete, MdViewHeadline } from 'react-icons/md';

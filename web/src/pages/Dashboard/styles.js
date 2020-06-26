@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
-  .left-bar {
-    position: fixed;
-    width: 20%;
-  }
-`;
+
 
 export const Header = styled.header`
   /* margin: 8px 8px; */
@@ -14,7 +9,10 @@ export const Header = styled.header`
   align-items: center;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 12px 0;
   /* z-index: unset; */
+  /* position: fixed; */
+
   
   height: 10%;
 
@@ -56,7 +54,7 @@ export const Header = styled.header`
     }
 
     input {
-      padding: 20px 60px;
+      padding: 18px 60px;
       width: 100%;
       background-color: #F1F3F4;
       border: 0;
@@ -85,4 +83,18 @@ export const Header = styled.header`
     border-radius: 50%;
   }
 
+`;
+
+
+export const Container = styled.div`
+  height: 80%;
+  .left-bar {
+    position: fixed;
+    width: 20%;
+  }
+
+  .file-area {
+    height: 100%;
+  }
+  /* height:90% ; */
 `;

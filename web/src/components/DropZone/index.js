@@ -1,25 +1,32 @@
-import React from 'react';
-import Dropzone from 'react-dropzone'
+import React, { useCallback } from 'react';
+
+import { MdGetApp } from 'react-icons/md';
+
 import {useDropzone} from 'react-dropzone'
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 function DropZone() {
 
-
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      console.log(acceptedFiles);
+    })
+    
+  }, [])
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-    {({getRootProps, getInputProps}) => (
-      <section>
-        <div {...getRootProps()}>
+    <Container {...getRootProps()}>
+      {
+        isDragActive &&
+        <>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        </div>
-      </section>
-    )}
-  </Dropzone>
-
+          <MdGetApp size={40} />
+        </>
+      }
+     
+    </Container>
   );
 }
 
