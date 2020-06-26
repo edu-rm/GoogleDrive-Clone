@@ -33,7 +33,7 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 12px 0 auto;
+      margin: 12px 12px 0 auto;
     }
 
     .barra p {
