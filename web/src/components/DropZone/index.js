@@ -14,7 +14,7 @@ function DropZone() {
     })
     
   }, [])
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   return (
     <Container {...getRootProps()}>
@@ -25,6 +25,7 @@ function DropZone() {
           <MdGetApp size={40} />
         </>
       }
+      <p>qui</p>
      
     </Container>
   );

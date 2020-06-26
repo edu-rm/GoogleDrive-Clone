@@ -14,9 +14,16 @@ const UpAndDown = keyframes`
 
 export const Container = styled.div`
   height: 100%;
-  display: flex; 
+  width: 100%;
+  z-index: 1;
+  display: none; 
+  opacity: 1;
   justify-content: center;
   align-items: center;
+  /* background-color: red; */
+  /* opacity: 0.2; */
+  position: absolute;
+
 
   svg {
     animation: ${UpAndDown} 1s infinite;

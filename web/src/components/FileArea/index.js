@@ -1,12 +1,12 @@
 import React from 'react';
 // import {useDropzone} from 'react-dropzone'
 import DropZone from '../DropZone';
-import { MdDelete, MdViewHeadline } from 'react-icons/md';
 
-import { Container, Header } from './styles';
+import { MdDelete, MdViewHeadline, MdFolder } from 'react-icons/md';
+
+import { Container, Header, Files } from './styles';
 
 function FileArea() {
-
 
 
   return (
@@ -26,7 +26,50 @@ function FileArea() {
           </li>
         </ul>
       </Header>
-      <DropZone />
+      <div className="dropzone">
+        <DropZone /> 
+        <Files display="grade">
+          <div className="header">
+            <p id="name">
+              Nome
+            </p>
+            <p id="owner">Proprietário</p>
+            <p id="createdAt">Criação</p>
+            <p id="size">Tamanho</p>
+          </div>
+          <div id="active" className="row">
+              <div id="name">
+                <MdFolder size={24} />
+                Eduardo Rampon Meireles
+              </div>
+              <div id="owner">Eu</div>
+              <div id="createdAt">14/09/2001</div>
+              <div id="size">1mb</div>
+          </div>
+          <div className="row">
+              <div id="name">
+                <MdFolder size={24} />
+                Eduardo Rampon Meireles
+              </div>
+              <div id="owner">Eu</div>
+              <div id="createdAt">14/09/2001</div>
+              <div id="size">1mb</div>
+          </div>
+          <div className="row">
+              <div id="name">
+                <MdFolder size={24} />
+                Eduardo Rampon Meireles
+              </div>
+              <div id="owner">Eu</div>
+              <div id="createdAt">14/09/2001</div>
+              <div id="size">1mb</div>
+          </div>
+              
+              
+
+        </Files>
+      </div>
+      
     </Container>
   );
 }
