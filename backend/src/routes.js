@@ -2,9 +2,10 @@ import Router from 'express';
 
 const routes = Router();
 
+import FileController from './app/controllers/FileController';
 
-routes.get('/', (req, res)=> {
-  return res.json({ message: 'Hello World' });
-});
+const fileController = new FileController();
+
+routes.post('/files', fileController.store);
 
 export default routes;
