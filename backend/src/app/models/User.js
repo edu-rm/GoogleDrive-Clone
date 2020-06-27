@@ -15,6 +15,17 @@ class User extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.hasMany(models.Folder, {
+      foreignKey: 'user_id',
+      as: 'user_folders',
+    });
+    this.hasMany(models.File, {
+      foreignKey: 'user_id',
+      as: 'user_files',
+    })
+  }
 }
 
 export default User;

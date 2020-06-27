@@ -1,5 +1,6 @@
 import User from '../models/User';
-import File from '../models/File';
+import Folder from '../models/Folder';
+
 
 import fs from 'fs';
 import { resolve } from 'path';
@@ -18,6 +19,13 @@ class UserController {
       root,
     });
 
+    console.log(user.id);
+
+    const folder = await Folder.create({
+      user_id: user.id,
+      father: null,
+    });
+
 
     fs.mkdirSync(
       path,
@@ -25,7 +33,7 @@ class UserController {
         if (err) return res.json({ error: 'Falha na criação de diretório'});
       });
 
-    return res.json(user);
+    return res.json({ user, folder});
   }
 
 }

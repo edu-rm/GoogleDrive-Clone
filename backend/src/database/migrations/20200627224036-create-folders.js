@@ -1,21 +1,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('files', {
+    return queryInterface.createTable('folders', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      path: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      folder_id: {
+      father: {
         type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        allowNull: true,
       },
       user_id :{
         type: Sequelize.INTEGER,
@@ -35,6 +29,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('files');
+    return queryInterface.dropTable('folders');
   },
 };
