@@ -18,7 +18,7 @@ class App {
   middlewares(){
     this.server.use(express.json());
     this.server.use(cors());
-    this.server.use('/users', express.static(resolve(__dirname, '..', 'storage', 'users')));
+    this.server.use('/storage', express.static(resolve(__dirname, '..', 'storage', 'users')));
 
   }
   routes(){
