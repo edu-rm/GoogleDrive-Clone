@@ -2,8 +2,11 @@ import File from '../models/File';
 
 class FileController {
   async store(req, res){
+    const { path, user_id } = req.query;
 
-    return res.json({ msg: "hello"});
+    const file = await File.create({ path, user_id });
+
+    return res.json(file);
   }
 }
 
