@@ -11,7 +11,7 @@ export default {
       return cb(null, resolve(__dirname, '..','..','storage', 'users' + path));
     },
     filename: (req, file, cb) => {
-      // req.name = file.originalname;
+      req.name = file.originalname;
       
       return cb(null, file.originalname + extname(file.originalname));
     }
