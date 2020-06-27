@@ -4,7 +4,7 @@ import DropZone from '../DropZone';
 
 import { MdDelete, MdViewHeadline, MdFolder } from 'react-icons/md';
 
-import { Container, Header, Files, ContextMenuStyle } from './styles';
+import { Container, Header, Files, ContextMenuStyle, Scroll } from './styles';
 
 function FileArea() {
   const [contextMenu, setContextMenu] = useState(false);
@@ -25,8 +25,8 @@ function FileArea() {
   }
 
   function handleOutClick(e){
-    setContextMenu(!contextMenu);
-
+    setContextMenu(false);
+    
     // console.log(e.parentNode);
     // console.log(contextMenuRef.current);
     // if(e.target != contextMenuRef.current){
@@ -53,6 +53,7 @@ function FileArea() {
       </Header>
       <div className="dropzone">
         <DropZone /> 
+
         <Files onContextMenu={handleClick} onClick={handleOutClick} display="grade">
           <div className="header">
             <p id="name">
@@ -62,6 +63,7 @@ function FileArea() {
             <p id="createdAt">Criação</p>
             <p id="size">Tamanho</p>
           </div>
+          <Scroll>
           <div id="active" className="row">
               <div id="name">
                 <MdFolder size={24} />
@@ -89,8 +91,109 @@ function FileArea() {
               <div id="createdAt">14/09/2001</div>
               <div id="size">1mb</div>
           </div>
-              
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div>
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div>   
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          <div className="row">
+            <div id="name">
+              <MdFolder size={24} />
+              Eduardo Rampon Meireles
+            </div>
+            <div id="owner">Eu</div>
+            <div id="createdAt">14/09/2001</div>
+            <div id="size">1mb</div>
+          </div> 
+          </Scroll>
+
         </Files>
+
       </div>
       <ContextMenu show={contextMenu} x={x} y={y} />
       

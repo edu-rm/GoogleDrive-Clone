@@ -37,9 +37,7 @@ function Dashboard() {
         <LeftBar />
         <Storage />
       </div>
-      <div className="file-area">
-        <FileArea />
-      </div>
+      <FileArea />
     </Container>
   );
 }

@@ -9,12 +9,12 @@ export const Header = styled.header`
   align-items: center;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 12px 0;
+  /* padding: 12px 0; */
   /* z-index: unset; */
   /* position: fixed; */
 
   
-  height: 10%;
+  height: 12%;
 
 
   .logo {
@@ -87,14 +87,10 @@ export const Header = styled.header`
 
 
 export const Container = styled.div`
-  height: 80%;
+  height: 82%;
   .left-bar {
     position: fixed;
     width: 20%;
-  }
-
-  .file-area {
-    height: 100%;
   }
   /* height:90% ; */
 `;

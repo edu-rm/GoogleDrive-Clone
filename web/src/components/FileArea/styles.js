@@ -1,12 +1,29 @@
 import styled, { css } from 'styled-components';
 
+import PerfectScrollbar from 'react-perfect-scrollbar';
+
+
+export const Container = styled.div`
+  /* background-color: red; */
+  height:100% ;
+  width:80%;
+  margin-left: 20%;
+
+  .dropzone {
+    height: 100%;
+    position: relative;
+
+  }
+`;
+
+
 export const Header = styled.div`
   display : flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 40px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
+  height: 8%;
   h1 {
     font-size: 18px;
     font-weight: 200;
@@ -37,22 +54,26 @@ export const Header = styled.div`
    
 `;
 
-export const Container = styled.div`
-  /* background-color: red; */
-  height:100% ;
-  width:80%;
-  margin-left: 20%;
+export const ContextMenuStyle = styled.div`
+    background-color: gray;
+    padding: 20px 20px;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    /* display: flex; */
+    top: ${(props) => `${props.y}px`};
+    left: ${(props) => `${props.x + 5}px`};
 
-  .dropzone {
-    height: 100%;
-    position: relative;
+    ul::before {
+      content: ${(props) => props.y};
+      display: flex;
+    }
 
-  }
 `;
 
 export const Files = styled.div`
   /* background-color: red; */
-  height:100% ;
+  height:92% ;
   padding: 12px 40px 0 12px;
   font-size: 12px;
 
@@ -87,8 +108,8 @@ export const Files = styled.div`
 
   
 
-  div {
-    display: flex;
+  #name, #owner, #createdAt, #size{
+    display: flex; 
     align-items: center;
 
     svg {
@@ -102,19 +123,11 @@ export const Files = styled.div`
 
 `;
 
-export const ContextMenuStyle = styled.div`
-    background-color: gray;
-    padding: 20px 20px;
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    /* display: flex; */
-    top: ${(props) => `${props.y}px`};
-    left: ${(props) => `${props.x + 5}px`};
-
-    ul::before {
-      content: ${(props) => props.y};
-      display: flex;
-    }
-
+export const Scroll = styled(PerfectScrollbar)`
+  /* padding: 5px 15px; */
+  /* all: none; */
+  /* width: 100%; */
+  height: 100%;
+  /* position:absolute; */
+  /* display: ; */
 `;
