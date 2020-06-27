@@ -25,6 +25,8 @@ function FileArea() {
   }
 
   function handleOutClick(e){
+    setContextMenu(!contextMenu);
+
     // console.log(e.parentNode);
     // console.log(contextMenuRef.current);
     // if(e.target != contextMenuRef.current){
@@ -100,23 +102,29 @@ function ContextMenu({ show, x, y }) {
 
 
   return (
-    <ContextMenuStyle x={x} y={y} >
-      {/* {show &&  */}
-        <ul>
-          <li>
-            item1
-          </li>
-          <li>
-            item2
-          </li>
-          <li>
-            item3
-          </li>
-        </ul>
-      {/* } */}
-  </ContextMenuStyle>
+    <div className="menu">
+      {show && 
+        <ContextMenuStyle x={x} y={y} >
+       
+          <ul>
+            <li>
+              item1
+            </li>
+            <li>
+              item2
+            </li>
+            <li>
+              item3
+            </li>
+          </ul>
+     
+        </ContextMenuStyle>
+      }
+    </div>
     
   );
+    
+  
     
 }
 

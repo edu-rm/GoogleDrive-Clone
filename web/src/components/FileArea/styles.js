@@ -103,6 +103,8 @@ export const Files = styled.div`
 `;
 
 export const ContextMenuStyle = styled.div`
+    background-color: gray;
+    padding: 20px 20px;
     position: absolute;
     z-index: 10;
     top: 0;
