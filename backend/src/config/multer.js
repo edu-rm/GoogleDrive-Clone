@@ -9,7 +9,6 @@ export default {
       return cb(null, resolve(__dirname, '..','..','storage', 'users' + path));
     },
     filename: (req, file, cb) => {
-      console.log(file.originalname);
       return cb(null, file.originalname + extname(file.originalname));
     }
   }),

@@ -8,6 +8,7 @@ class FileController {
 
     return res.json(file);
   }
+  
 }
 
 export default FileController;
