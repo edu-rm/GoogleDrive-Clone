@@ -9,8 +9,9 @@ class FolderController {
     // Path da pasta pai
     const { name, father, user_id }  = req.body;
 
-    const { path } = await Folder.findByPk(father);
+    const { path, url } = await Folder.findByPk(father);
     const newFolderPath = `${path}/${name}/`;
+    const newFolderUrl = `${url}${name}/`;
 
 
     const folder = await Folder.create({
@@ -18,6 +19,7 @@ class FolderController {
       name, 
       father, //id ou null
       path: newFolderPath,
+      url: newFolderUrl,
     });
 
     fs.mkdirSync(
