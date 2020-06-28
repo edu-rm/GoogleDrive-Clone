@@ -18,7 +18,11 @@ routes.post('/users', userController.store);
 //Privates
 
 routes.post('/files', upload.array('files'), fileController.store);
+
+
 routes.post('/folders', folderController.store);
+routes.get('/folders/:id', folderController.index);
+
 
 
 
