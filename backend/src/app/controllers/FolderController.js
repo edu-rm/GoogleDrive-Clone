@@ -86,6 +86,10 @@ class FolderController {
       }
     });
 
+    fs.rmdirSync(path, {
+      recursive: true,
+    });
+
 
     return res.json(ids);
   }
