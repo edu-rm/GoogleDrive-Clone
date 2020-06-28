@@ -12,6 +12,12 @@ class FileController {
     // Listar todos os arquivos presentes na pasta X
     const { folder_id, user_id } = req.query;
 
+    const files = await File.findAll({
+      where: {
+        folder_id
+      },
+    });
+    return res.json(files)
   }
 
 }
