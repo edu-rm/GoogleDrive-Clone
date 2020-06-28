@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { Op } from 'sequelize';
 
 import Folder from '../models/Folder';
 import File from '../models/File';
@@ -10,7 +11,7 @@ class FolderController {
     const { name, father }  = req.body;
 
     const { path, url } = await Folder.findByPk(father);
-    const newFolderPath = `${path}/${name}/`;
+    const newFolderPath = `${path}${name}/`;
     const newFolderUrl = `${url}${name}/`;
 
 
@@ -46,6 +47,47 @@ class FolderController {
 
     
 
+  }
+
+  async delete(req,res) {
+    const { id } = req.params;
+
+    // Encontra o caminho da pasta que foi solicitada para exclusão
+    const { path } = await Folder.findOne({
+      where: {
+        id,
+      }
+    });
+
+    // Faz uma busca para pegar todas as pastas que possuem o mesmo caminho no path (a mesma e subpastas)
+    const query = `${path}%`;
+
+    const subfolders = await Folder.findAll({
+      where: {
+        path: {
+          [Op.like]: query
+        },
+      }
+    });
+
+    // Excluir todos os arquivos usando o array de id
+
+    const ids = subfolders.map(folder => folder.id);
+
+    await File.destroy({
+      where: {
+        folder_id: ids
+      }
+    });
+
+    await Folder.destroy({
+      where: {
+        id: ids,
+      }
+    });
+
+
+    return res.json(ids);
   }
 }
 

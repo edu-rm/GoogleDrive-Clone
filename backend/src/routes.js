@@ -32,7 +32,9 @@ routes.post('/files', AuthMiddleware, upload.array('files'), fileController.stor
 routes.post('/folders',AuthMiddleware, folderController.store);
 
 routes.get('/files', AuthMiddleware, fileController.index);
+
 routes.get('/folders/:id',AuthMiddleware, folderController.index);
+routes.delete('/folders/:id',AuthMiddleware, folderController.delete);
 
 
 
