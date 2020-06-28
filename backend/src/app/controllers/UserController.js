@@ -10,20 +10,19 @@ class UserController {
     const { name, email, password } = req.body;
 
     const path = resolve(__dirname, '..', '..', '..', 'storage', 'users', email);
-    const root = `http://localhost:3333/storage/${email}`;
+    const rootFolder = path;
 
     const user = await User.create({
       name,
       email,
       password,
-      root,
     });
 
-    console.log(user.id);
-
     const folder = await Folder.create({
+      name: 'root',
       user_id: user.id,
       father: null,
+      path: rootFolder,
     });
 
 

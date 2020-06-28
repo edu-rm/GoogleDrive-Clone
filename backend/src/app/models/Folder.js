@@ -5,6 +5,8 @@ class Folder extends Model {
     super.init(
       {
         father: Sequelize.INTEGER,
+        name: Sequelize.STRING,
+        path: Sequelize.STRING,
       },
       {
         sequelize

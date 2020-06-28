@@ -7,6 +7,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      path: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       father: {
         type: Sequelize.INTEGER,
         allowNull: true,
