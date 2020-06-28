@@ -11,6 +11,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      name:{
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      extension:{
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      path: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       user_id :{
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'},

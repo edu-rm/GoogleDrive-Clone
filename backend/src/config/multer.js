@@ -11,11 +11,16 @@ export default {
       const { user_id, folder_id } = req.query;
 
       const { path } = await Folder.findByPk(folder_id);
-      req.file = path;
+
+      const url = ``;
+      
       const newFile = await File.create({ 
+        name: file.originalname,
         path, 
         user_id,
-        folder_id
+        folder_id,
+        url: 'teste',
+        extension: extname(file.originalname),
       });
 
 

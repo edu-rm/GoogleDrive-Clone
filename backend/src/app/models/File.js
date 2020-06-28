@@ -4,6 +4,9 @@ class File extends Model{
   static init(sequelize) {
     super.init({
         path: Sequelize.STRING,
+        name: Sequelize.STRING,
+        extension: Sequelize.STRING,
+        url: Sequelize.STRING
       },
       {
         sequelize
