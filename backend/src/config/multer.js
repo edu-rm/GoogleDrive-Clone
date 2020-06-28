@@ -15,6 +15,7 @@ export default {
       const newFile = await File.create({ 
         path, 
         user_id,
+        folder_id
       });
 
 

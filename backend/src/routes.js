@@ -22,6 +22,8 @@ routes.post('/files', upload.array('files'), fileController.store);
 
 routes.post('/folders', folderController.store);
 routes.get('/folders/:id', folderController.index);
+routes.get('/files/', folderController.index);
+
 
 
 

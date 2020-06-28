@@ -8,6 +8,12 @@ class FileController {
     return res.json({ msg: 'Success' });
   }
 
+  async index(req,res){
+    // Listar todos os arquivos presentes na pasta X
+    const { folder_id, user_id } = req.query;
+
+  }
+
 }
 
 export default FileController;

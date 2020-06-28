@@ -11,12 +11,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      folder_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
       user_id :{
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'},
