@@ -11,7 +11,7 @@ export default {
       const { user_id, folder_id } = req.query;
 
       const { path } = await Folder.findByPk(folder_id);
-
+      req.file = path;
       const newFile = await File.create({ 
         path, 
         user_id,
