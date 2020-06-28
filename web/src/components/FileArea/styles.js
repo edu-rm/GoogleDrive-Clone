@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
@@ -8,6 +8,7 @@ export const Container = styled.div`
   height:100% ;
   width:80%;
   margin-left: 20%;
+
 
   .dropzone {
     height: 100%;
@@ -58,7 +59,7 @@ export const ContextMenuStyle = styled.div`
     background-color: gray;
     padding: 20px 20px;
     position: absolute;
-    z-index: 10;
+    /* z-index: 10; */
     top: 0;
     /* display: flex; */
     top: ${(props) => `${props.y}px`};
@@ -77,6 +78,7 @@ export const Files = styled.div`
   padding: 12px 40px 0 12px;
   font-size: 12px;
 
+
   .header {
     display: grid;
     grid-template-columns: 40% 20% 20% 20%;
@@ -91,7 +93,6 @@ export const Files = styled.div`
     grid-template-columns: 40% 20% 20% 20%;
     padding: 12px 0px;
     cursor: pointer;
-    z-index: 2;
     font-weight: bold;
     color: rgba(0,0,0,0.65);
   }
@@ -130,4 +131,45 @@ export const Scroll = styled(PerfectScrollbar)`
   height: 100%;
   /* position:absolute; */
   /* display: ; */
+  /* z-index: ${(props)=> props.drag ? 1 : 3 }; */
+  z-index: 2;
+
+
+`;
+
+
+
+const UpAndDown = keyframes`  
+  0% { 
+    transform: translateY(10px);
+  }
+  50% { 
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+`;
+
+export const ContainerDrag = styled.div`
+
+  z-index: 3;
+
+  height: 100%;
+  width: 100%;
+
+  .drop-area {
+    justify-content: center;
+    display: flex; 
+    height: 100%;
+    align-items: center;
+
+  }
+
+  #arrow-down {
+    animation: ${UpAndDown} 1s infinite;
+    justify-self: center;
+  
+  }
+
 `;

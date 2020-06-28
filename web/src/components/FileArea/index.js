@@ -1,18 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 // import {useDropzone} from 'react-dropzone'
-import DropZone from '../DropZone';
 
-import { MdDelete, MdViewHeadline, MdFolder } from 'react-icons/md';
+import {useDropzone} from 'react-dropzone'
+import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
 
-import { Container, Header, Files, ContextMenuStyle, Scroll } from './styles';
+import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
 function FileArea() {
   const [contextMenu, setContextMenu] = useState(false);
-  // const contextMenuRef = useRef(null);
+  // const {isDragActive} = useDropzone();
+
+  /*For Context */
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
-  function handleClick(e) {
+  const [selected, seSelected] = useState([]);
+
+
+  function handleClickContext(e) {
     e.preventDefault();
     setX(e.clientX);
     setY(e.clientY);
@@ -20,11 +25,10 @@ function FileArea() {
     console.log(e.clientX);
     console.log(e.clientY);
 
-
     setContextMenu(!contextMenu);
   }
 
-  function handleOutClick(e){
+  function handleClickOutContext(){
     setContextMenu(false);
     
     // console.log(e.parentNode);
@@ -33,6 +37,16 @@ function FileArea() {
     //   setContextMenu(false);
     // }
   }
+
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      console.log(file);
+    })
+    
+
+  }, [])
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   return (
     <Container>
@@ -52,147 +66,52 @@ function FileArea() {
         </ul>
       </Header>
       <div className="dropzone">
-        <DropZone /> 
+      <ContainerDrag {...getRootProps()}>
 
-        <Files onContextMenu={handleClick} onClick={handleOutClick} display="grade">
-          <div className="header">
-            <p id="name">
-              Nome
-            </p>
-            <p id="owner">Proprietário</p>
-            <p id="createdAt">Criação</p>
-            <p id="size">Tamanho</p>
+        {isDragActive ?
+          <div className="drop-area">
+            <input {...getInputProps()} />
+            <MdGetApp id="arrow-down" size={40} />
           </div>
-          <Scroll>
-          <div id="active" className="row">
-              <div id="name">
-                <MdFolder size={24} />
-                Eduardo Rampon Meireles
-              </div>
-              <div id="owner">Eu</div>
-              <div id="createdAt">14/09/2001</div>
-              <div id="size">1mb</div>
-          </div>
-          <div className="row">
-              <div id="name">
-                <MdFolder size={24} />
-                Eduardo Rampon Meireles
-              </div>
-              <div id="owner">Eu</div>
-              <div id="createdAt">14/09/2001</div>
-              <div id="size">1mb</div>
-          </div>
-          <div className="row">
-              <div id="name">
-                <MdFolder size={24} />
-                Eduardo Rampon Meireles
-              </div>
-              <div id="owner">Eu</div>
-              <div id="createdAt">14/09/2001</div>
-              <div id="size">1mb</div>
-          </div>
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
+          :
+
+          <Files onContextMenu={handleClickContext} onClick={handleClickOutContext} display="grade">
+            <div className="header">
+              <p id="name">
+                Nome
+              </p>
+              <p id="owner">Proprietário</p>
+              <p id="createdAt">Criação</p>
+              <p id="size">Tamanho</p>
             </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div>
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
+            <Scroll >
+            <div id="active" className="row">
+                <div id="name">
+                  <MdFolder size={24} />
+                  Eduardo Rampon Meireles
+                </div>
+                <div id="owner">Eu</div>
+                <div id="createdAt">14/09/2001</div>
+                <div id="size">1mb</div>
             </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
+            <div className="row">
+                <div id="name">
+                  <MdFolder size={24} />
+                  Eduardo Rampon Meireles
+                </div>
+                <div id="owner">Eu</div>
+                <div id="createdAt">14/09/2001</div>
+                <div id="size">1mb</div>
             </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div>   
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
-          <div className="row">
-            <div id="name">
-              <MdFolder size={24} />
-              Eduardo Rampon Meireles
-            </div>
-            <div id="owner">Eu</div>
-            <div id="createdAt">14/09/2001</div>
-            <div id="size">1mb</div>
-          </div> 
           </Scroll>
 
         </Files>
+        }
+      </ContainerDrag>  
+
+            
+
+        
 
       </div>
       <ContextMenu show={contextMenu} x={x} y={y} />

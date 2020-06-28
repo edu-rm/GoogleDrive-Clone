@@ -13,20 +13,23 @@ const UpAndDown = keyframes`
 `;
 
 export const Container = styled.div`
+  position: absolute;
+  z-index: 3;
+
   height: 100%;
   width: 100%;
-  z-index: 1;
-  display: none; 
-  opacity: 1;
+  display: flex; 
+  /* z-index: ${(props)=> props.drag ? 3 : 1 }; */
+  /* opacity: 1; */
   justify-content: center;
   align-items: center;
   /* background-color: red; */
   /* opacity: 0.2; */
-  position: absolute;
 
 
   svg {
     animation: ${UpAndDown} 1s infinite;
+  
   }
 
 `;
