@@ -16,7 +16,7 @@ export default {
       
       const newFile = await File.create({ 
         name: file.originalname,
-        path, 
+        path: `${path}${file.originalname}`, 
         user_id: req.user_id,
         folder_id,
         url: fileUrl,

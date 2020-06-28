@@ -36,6 +36,9 @@ routes.get('/files', AuthMiddleware, fileController.index);
 routes.get('/folders/:id',AuthMiddleware, folderController.index);
 routes.delete('/folders/:id',AuthMiddleware, folderController.delete);
 
+routes.delete('/files/:id',AuthMiddleware, fileController.delete);
+
+
 
 
 

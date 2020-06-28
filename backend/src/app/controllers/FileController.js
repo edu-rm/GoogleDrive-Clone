@@ -1,4 +1,6 @@
 import File from '../models/File';
+import fs from 'fs';
+import { promisify } from 'util';
 
 class FileController {
   async store(req, res){
@@ -18,6 +20,26 @@ class FileController {
       },
     });
     return res.json(files)
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    const { path } = await File.findByPk(id);
+    try {
+
+      await File.destroy({
+        where: {
+          id,
+        }
+      });    
+
+      await promisify(fs.unlink)(path);
+      
+    } catch (e) {
+      return res.json(e);
+    }
+
+    return res.json({ msg : 'Deletado com sucesso '});
   }
 
 }
