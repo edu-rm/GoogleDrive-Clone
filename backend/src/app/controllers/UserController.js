@@ -15,7 +15,7 @@ class UserController {
     const user = await User.create({
       name,
       email,
-      password,
+      password_hash: password,
     });
 
     const url = `http://localhost:3333/storage/${email}/`;

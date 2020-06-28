@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
 class User extends Model {
   static init(sequelize) {
@@ -7,12 +8,22 @@ class User extends Model {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.STRING,
+        password_hash: Sequelize.VIRTUAL,
+
       },
       {
         sequelize
       }
     );
+    this.addHook('beforeSave', async (user)=>{
+      user.password = await bcrypt.hash(user.password_hash, 8);
+    });
+
     return this;
+  }
+
+  checkPassword( password ) {
+    return bcrypt.compare(password, this.password);
   }
 
   static associate(models) {

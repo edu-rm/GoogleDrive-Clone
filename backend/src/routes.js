@@ -8,12 +8,18 @@ const upload = multer(multerConfig)
 import FileController from './app/controllers/FileController';
 import UserController from './app/controllers/UserController';
 import FolderController from './app/controllers/FolderController';
+import SessionController from './app/controllers/SessionController';
+
 
 const folderController = new FolderController();
 const fileController = new FileController();
 const userController = new UserController();
+const sessionController = new SessionController();
+
 
 routes.post('/users', userController.store);
+routes.post('/sessions', sessionController.store);
+
 
 //Privates
 
