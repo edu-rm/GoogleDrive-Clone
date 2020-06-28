@@ -10,16 +10,16 @@ export default {
     destination: async (req, file, cb) => {
       const { user_id, folder_id } = req.query;
 
-      const { path } = await Folder.findByPk(folder_id);
+      const { path, url } = await Folder.findByPk(folder_id);
 
-      const url = ``;
+      const fileUrl = `${url}${file.originalname}`;
       
       const newFile = await File.create({ 
         name: file.originalname,
         path, 
         user_id,
         folder_id,
-        url: 'teste',
+        url: fileUrl,
         extension: extname(file.originalname),
       });
 
@@ -29,7 +29,7 @@ export default {
     filename: (req, file, cb) => {
       req.name = file.originalname;
       
-      return cb(null, file.originalname + extname(file.originalname));
+      return cb(null, file.originalname);
     }
   }),
 }

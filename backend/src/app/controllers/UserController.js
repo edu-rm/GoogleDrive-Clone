@@ -18,11 +18,14 @@ class UserController {
       password,
     });
 
+    const url = `http://localhost:3333/storage/${email}/`;
+
     const folder = await Folder.create({
       name: 'root',
       user_id: user.id,
       father: null,
       path: rootFolder,
+      url
     });
 
 

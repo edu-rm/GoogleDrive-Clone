@@ -13,17 +13,17 @@ module.exports = {
       },
       name:{
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-      extension:{
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      path: {
+      url:{
         type: Sequelize.STRING,
         allowNull: false,
       },
-      url: {
+      extension:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      path: {
         type: Sequelize.STRING,
         allowNull: false,
       },

@@ -7,6 +7,7 @@ class Folder extends Model {
         father: Sequelize.INTEGER,
         name: Sequelize.STRING,
         path: Sequelize.STRING,
+        url: Sequelize.STRING,
       },
       {
         sequelize
