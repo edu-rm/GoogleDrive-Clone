@@ -9,7 +9,7 @@ class FileController {
 
   async index(req,res){
     // Listar todos os arquivos presentes na pasta X
-    const { folder_id, user_id } = req.query;
+    const { folder_id } = req.query;
 
 
     const files = await File.findAll({

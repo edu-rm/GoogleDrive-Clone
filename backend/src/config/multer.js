@@ -8,7 +8,7 @@ import Folder from '../app/models/Folder';
 export default {
   storage: multer.diskStorage({
     destination: async (req, file, cb) => {
-      const { user_id, folder_id } = req.query;
+      const { folder_id } = req.query;
 
       const { path, url } = await Folder.findByPk(folder_id);
 
@@ -17,7 +17,7 @@ export default {
       const newFile = await File.create({ 
         name: file.originalname,
         path, 
-        user_id,
+        user_id: req.user_id,
         folder_id,
         url: fileUrl,
         extension: extname(file.originalname),

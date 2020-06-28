@@ -7,7 +7,7 @@ import File from '../models/File';
 class FolderController {
   async store(req, res) {
     // Path da pasta pai
-    const { name, father, user_id }  = req.body;
+    const { name, father }  = req.body;
 
     const { path, url } = await Folder.findByPk(father);
     const newFolderPath = `${path}/${name}/`;
@@ -15,7 +15,7 @@ class FolderController {
 
 
     const folder = await Folder.create({
-      user_id,
+      user_id: req.user_id,
       name, 
       father, //id ou null
       path: newFolderPath,
