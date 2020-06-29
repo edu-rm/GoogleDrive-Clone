@@ -3,6 +3,8 @@ import { useDispatch, useSelector} from 'react-redux';
 
 import { signInRequest } from '../../store/modules/auth/actions';
 
+import history from '../../services/history';
+
 import { Container, Content } from './styles';
 import { Link } from 'react-router-dom';
 
@@ -15,11 +17,8 @@ function SignIn() {
   const [password, setPassword] = useState('');
 
   function handleSubmit(){
-    console.log('aqui')
-    console.log(email);
-    console.log(password);
-
     dispatch(signInRequest(email, password));
+
   }
 
   return (

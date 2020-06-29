@@ -17,7 +17,6 @@ export default function auth(state = INITIAL_STATE, action){
       }
       case '@auth/SIGN_FAILURE': {
         draft.loading = false;
-        console.log('falha')
         break;
       }
       default:

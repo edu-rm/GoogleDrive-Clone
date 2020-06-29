@@ -14,19 +14,21 @@ export function* signIn({ payload }) {
     });
 
     const { token, user } = response.data;
-    console.log(user);
 
     api.defaults.headers.authorization= `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
 
   }catch(e){
-    yield put(signFailure);
+    yield put(signFailure());
+    history.push('/');
   }
+
+  history.push('/dashboard');
+
 }
 
 export default all([
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest("@auth/SIGN_IN_REQUEST", signIn),
 ]);
