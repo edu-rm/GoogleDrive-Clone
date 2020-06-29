@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 // import {useDropzone} from 'react-dropzone'
+
+// import api from '../../services/api';
 
 import {useDropzone} from 'react-dropzone'
 import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
@@ -16,6 +18,13 @@ function FileArea() {
 
   const [selected, seSelected] = useState([]);
 
+  // useEffect( () => {
+  //   async function requestFileFolder() {
+      
+  //   }
+
+  //   requestFileFolder();
+  // }, []);
 
   function handleClickContext(e) {
     e.preventDefault();

@@ -4,14 +4,13 @@ import { Route, Redirect } from 'react-router-dom';
 
 import store from '../store';
 
-function RouteWrapper({
+export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  // const { signed } = store.getState().auth;
-  const signed = true;
-  
+  const { signed } = store.getState().auth;
+
   if(!signed && isPrivate) {
     return <Redirect to="/" />
   }
@@ -24,9 +23,7 @@ function RouteWrapper({
   return (
     <Route
       {...rest}
-      render={(props)=><Component {...props}/>} 
+      render={(props) => <Component {...props}/>} 
     />
   );
 }
-
-export default RouteWrapper;
