@@ -9,10 +9,14 @@ import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
 function FileArea() {
-  /* FOLDERS */
+  /* FLOW CONTROL */
 
-  const [folders, setFolders] = useState([]);
-  const [itemActive, setItemActive] = useState();
+
+  /* FOLDERS */
+  const [currentFolderContent, setCurrentFolderContent] = useState([]);
+  const [nextFolder, setNextFolder] = useState([]);
+
+  const [itemActive, setItemActive] = useState(0);
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
@@ -21,11 +25,12 @@ function FileArea() {
 
   const [selected, seSelected] = useState([]);
 
+  /* ROOT FOLDER */
   useEffect(()=>{
     async function requestItems() {
       try {
         const response = await api.get('folders/1');
-        setFolders(response.data);
+        setCurrentFolderContent(response.data);
       } catch (e) {
         console.log(e);
       }
@@ -34,6 +39,25 @@ function FileArea() {
     requestItems();
 
   }, []);
+  
+  /* NEXT FOLDER */
+  
+  useEffect(()=>{
+    console.log(itemActive);
+    async function requestItems() {
+      try {
+        const response = await api.get(`folders/${nextFolder}`);
+        console.log(response.data);
+
+        setCurrentFolderContent(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    if(itemActive != 0) {
+      requestItems();
+    }
+  },[nextFolder])
 
   function handleClickContext(e) {
     e.preventDefault();
@@ -52,7 +76,7 @@ function FileArea() {
 
   function handleDoubleClick(id) {
     if(itemActive === id) {
-      console.log("entrei na pasta");
+      setNextFolder(id);
     }else {
       setItemActive(id)
     }
@@ -105,9 +129,9 @@ function FileArea() {
               <p id="size">Tamanho</p>
             </div>
             <Scroll >
-            {folders 
+            {currentFolderContent 
               && 
-              folders.map(folder => (
+              currentFolderContent.map(folder => (
                 <div 
                   key={folder.id} 
                   className="row"
