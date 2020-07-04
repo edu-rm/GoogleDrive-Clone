@@ -46,7 +46,7 @@ ${(props) =>
         color: #1A73E8;
       }
       input {
-        border: 1.5px solid #1A73E8;
+        border: 1px solid #1A73E8;
       }
     ` 
     :
