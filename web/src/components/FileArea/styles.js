@@ -55,24 +55,48 @@ export const Header = styled.div`
    
 `;
 
+
 export const ContextMenuStyle = styled.div`
-    background-color: gray;
-    padding: 20px 20px;
+    height: auto;
+    /* overflow: hidden;
+    max-height: 0; */
+    background-color: white;
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+    /* padding: 20px 20px; */
+    width: 300px;
     position: absolute;
-    /* z-index: 10; */
+    box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 10;
     top: 0;
     /* display: flex; */
     top: ${(props) => `${props.y}px`};
     left: ${(props) => `${props.x + 5}px`};
 
-    ul::before {
-      content: ${(props) => props.y};
+    button {
+      background: none;
+      width: 100%;
       display: flex;
+      align-items: center;
+      cursor: pointer;
+      border: 0;
+      padding: 12px 20px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      svg {
+        margin-right: 12px;
+        color: rgba(0, 0, 0, 0.7);
+      }
     }
+
 
 `;
 
 export const Files = styled.div`
+  user-select: none; 
   /* background-color: red; */
   height:92% ;
   padding: 12px 40px 0 12px;
@@ -103,7 +127,6 @@ export const Files = styled.div`
   #active {
     background-color: #E8F0FE;
     color: #1A73E8;
-    border: 1px solid #1A73E8;
   }
 
   
@@ -124,13 +147,7 @@ export const Files = styled.div`
 `;
 
 export const Scroll = styled(PerfectScrollbar)`
-  /* padding: 5px 15px; */
-  /* all: none; */
-  /* width: 100%; */
   height: 100%;
-  /* position:absolute; */
-  /* display: ; */
-  /* z-index: ${(props)=> props.drag ? 1 : 3 }; */
   z-index: 2;
 
 

@@ -1,17 +1,34 @@
-import React from 'react';
-import { MdCloudQueue, MdPeopleOutline } from 'react-icons/md'
+import React, { useState } from 'react';
+import { MdCloudQueue, MdPeopleOutline, MdAdd, MdCreateNewFolder } from 'react-icons/md'
 
 import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
 function LeftBar() {
+  const [activeMenu, setActiveMenu] = useState(false);
+
+  function handleNewClick() {
+    setActiveMenu(!activeMenu);
+  }
+
   return (
     <Container>
-      <button>
-        Novo
-      </button>
-      <ul>
+      <div className="new-button">
+        <button onClick={handleNewClick}>
+          <MdAdd size={24} />
+          Novo
+        </button>
+        <div className="menu" id={activeMenu ? 'visible' : 'invisible'}>
+          <ul>
+            <li>
+              <MdCreateNewFolder size={24} />
+              Criar nova pasta
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ul id="items">
         <li id="active">
           <Link to="/dashboard">
             <MdCloudQueue size={24} />

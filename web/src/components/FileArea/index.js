@@ -9,12 +9,13 @@ import {
   MdViewHeadline, 
   MdGetApp, 
   MdFolder,
-  MdArrowBack
+  MdArrowBack,
+  MdCreateNewFolder
 } from 'react-icons/md';
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
-function FileArea() {
+export default function FileArea() {
   /* FLOW CONTROL */
 
 
@@ -211,7 +212,10 @@ function ContextMenu({ show, x, y }) {
        
           <ul>
             <li>
-              item1
+              <button>
+                <MdCreateNewFolder size={24} />
+                Criar pasta
+              </button>
             </li>
             <li>
               item2
@@ -230,5 +234,3 @@ function ContextMenu({ show, x, y }) {
   
     
 }
-
-export default FileArea;
