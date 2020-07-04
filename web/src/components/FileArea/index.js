@@ -4,7 +4,13 @@ import React, { useState, useCallback, useEffect } from 'react';
 import api from '../../services/api';
 
 import {useDropzone} from 'react-dropzone'
-import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
+import { 
+  MdDelete, 
+  MdViewHeadline, 
+  MdGetApp, 
+  MdFolder,
+  MdArrowBack
+} from 'react-icons/md';
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
@@ -14,7 +20,11 @@ function FileArea() {
 
   /* FOLDERS */
   const [currentFolderContent, setCurrentFolderContent] = useState([]);
+  const [currentFolderId, setCurrentFolderId] = useState();
+
   const [nextFolder, setNextFolder] = useState([]);
+  const [prevFolder, setPrevFolder] = useState(0);
+
 
   const [itemActive, setItemActive] = useState(0);
 
@@ -23,14 +33,15 @@ function FileArea() {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
-  const [selected, seSelected] = useState([]);
 
   /* ROOT FOLDER */
   useEffect(()=>{
     async function requestItems() {
       try {
         const response = await api.get('folders/1');
-        setCurrentFolderContent(response.data);
+        setCurrentFolderContent(response.data.childrenFolders);
+        setCurrentFolderId(1);
+        setPrevFolder(0);
       } catch (e) {
         console.log(e);
       }
@@ -47,17 +58,34 @@ function FileArea() {
     async function requestItems() {
       try {
         const response = await api.get(`folders/${nextFolder}`);
-        console.log(response.data);
+        setCurrentFolderId(nextFolder);
+        setPrevFolder(currentFolderId);
+        
+        setCurrentFolderContent(response.data.childrenFolders);
 
-        setCurrentFolderContent(response.data);
       } catch (e) {
         console.log(e);
       }
     }
     if(itemActive != 0) {
+      setPrevFolder(currentFolderId);
       requestItems();
     }
   },[nextFolder])
+
+  /* BACK FOLDER */
+
+  async function handleBackFolder(){
+    try {
+      const response = await api.get(`folders/${prevFolder}`);
+      setCurrentFolderContent(response.data);
+
+      setPrevFolder(response)
+      setCurrentFolderId(prevFolder);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   function handleClickContext(e) {
     e.preventDefault();
@@ -95,6 +123,9 @@ function FileArea() {
   return (
     <Container>
       <Header>
+        <button onClick={handleBackFolder}>
+          <MdArrowBack size={24}/>
+        </button>
         <h1>Armazenamento</h1>
         <ul>
           <li>
