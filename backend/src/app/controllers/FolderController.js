@@ -33,7 +33,7 @@ class FolderController {
     return res.json(folder);
   }
 
-  async index(req,res){
+  async show(req,res){
     // Preciso exibir tanto as pastas da pasta que foi passada quanto os arquivos
     const { id } = req.params;
 

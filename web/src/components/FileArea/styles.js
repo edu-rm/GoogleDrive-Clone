@@ -95,11 +95,10 @@ export const Files = styled.div`
     cursor: pointer;
     font-weight: bold;
     color: rgba(0,0,0,0.65);
+    border-top: 1px solid rgba(0,0,0,0.2);
+
   }
 
-  .row + .row {
-    border-top: 1px solid rgba(0,0,0,0.2);
-  }
 
   #active {
     background-color: #E8F0FE;

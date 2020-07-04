@@ -1,10 +1,18 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
-import history from '../../../services/history';
-
 import { signInSuccess, signFailure } from './actions';
 
+import history from '../../../services/history';
+
+// import { useHistory } from 'react-router-dom';
+
+
+
 export function* signIn({ payload }) {
+
+  // const history = useHistory();
+
+
   try {
     const { email, password } = payload;
 

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 // import {useDropzone} from 'react-dropzone'
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import {useDropzone} from 'react-dropzone'
 import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
@@ -9,22 +9,31 @@ import { MdDelete, MdViewHeadline, MdGetApp, MdFolder } from 'react-icons/md';
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
 function FileArea() {
-  const [contextMenu, setContextMenu] = useState(false);
-  // const {isDragActive} = useDropzone();
+  /* FOLDERS */
+
+  const [folders, setFolders] = useState([]);
 
   /*For Context */
+  const [contextMenu, setContextMenu] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
   const [selected, seSelected] = useState([]);
 
-  // useEffect( () => {
-  //   async function requestFileFolder() {
-      
-  //   }
+  useEffect(()=>{
+    async function requestItems() {
+      try {
+        const response = await api.get('folders/1');
+        setFolders(response.data);
+        console.log(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    }
 
-  //   requestFileFolder();
-  // }, []);
+    requestItems();
+
+  }, []);
 
   function handleClickContext(e) {
     e.preventDefault();
@@ -39,12 +48,6 @@ function FileArea() {
 
   function handleClickOutContext(){
     setContextMenu(false);
-    
-    // console.log(e.parentNode);
-    // console.log(contextMenuRef.current);
-    // if(e.target != contextMenuRef.current){
-    //   setContextMenu(false);
-    // }
   }
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -94,24 +97,21 @@ function FileArea() {
               <p id="size">Tamanho</p>
             </div>
             <Scroll >
-            <div id="active" className="row">
-                <div id="name">
-                  <MdFolder size={24} />
-                  Eduardo Rampon Meireles
+            {folders 
+              && 
+              folders.map(folder => (
+                <div key={folder.id} className="row">
+                  <div id="name">
+                    <MdFolder size={24} />
+                    {folder.name}
+                  </div>
+                  <div id="owner">Eu</div>
+                  <div id="createdAt">{folder.createdAt}</div>
+                  <div id="size">1mb</div>
                 </div>
-                <div id="owner">Eu</div>
-                <div id="createdAt">14/09/2001</div>
-                <div id="size">1mb</div>
-            </div>
-            <div className="row">
-                <div id="name">
-                  <MdFolder size={24} />
-                  Eduardo Rampon Meireles
-                </div>
-                <div id="owner">Eu</div>
-                <div id="createdAt">14/09/2001</div>
-                <div id="size">1mb</div>
-            </div>
+              ))
+            }
+            
           </Scroll>
 
         </Files>
