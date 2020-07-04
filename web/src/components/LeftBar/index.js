@@ -1,26 +1,29 @@
 import React, { useState, useRef } from 'react';
 import { MdCloudQueue, MdPeopleOutline, MdAdd, MdCreateNewFolder } from 'react-icons/md'
 
+import { useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
 function LeftBar() {
   const [activeMenu, setActiveMenu] = useState(false);
+  const currentFolder = useSelector((state) => state.folder.folder_id);
+
   const buttonRef = useRef(null);
+
   function handleNewClick() {
     setActiveMenu(!activeMenu);
   }
-  function handleNewClickOut(e) {
-    console.log(e.target);
-    console.log(buttonRef.current);
-    if(buttonRef.current != e.target) {
-      setActiveMenu(false);
-    }
+
+  function handleCreateFolder() {
+
   }
 
   return (
-    <Container onClick={handleNewClickOut}>
+    <>
+    <Container >
       <div className="new-button">
         <button ref={buttonRef} onClick={(e) => handleNewClick(e)}>
           <MdAdd size={24} />
@@ -28,7 +31,7 @@ function LeftBar() {
         </button>
         <div className="menu" id={activeMenu ? 'visible' : 'invisible'}>
           <ul>
-            <li>
+            <li onClick={handleCreateFolder}>
               <MdCreateNewFolder size={24} />
               Criar nova pasta
             </li>
@@ -52,6 +55,7 @@ function LeftBar() {
         <li></li>
       </ul>
     </Container>
+    </>
   );
 }
 

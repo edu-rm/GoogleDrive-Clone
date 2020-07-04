@@ -7,7 +7,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   /* padding: 12px 0; */
   /* z-index: unset; */
@@ -87,7 +87,8 @@ export const Header = styled.header`
 
 
 export const Container = styled.div`
-  height: 82%;
+  height: 100%;
+  /* position: relative; */
   .left-bar {
     position: fixed;
     width: 20%;

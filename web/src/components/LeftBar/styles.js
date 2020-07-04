@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  /* position: fixed; */
-  /* margin-top: 10%; */
-  /* width: 20%; */
   font-size: 12px;
   font-weight: bold;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -43,8 +40,8 @@ export const Container = styled.div`
   .menu {
     position: absolute;
     z-index: 10;
-    top: 8px;
-    left: 8px;
+    bottom: -40px;
+    left: 20px;
     box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.2);
     /* border: 1px solid black; */
     border-radius: 8px;
@@ -99,3 +96,6 @@ export const Container = styled.div`
   }
 
 `;
+
+
+

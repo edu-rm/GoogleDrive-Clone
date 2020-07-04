@@ -10,6 +10,8 @@ import { Header, Container } from './styles';
 import LeftBar from '../../components/LeftBar';
 import Storage from '../../components/Storage';
 import FileArea from '../../components/FileArea';
+import Modal from '../../components/Modal';
+
 
 
 
@@ -38,6 +40,7 @@ function Dashboard() {
         <Storage />
       </div>
       <FileArea />
+      <Modal />
     </Container>
   );
 }

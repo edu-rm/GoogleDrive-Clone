@@ -62,7 +62,6 @@ export default function FileArea() {
   /* NEXT FOLDER */
   
   useEffect(()=>{
-    console.log('next');
 
     async function requestItems() {
       try {
@@ -75,7 +74,6 @@ export default function FileArea() {
         setItemActive(0);
         
         setCurrentFolderContent(response.data.childrenFolders);
-        console.log('prox')
       } catch (e) {
         console.log(e);
       }
@@ -108,8 +106,6 @@ export default function FileArea() {
     setX(e.clientX);
     setY(e.clientY);
 
-    console.log(e.clientX);
-    console.log(e.clientY);
 
     setContextMenu(!contextMenu);
   }
@@ -124,7 +120,6 @@ export default function FileArea() {
     }else {
       setItemActive(id);
     }
-    console.log('cliquei');
   }
 
   const onDrop = useCallback((acceptedFiles) => {
