@@ -22,7 +22,7 @@ function FileArea() {
   const [currentFolderContent, setCurrentFolderContent] = useState([]);
   const [currentFolderId, setCurrentFolderId] = useState();
 
-  const [nextFolder, setNextFolder] = useState([]);
+  const [nextFolder, setNextFolder] = useState();
   const [prevFolder, setPrevFolder] = useState(0);
 
 
@@ -42,6 +42,7 @@ function FileArea() {
         setCurrentFolderContent(response.data.childrenFolders);
         setCurrentFolderId(1);
         setPrevFolder(0);
+        setItemActive(0);
       } catch (e) {
         console.log(e);
       }
@@ -54,21 +55,22 @@ function FileArea() {
   /* NEXT FOLDER */
   
   useEffect(()=>{
-    console.log(itemActive);
+    console.log('next');
+
     async function requestItems() {
       try {
         const response = await api.get(`folders/${nextFolder}`);
         setCurrentFolderId(nextFolder);
         setPrevFolder(response.data.father);
+        setItemActive(0);
         
         setCurrentFolderContent(response.data.childrenFolders);
-
+        console.log('prox')
       } catch (e) {
         console.log(e);
       }
     }
     if(itemActive != 0) {
-      setPrevFolder(currentFolderId);
       requestItems();
     }
   },[nextFolder])
@@ -79,9 +81,10 @@ function FileArea() {
     try {
       const response = await api.get(`folders/${prevFolder}`);
       setCurrentFolderContent(response.data.childrenFolders);
-
+      setNextFolder(0);
       setCurrentFolderId(prevFolder);
-      setPrevFolder(response.data.father)
+      setPrevFolder(response.data.father);
+      setItemActive(0);
     } catch (e) {
       console.log(e);
     }
@@ -106,8 +109,9 @@ function FileArea() {
     if(itemActive === id) {
       setNextFolder(id);
     }else {
-      setItemActive(id)
+      setItemActive(id);
     }
+    console.log('cliquei');
   }
 
   const onDrop = useCallback((acceptedFiles) => {
