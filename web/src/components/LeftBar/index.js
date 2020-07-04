@@ -11,7 +11,6 @@ function LeftBar() {
   const [activeMenu, setActiveMenu] = useState(false);
   const currentFolder = useSelector((state) => state.folder.folder_id);
 
-  const buttonRef = useRef(null);
 
   function handleNewClick() {
     setActiveMenu(!activeMenu);
@@ -25,7 +24,7 @@ function LeftBar() {
     <>
     <Container >
       <div className="new-button">
-        <button ref={buttonRef} onClick={(e) => handleNewClick(e)}>
+        <button onClick={(e) => handleNewClick(e)}>
           <MdAdd size={24} />
           Novo
         </button>
