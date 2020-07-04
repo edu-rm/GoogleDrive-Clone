@@ -26,7 +26,6 @@ function FileArea() {
       try {
         const response = await api.get('folders/1');
         setFolders(response.data);
-        console.log(response.data);
       } catch (e) {
         console.log(e);
       }
@@ -47,19 +46,8 @@ function FileArea() {
     setContextMenu(!contextMenu);
   }
 
-  function handleClickActivate (folder) {
-    if(itemActive.id = folder.id) {
-      setItemActive();
-      console.log(itemActive);
-
-    }else {
-      setItemActive(folder);
-      console.log(itemActive);
-    }
-  }
-
   function handleClickOutContext(){
-    setContextMenu();
+    setContextMenu(false);
   }
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -115,7 +103,8 @@ function FileArea() {
                 <div 
                   key={folder.id} 
                   className="row"
-                  onClick={(folder)=>handleClickActivate(folder)}
+                  onClick={()=>setItemActive(folder)}
+                  id={itemActive === folder ? 'active' : 'normal'}
                 >
                   <div id="name">
                     <MdFolder size={24} />
