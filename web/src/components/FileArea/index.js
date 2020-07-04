@@ -59,7 +59,7 @@ function FileArea() {
       try {
         const response = await api.get(`folders/${nextFolder}`);
         setCurrentFolderId(nextFolder);
-        setPrevFolder(currentFolderId);
+        setPrevFolder(response.data.father);
         
         setCurrentFolderContent(response.data.childrenFolders);
 
@@ -78,10 +78,10 @@ function FileArea() {
   async function handleBackFolder(){
     try {
       const response = await api.get(`folders/${prevFolder}`);
-      setCurrentFolderContent(response.data);
+      setCurrentFolderContent(response.data.childrenFolders);
 
-      setPrevFolder(response)
       setCurrentFolderId(prevFolder);
+      setPrevFolder(response.data.father)
     } catch (e) {
       console.log(e);
     }
