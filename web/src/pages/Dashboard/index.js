@@ -28,7 +28,7 @@ function Dashboard() {
           <input type="text" placeholder="Pesquisar"/>
         </div>
         <div className="right">
-          <Link type="button">
+          <Link to="button">
             <img src="https://image.freepik.com/vetores-gratis/perfil-de-avatar-de-homem-no-icone-redondo_24640-14044.jpg" alt="avatar"/>
           </Link>
         </div>

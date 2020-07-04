@@ -50,6 +50,14 @@ function FileArea() {
     setContextMenu(false);
   }
 
+  function handleDoubleClick(id) {
+    if(itemActive === id) {
+      console.log("entrei na pasta");
+    }else {
+      setItemActive(id)
+    }
+  }
+
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       console.log(file);
@@ -103,8 +111,8 @@ function FileArea() {
                 <div 
                   key={folder.id} 
                   className="row"
-                  onClick={()=>setItemActive(folder)}
-                  id={itemActive === folder ? 'active' : 'normal'}
+                  onClick={()=>handleDoubleClick(folder.id)}
+                  id={itemActive === folder.id ? 'active' : 'normal'}
                 >
                   <div id="name">
                     <MdFolder size={24} />
