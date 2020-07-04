@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-// import {useDropzone} from 'react-dropzone'
+
+import { currentFolder } from '../../store/modules/folder/actions';
+
+import { useDispatch } from 'react-redux';
 
 import api from '../../services/api';
 
@@ -17,6 +20,7 @@ import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } fro
 
 export default function FileArea() {
   /* FLOW CONTROL */
+  const dispatch = useDispatch();
 
 
   /* FOLDERS */
@@ -44,6 +48,8 @@ export default function FileArea() {
         setCurrentFolderId(1);
         setPrevFolder(0);
         setItemActive(0);
+
+        // dispatch(currentFolder(1));
       } catch (e) {
         console.log(e);
       }
@@ -62,6 +68,9 @@ export default function FileArea() {
       try {
         const response = await api.get(`folders/${nextFolder}`);
         setCurrentFolderId(nextFolder);
+
+        dispatch(currentFolder(nextFolder));
+
         setPrevFolder(response.data.father);
         setItemActive(0);
         
@@ -83,7 +92,10 @@ export default function FileArea() {
       const response = await api.get(`folders/${prevFolder}`);
       setCurrentFolderContent(response.data.childrenFolders);
       setNextFolder(0);
+
+      dispatch(currentFolder(prevFolder));
       setCurrentFolderId(prevFolder);
+      
       setPrevFolder(response.data.father);
       setItemActive(0);
     } catch (e) {

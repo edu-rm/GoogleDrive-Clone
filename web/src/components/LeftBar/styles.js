@@ -42,6 +42,7 @@ export const Container = styled.div`
 
   .menu {
     position: absolute;
+    z-index: 10;
     top: 8px;
     left: 8px;
     box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.2);
