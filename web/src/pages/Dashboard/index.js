@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MdSearch } from 'react-icons/md';
@@ -16,6 +16,9 @@ import Modal from '../../components/Modal';
 
 
 function Dashboard() {
+
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <Container>
       <Header>
@@ -36,11 +39,16 @@ function Dashboard() {
         </div>
       </Header>
       <div className="left-bar">
-        <LeftBar />
+        <LeftBar 
+          setShowModal={setModalShow} 
+        />
         <Storage />
       </div>
       <FileArea />
-      <Modal />
+      <Modal 
+        showModal={modalShow} 
+        setShowModal={setModalShow} 
+      />
     </Container>
   );
 }

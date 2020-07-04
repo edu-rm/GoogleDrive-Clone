@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
-function LeftBar() {
+function LeftBar({ setShowModal }) {
   const [activeMenu, setActiveMenu] = useState(false);
   const currentFolder = useSelector((state) => state.folder.folder_id);
 
@@ -17,7 +17,7 @@ function LeftBar() {
   }
 
   function handleCreateFolder() {
-
+    setShowModal(true);
   }
 
   return (

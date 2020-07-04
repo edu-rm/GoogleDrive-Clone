@@ -12,6 +12,10 @@ export const Container = styled.div`
   justify-content: center;
   background-color: rgba(0,0,0,0.5);
   
+  svg {
+    cursor: pointer;
+  }
+  
 
   .folder-name {
     background-color: white;
