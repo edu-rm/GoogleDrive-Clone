@@ -12,6 +12,7 @@ function FileArea() {
   /* FOLDERS */
 
   const [folders, setFolders] = useState([]);
+  const [itemActive, setItemActive] = useState();
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
@@ -44,6 +45,17 @@ function FileArea() {
     console.log(e.clientY);
 
     setContextMenu(!contextMenu);
+  }
+
+  function handleClickActivate (folder) {
+    if(itemActive.id = folder.id) {
+      setItemActive();
+      console.log(itemActive);
+
+    }else {
+      setItemActive(folder);
+      console.log(itemActive);
+    }
   }
 
   function handleClickOutContext(){
@@ -100,7 +112,11 @@ function FileArea() {
             {folders 
               && 
               folders.map(folder => (
-                <div key={folder.id} className="row">
+                <div 
+                  key={folder.id} 
+                  className="row"
+                  onClick={(folder)=>handleClickActivate(folder)}
+                >
                   <div id="name">
                     <MdFolder size={24} />
                     {folder.name}
