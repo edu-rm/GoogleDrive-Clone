@@ -59,7 +59,7 @@ function FileArea() {
   }
 
   function handleClickOutContext(){
-    setContextMenu(false);
+    setContextMenu();
   }
 
   const onDrop = useCallback((acceptedFiles) => {
