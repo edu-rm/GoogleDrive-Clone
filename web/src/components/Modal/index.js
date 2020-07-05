@@ -10,11 +10,10 @@ import { MdClose } from 'react-icons/md';
 import { Container } from './styles';
 
 function Modal({ showModal, setShowModal }) {
-  const [newFolderName, setNewFolderName] = useState('Pasta sem nome');
-  
-  const currentFolder = useSelector((state) => state.folder.father);
-
+  const currentFolder = useSelector((state) => state.folder.currentFolder);
   const dispatch = useDispatch();
+
+  const [newFolderName, setNewFolderName] = useState('Pasta sem nome');
   
   function handleModalClose() {
     setShowModal(!showModal);

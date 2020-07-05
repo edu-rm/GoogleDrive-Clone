@@ -46,3 +46,33 @@ export function setRootFolder(id) {
     }
   }
 }
+
+export function setCurrentFolder(id) {
+  // console.log(folders);
+  return {
+    type: '@folder/SET_CURRENT_FOLDER',
+    payload: {
+      id,
+    }
+  }
+}
+
+export function setFatherFolder(id) {
+  // console.log(folders);
+  return {
+    type: '@folder/SET_FATHER_FOLDER',
+    payload: {
+      id,
+    }
+  }
+}
+
+export function setPrevFolder(id) {
+  // console.log(folders);
+  return {
+    type: '@folder/SET_PREV_FOLDER',
+    payload: {
+      id,
+    }
+  }
+}

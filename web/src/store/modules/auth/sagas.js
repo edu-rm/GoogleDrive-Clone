@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 // import history from '../../../services/history';
 
 import { signInSuccess, signFailure } from './actions';
-import { setRootFolder } from '../folder/actions';
+import { setRootFolder, setCurrentFolder } from '../folder/actions';
 
 
 export function* signIn({ payload }) {
@@ -23,9 +23,13 @@ export function* signIn({ payload }) {
     api.defaults.headers.authorization= `Bearer ${token}`;
 
     console.log(api.defaults.headers.authorization);
-    console.log(response.data.folder)
+   
+
     yield put(signInSuccess(token, user));
+    
     yield put(setRootFolder(response.data.folder));
+    yield put(setCurrentFolder(response.data.folder));
+
 
   }catch(e){
     yield put(signFailure());

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { setContentCurrentFolderRequest } from '../../store/modules/folder/actions';
+import { setContentCurrentFolderRequest, setCurrentFolder, setPrevFolder } from '../../store/modules/folder/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,52 +15,78 @@ import {
 } from 'react-icons/md';
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
+import { current } from 'immer';
 
 export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
   const dispatch = useDispatch();
 
   /* FOLDERS */
-  const currentFolderContent = useSelector((state) => state.folder.folderContent);
-  const rootFolder = useSelector((state) => state.folder.rootFolder);
-
-  const father = useSelector((state) => state.folder.father);
-
-  const [currentFolderId, setCurrentFolderId] = useState();
+  const currentFolderContent = useSelector(state => state.folder.folderContent);
+  const rootFolder = useSelector(state => state.folder.rootFolder);
+  const currentFolder = useSelector(state => state.folder.currentFolder);
+  const father = useSelector(state => state.folder.father);
+  const prevFolder = useSelector(state => state.folder.prevFolder);
+  // const [currentFolderId, setCurrentFolderId] = useState();
   const [nextFolder, setNextFolder] = useState();
-  const [prevFolder, setPrevFolder] = useState(0);
+  // const [prevFolder, setPrevFolder] = useState(0);
   const [itemActive, setItemActive] = useState(0);
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+  useEffect(()=> {
+    console.log(currentFolder);
+    console.log(father);
+  },[])
 
   /* ROOT FOLDER */
+
+  // useEffect(()=> {
+  //   console.log(rootFolder);
+  //   console.log(currentFolder);
+  //   console.log(father);
+
+  // })
+
   useEffect(()=>{
     dispatch(setContentCurrentFolderRequest(rootFolder));
-    setCurrentFolderId(rootFolder);
-    setPrevFolder(0);
+    // setCurrentFolderId(rootFolder);
+    dispatch(setPrevFolder(0));
     setItemActive(0);
+    console.log('root',currentFolder);
   }, []);
   
   /* NEXT FOLDER */  
   useEffect(()=>{
     if(itemActive !== 0) {
+      console.log('next',nextFolder);
+
+      dispatch(setPrevFolder(currentFolder));
+
       dispatch(setContentCurrentFolderRequest(nextFolder));
-      setCurrentFolderId(nextFolder);
-      setPrevFolder(currentFolderId);
+      dispatch(setCurrentFolder(nextFolder));
+      // setCurrentFolderId(nextFolder);
+      // console.log('current',currentFolder);
+
       setItemActive(0);
     }
   },[nextFolder])
 
   /* BACK FOLDER */
   function handleBackFolder(){
-    if(prevFolder !== rootFolder && prevFolder !== 0) {
+    console.log('prev',prevFolder)
+    if(prevFolder !== 0) {
+      console.log('porev folder ', prevFolder);
+
       dispatch(setContentCurrentFolderRequest(prevFolder));
-      setNextFolder(0);
-      setCurrentFolderId(prevFolder);
-      setPrevFolder(father);
+
+      dispatch(setCurrentFolder(prevFolder));
+      dispatch(setPrevFolder(father));
+      
+      // setCurrentFolderId(prevFolder);
+      // setNextFolder(0);
       setItemActive(0);
     }
   }
