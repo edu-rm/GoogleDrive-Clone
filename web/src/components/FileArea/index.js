@@ -4,8 +4,6 @@ import { setContentCurrentFolderRequest } from '../../store/modules/folder/actio
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import api from '../../services/api';
-
 import {useDropzone} from 'react-dropzone'
 import { 
   MdDelete, 
@@ -21,28 +19,20 @@ import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } fro
 export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
   const dispatch = useDispatch();
-  // const isLoading = useSelector((state) => state.folder.isLoading);
-
 
   /* FOLDERS */
-  // const [currentFolderContent, setCurrentFolderContent] = useState([]);
-
   const currentFolderContent = useSelector((state) => state.folder.folderContent);
   const father = useSelector((state) => state.folder.father);
 
   const [currentFolderId, setCurrentFolderId] = useState();
-
   const [nextFolder, setNextFolder] = useState();
   const [prevFolder, setPrevFolder] = useState(0);
-
-
   const [itemActive, setItemActive] = useState(0);
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-
 
   /* ROOT FOLDER */
   useEffect(()=>{
@@ -52,38 +42,29 @@ export default function FileArea({ showModal }) {
     setItemActive(0);
   }, []);
   
-  /* NEXT FOLDER */
-  
+  /* NEXT FOLDER */  
   useEffect(()=>{
-
     if(itemActive !== 0) {
       dispatch(setContentCurrentFolderRequest(nextFolder));
       setCurrentFolderId(nextFolder);
-
       setPrevFolder(father);
       setItemActive(0);
-        
     }
   },[nextFolder])
 
   /* BACK FOLDER */
-
   function handleBackFolder(){
-      dispatch(setContentCurrentFolderRequest(prevFolder));
-
-      setNextFolder(0);
-
-      setCurrentFolderId(prevFolder);
-      
-      setPrevFolder(father);
-      setItemActive(0);
+    dispatch(setContentCurrentFolderRequest(prevFolder));
+    setNextFolder(0);
+    setCurrentFolderId(prevFolder);
+    setPrevFolder(father);
+    setItemActive(0);
   }
 
   function handleClickContext(e) {
     e.preventDefault();
     setX(e.clientX);
     setY(e.clientY);
-
 
     setContextMenu(!contextMenu);
   }
@@ -132,14 +113,12 @@ export default function FileArea({ showModal }) {
       </Header>
       <div className="dropzone">
       <ContainerDrag {...getRootProps()}>
-
         {isDragActive ?
           <div className="drop-area">
             <input {...getInputProps()} />
             <MdGetApp id="arrow-down" size={40} />
           </div>
           :
-
           <Files onContextMenu={handleClickContext} onClick={handleClickOutContext} display="grade">
             <div className="header">
               <p id="name">
@@ -150,9 +129,9 @@ export default function FileArea({ showModal }) {
               <p id="size">Tamanho</p>
             </div>
             <Scroll >
-            {currentFolderContent 
+              {currentFolderContent 
               && 
-              currentFolderContent.map(folder => (
+              currentFolderContent.map(folder => folder && (
                 <div 
                   key={folder.id} 
                   className="row"
@@ -169,32 +148,21 @@ export default function FileArea({ showModal }) {
                 </div>
               ))
             }
-            
           </Scroll>
-
         </Files>
         }
       </ContainerDrag>  
-
-            
-
-        
-
       </div>
       <ContextMenu show={contextMenu} x={x} y={y} />
-      
     </Container>
   );
 }
 
 function ContextMenu({ show, x, y }) {
-
-
   return (
     <div className="menu">
       {show && 
         <ContextMenuStyle x={x} y={y} >
-       
           <ul>
             <li>
               <button>
@@ -209,13 +177,8 @@ function ContextMenu({ show, x, y }) {
               item3
             </li>
           </ul>
-     
         </ContextMenuStyle>
       }
-    </div>
-    
+    </div> 
   );
-    
-  
-    
 }

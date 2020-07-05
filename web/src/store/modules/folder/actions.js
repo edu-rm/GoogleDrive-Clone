@@ -8,11 +8,31 @@ export function setContentCurrentFolderRequest(id) {
 }
 
 export function setContentCurrentFolderSuccess(folders, father) {
+  // console.log(folders);
   return {
     type: '@folder/SET_FOLDER_CONTENT_SUCCESS',
     payload: {
-      folders,
+      folderContent : folders,
       father
     }
+  }
+}
+
+export function createFolderRequest(name, father) {
+  return {
+    type: '@folder/CREATE_REQUEST',
+    payload: {
+      name,
+      father,
+    },
+  }
+}
+
+export function createFolderSuccess(folder) {
+  return {
+    type: '@folder/CREATE_SUCCESS',
+    payload: {
+      folder
+    },
   }
 }

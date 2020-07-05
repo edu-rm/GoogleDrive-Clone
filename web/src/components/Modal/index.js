@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import api from '../../services/api';
 import { useSelector, useDispatch } from 'react-redux';
+import { createFolderRequest } from '../../store/modules/folder/actions';
 
 import { MdClose } from 'react-icons/md';
 
@@ -9,28 +10,21 @@ import { MdClose } from 'react-icons/md';
 import { Container } from './styles';
 
 function Modal({ showModal, setShowModal }) {
-  const [inputValue, setInputValue] = useState('Pasta sem nome');
+  const [newFolderName, setNewFolderName] = useState('Pasta sem nome');
   
-  const currentFolder = useSelector((state) => state.folder.folder_id);
+  const currentFolder = useSelector((state) => state.folder.father);
+
   const dispatch = useDispatch();
   
   function handleModalClose() {
     setShowModal(!showModal);
   }
 
-  async function handleCreateFolder() {
-    try {
-      const response = await api.post('folders', {
-        name: inputValue,
-        father: Number(currentFolder)
-      });
+  function handleCreateFolder() {
 
-      setShowModal(false);
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch(createFolderRequest(newFolderName, currentFolder || 1));
 
-
+    setShowModal(false);
   }
 
   return (
@@ -41,9 +35,9 @@ function Modal({ showModal, setShowModal }) {
           <MdClose onClick={handleModalClose} size={24} />
         </div>
         <input 
-          value={inputValue} 
+          value={newFolderName} 
           type="text"
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => setNewFolderName(e.target.value)}
         />
         <div className="footer">
           <button onClick={handleModalClose} id="cancelar">
