@@ -1,19 +1,14 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
 
+import store from '../../../store';
+import { push } from 'react-router-redux';
+
 import { signInSuccess, signFailure } from './actions';
 import { setRootFolder } from '../folder/actions';
 
-import history from '../../../services/history';
-
-// import { useHistory } from 'react-router-dom';
-
-
 
 export function* signIn({ payload }) {
-
-  // const history = useHistory();
-
 
   try {
     const { email, password } = payload;
@@ -32,13 +27,12 @@ export function* signIn({ payload }) {
     yield put(signInSuccess(token, user));
     yield put(setRootFolder(response.data.folder));
 
-
   }catch(e){
     yield put(signFailure());
-    history.push('/');
+    yield put(push('/'));
   }
-
-  history.push('/dashboard');
+  
+  yield put(push('/dashboard'));
 
 }
 

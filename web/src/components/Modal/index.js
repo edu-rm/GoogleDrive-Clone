@@ -22,7 +22,7 @@ function Modal({ showModal, setShowModal }) {
 
   function handleCreateFolder() {
 
-    dispatch(createFolderRequest(newFolderName, currentFolder || 1));
+    dispatch(createFolderRequest(newFolderName, currentFolder));
 
     setShowModal(false);
   }

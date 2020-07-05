@@ -24,7 +24,6 @@ export default function FileArea({ showModal }) {
   const currentFolderContent = useSelector((state) => state.folder.folderContent);
   const rootFolder = useSelector((state) => state.folder.rootFolder);
 
-  console.log(rootFolder);
   const father = useSelector((state) => state.folder.father);
 
   const [currentFolderId, setCurrentFolderId] = useState();
@@ -57,11 +56,13 @@ export default function FileArea({ showModal }) {
 
   /* BACK FOLDER */
   function handleBackFolder(){
-    dispatch(setContentCurrentFolderRequest(prevFolder));
-    setNextFolder(0);
-    setCurrentFolderId(prevFolder);
-    setPrevFolder(father);
-    setItemActive(0);
+    if(prevFolder !== rootFolder && prevFolder !== 0) {
+      dispatch(setContentCurrentFolderRequest(prevFolder));
+      setNextFolder(0);
+      setCurrentFolderId(prevFolder);
+      setPrevFolder(father);
+      setItemActive(0);
+    }
   }
 
   function handleClickContext(e) {
