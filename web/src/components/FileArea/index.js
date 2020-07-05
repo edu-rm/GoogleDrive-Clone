@@ -40,7 +40,7 @@ export default function FileArea({ showModal }) {
   /* ROOT FOLDER */
   useEffect(()=>{
     dispatch(setContentCurrentFolderRequest(rootFolder));
-    setCurrentFolderId(1);
+    setCurrentFolderId(rootFolder);
     setPrevFolder(0);
     setItemActive(0);
   }, []);
@@ -50,7 +50,7 @@ export default function FileArea({ showModal }) {
     if(itemActive !== 0) {
       dispatch(setContentCurrentFolderRequest(nextFolder));
       setCurrentFolderId(nextFolder);
-      setPrevFolder(father);
+      setPrevFolder(currentFolderId);
       setItemActive(0);
     }
   },[nextFolder])

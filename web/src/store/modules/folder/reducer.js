@@ -18,6 +18,7 @@ export default function folder(state = INITIAL_STATE, action) {
       }
       case '@folder/SET_ROOT_FOLDER' : {
         draft.rootFolder = action.payload.id;
+        // draft.father = action.payload.id;
       }
     }
   });
