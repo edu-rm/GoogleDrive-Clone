@@ -22,6 +22,9 @@ export default function FileArea({ showModal }) {
 
   /* FOLDERS */
   const currentFolderContent = useSelector((state) => state.folder.folderContent);
+  const rootFolder = useSelector((state) => state.folder.rootFolder);
+
+  console.log(rootFolder);
   const father = useSelector((state) => state.folder.father);
 
   const [currentFolderId, setCurrentFolderId] = useState();
@@ -36,7 +39,7 @@ export default function FileArea({ showModal }) {
 
   /* ROOT FOLDER */
   useEffect(()=>{
-    dispatch(setContentCurrentFolderRequest(1));
+    dispatch(setContentCurrentFolderRequest(rootFolder));
     setCurrentFolderId(1);
     setPrevFolder(0);
     setItemActive(0);

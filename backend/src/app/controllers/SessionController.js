@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from '../../config/authToken';
 import User from '../models/User';
+import Folder from '../models/Folder';
 
 class SessionController {
   async store(req, res) {
@@ -22,6 +23,12 @@ class SessionController {
 
     const { id, name } = user;
 
+    const { id: rootFolder } = await Folder.findOne({
+      where: {
+        user_id: id,
+        father: null
+      }
+    });
 
     return res.json({
       user :{
@@ -29,6 +36,7 @@ class SessionController {
         name,
         email,
       },
+      folder : rootFolder,
       token: jwt.sign({ id }, config.secret, {
         expiresIn: config.expiresIn,
       }),

@@ -2,10 +2,11 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   folderContent: [],
-  father: 1,
+  rootFolder: null,
+  father: null,
 }
 
-export default function setFolderId(state = INITIAL_STATE, action) {
+export default function folder(state = INITIAL_STATE, action) {
   return produce(state, (draft)=> {
     switch( action.type ) {
       case '@folder/SET_FOLDER_CONTENT_SUCCESS' : {
@@ -14,6 +15,9 @@ export default function setFolderId(state = INITIAL_STATE, action) {
       }
       case '@folder/CREATE_SUCCESS' : {
         draft.folderContent.push(action.payload.folder);
+      }
+      case '@folder/SET_ROOT_FOLDER' : {
+        draft.rootFolder = action.payload.id;
       }
     }
   });

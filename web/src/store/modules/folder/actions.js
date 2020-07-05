@@ -36,3 +36,13 @@ export function createFolderSuccess(folder) {
     },
   }
 }
+
+export function setRootFolder(id) {
+  // console.log(folders);
+  return {
+    type: '@folder/SET_ROOT_FOLDER',
+    payload: {
+      id,
+    }
+  }
+}
