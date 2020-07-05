@@ -1,8 +1,18 @@
-export function currentFolder(folder_id) {
+export function setContentCurrentFolderRequest(id) {
   return {
-    type: '@folder/SET_CURRENT_FOLDER',
+    type: '@folder/SET_FOLDER_CONTENT_REQUEST',
     payload: {
-      folder_id,
+      id,
+    }
+  }
+}
+
+export function setContentCurrentFolderSuccess(folders, father) {
+  return {
+    type: '@folder/SET_FOLDER_CONTENT_SUCCESS',
+    payload: {
+      folders,
+      father
     }
   }
 }

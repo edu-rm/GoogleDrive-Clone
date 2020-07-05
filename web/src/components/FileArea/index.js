@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { currentFolder } from '../../store/modules/folder/actions';
+import { setContentCurrentFolderRequest } from '../../store/modules/folder/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +25,11 @@ export default function FileArea({ showModal }) {
 
 
   /* FOLDERS */
-  const [currentFolderContent, setCurrentFolderContent] = useState([]);
+  // const [currentFolderContent, setCurrentFolderContent] = useState([]);
+
+  const currentFolderContent = useSelector((state) => state.folder.folderContent);
+  const father = useSelector((state) => state.folder.father);
+
   const [currentFolderId, setCurrentFolderId] = useState();
 
   const [nextFolder, setNextFolder] = useState();
@@ -42,64 +46,37 @@ export default function FileArea({ showModal }) {
 
   /* ROOT FOLDER */
   useEffect(()=>{
-    async function requestItems() {
-      try {
-        const response = await api.get('folders/1');
-        setCurrentFolderContent(response.data.childrenFolders);
-        setCurrentFolderId(1);
-        setPrevFolder(0);
-        setItemActive(0);
-
-        // dispatch(currentFolder(1));
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    requestItems();
-
+    dispatch(setContentCurrentFolderRequest(1));
+    setCurrentFolderId(1);
+    setPrevFolder(0);
+    setItemActive(0);
   }, []);
   
   /* NEXT FOLDER */
   
   useEffect(()=>{
 
-    async function requestItems() {
-      try {
-        const response = await api.get(`folders/${nextFolder}`);
-        setCurrentFolderId(nextFolder);
+    if(itemActive !== 0) {
+      dispatch(setContentCurrentFolderRequest(nextFolder));
+      setCurrentFolderId(nextFolder);
 
-        dispatch(currentFolder(nextFolder));
-
-        setPrevFolder(response.data.father);
-        setItemActive(0);
+      setPrevFolder(father);
+      setItemActive(0);
         
-        setCurrentFolderContent(response.data.childrenFolders);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    if(itemActive != 0) {
-      requestItems();
     }
   },[nextFolder])
 
   /* BACK FOLDER */
 
-  async function handleBackFolder(){
-    try {
-      const response = await api.get(`folders/${prevFolder}`);
-      setCurrentFolderContent(response.data.childrenFolders);
+  function handleBackFolder(){
+      dispatch(setContentCurrentFolderRequest(prevFolder));
+
       setNextFolder(0);
 
-      dispatch(currentFolder(prevFolder));
       setCurrentFolderId(prevFolder);
       
-      setPrevFolder(response.data.father);
+      setPrevFolder(father);
       setItemActive(0);
-    } catch (e) {
-      console.log(e);
-    }
   }
 
   function handleClickContext(e) {
