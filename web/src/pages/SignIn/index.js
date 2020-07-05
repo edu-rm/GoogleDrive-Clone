@@ -45,7 +45,7 @@ function SignIn() {
           </div>
         </form>
         <div className="footer-signin">
-          <Link id="signup" to='/signup'>Crie uma conta</Link>
+          <Link to='/signup'>Crie uma conta</Link>
           <button onClick={handleSubmit}>
             Próxima
           </button>

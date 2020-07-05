@@ -1,8 +1,8 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
 
-import store from '../../../store';
 import { push } from 'react-router-redux';
+// import history from '../../../services/history';
 
 import { signInSuccess, signFailure } from './actions';
 import { setRootFolder } from '../folder/actions';
@@ -31,8 +31,10 @@ export function* signIn({ payload }) {
     yield put(signFailure());
     yield put(push('/'));
   }
-  
+
   yield put(push('/dashboard'));
+  // history.push('/dashboard');
+
 
 }
 

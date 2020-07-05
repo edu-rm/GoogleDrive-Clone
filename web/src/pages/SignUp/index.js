@@ -22,7 +22,6 @@ function SignUp() {
     setSenhaVisible(!senhaVisible);
     if(inputSenhaType === 'password'){
       setInputSenhaType('text');
-      console.log('aqui');
     }else {
       setInputSenhaType('password');
     }

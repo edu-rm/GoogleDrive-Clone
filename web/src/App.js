@@ -10,14 +10,12 @@ import GlobalStyles from './styles/global';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <Router history={history}>
-          <Routes />
-          <GlobalStyles />
-        </Router>
-      </Provider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <Router history={history}>
+        <Routes />
+        <GlobalStyles />
+      </Router>
+    </Provider>
   );
 }
 
