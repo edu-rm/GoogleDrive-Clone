@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { MdCloudQueue, MdPeopleOutline, MdAdd, MdCreateNewFolder } from 'react-icons/md'
 
-import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
@@ -9,14 +8,13 @@ import { Container } from './styles';
 
 function LeftBar({ setShowModal }) {
   const [activeMenu, setActiveMenu] = useState(false);
-  const currentFolder = useSelector((state) => state.folder.folder_id);
 
 
   function handleNewClick() {
     setActiveMenu(!activeMenu);
   }
 
-  function handleCreateFolder() {
+  function handleShowModal() {
     setShowModal(true);
   }
 
@@ -30,7 +28,7 @@ function LeftBar({ setShowModal }) {
         </button>
         <div className="menu" id={activeMenu ? 'visible' : 'invisible'}>
           <ul>
-            <li onClick={handleCreateFolder}>
+            <li onClick={handleShowModal}>
               <MdCreateNewFolder size={24} />
               Criar nova pasta
             </li>

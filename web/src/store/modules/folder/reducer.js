@@ -13,3 +13,4 @@ export default function setFolderId(state = INITIAL_STATE, action) {
     }
   });
 }
+

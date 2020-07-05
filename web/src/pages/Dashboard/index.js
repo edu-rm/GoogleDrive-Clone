@@ -44,7 +44,7 @@ function Dashboard() {
         />
         <Storage />
       </div>
-      <FileArea />
+      <FileArea showModal={modalShow}  />
       <Modal 
         showModal={modalShow} 
         setShowModal={setModalShow} 

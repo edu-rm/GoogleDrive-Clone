@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import { currentFolder } from '../../store/modules/folder/actions';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import api from '../../services/api';
 
@@ -18,9 +18,10 @@ import {
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
-export default function FileArea() {
+export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
   const dispatch = useDispatch();
+  // const isLoading = useSelector((state) => state.folder.isLoading);
 
 
   /* FOLDERS */
