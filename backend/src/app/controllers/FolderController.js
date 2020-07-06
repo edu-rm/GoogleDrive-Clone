@@ -8,7 +8,7 @@ import File from '../models/File';
 class FolderController {
   async store(req, res) {
     // Path da pasta pai
-    const { name, father }  = req.body;
+    const { name, father } = req.body;
 
     const { path, url } = await Folder.findByPk(father);
     const newFolderPath = `${path}${name}/`;
@@ -35,7 +35,7 @@ class FolderController {
 
   async show(req,res){
     // Preciso exibir tanto as pastas da pasta que foi passada quanto os arquivos
-    const { id } = req.params;
+    const { id } = req.query;
     console.log(id);
     const childrenFolders = await Folder.findAll({
       where: {

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   rootFolder: null,
   father: null,
   currentFolder : null,
-  prevFolder: null
+  nextFolder: null,
 }
 
 export default function folder(state = INITIAL_STATE, action) {
@@ -23,12 +23,13 @@ export default function folder(state = INITIAL_STATE, action) {
       case '@folder/SET_CURRENT_FOLDER' : {
         draft.currentFolder = action.payload.id;
       }
+      case '@folder/SET_NEXT_FOLDER' : {
+        draft.nextFolder = action.payload.id ;
+      }
       case '@folder/SET_FATHER_FOLDER' : {
         draft.father = action.payload.id ? action.payload.id : draft.rootFolder;
       }
-      case '@folder/SET_PREV_FOLDER' : {
-        draft.prevFolder = action.payload.id ;
-      }
+      
     }
   });
 }

@@ -6,7 +6,11 @@ import { setContentCurrentFolderSuccess, createFolderSuccess, setFatherFolder } 
 export function* folderContent({ payload }) {
   try {
     const { id } = payload;
-    const response = yield call(api.get, `folders/${id}`);
+    const response = yield call(api.get, 'folders', {
+      params: {
+        id
+      }
+    });
 
     // console.log(folders);
 

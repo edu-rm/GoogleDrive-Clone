@@ -33,7 +33,7 @@ routes.post('/folders',AuthMiddleware, folderController.store);
 
 routes.get('/files', AuthMiddleware, fileController.index);
 
-routes.get('/folders/:id',AuthMiddleware, folderController.show);
+routes.get('/folders',AuthMiddleware, folderController.show);
 routes.delete('/folders/:id',AuthMiddleware, folderController.delete);
 
 routes.delete('/files/:id',AuthMiddleware, fileController.delete);

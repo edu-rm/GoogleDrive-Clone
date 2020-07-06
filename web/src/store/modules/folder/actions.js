@@ -76,3 +76,15 @@ export function setPrevFolder(id) {
     }
   }
 }
+
+export function setNextFolder(id) {
+  // console.log(folders);
+  return {
+    type: '@folder/SET_NEXT_FOLDER',
+    payload: {
+      id,
+    }
+  }
+}
+
+

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { setContentCurrentFolderRequest, setCurrentFolder, setPrevFolder } from '../../store/modules/folder/actions';
+import { setContentCurrentFolderRequest, setCurrentFolder, setNextFolder } from '../../store/modules/folder/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,69 +26,51 @@ export default function FileArea({ showModal }) {
   const rootFolder = useSelector(state => state.folder.rootFolder);
   const currentFolder = useSelector(state => state.folder.currentFolder);
   const father = useSelector(state => state.folder.father);
-  const prevFolder = useSelector(state => state.folder.prevFolder);
-  // const [currentFolderId, setCurrentFolderId] = useState();
-  const [nextFolder, setNextFolder] = useState();
-  // const [prevFolder, setPrevFolder] = useState(0);
+  const nextFolder = useSelector(state => state.folder.nextFolder);
+
+  // const [nextFolder, setNextFolder] = useState(0);
+
   const [itemActive, setItemActive] = useState(0);
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-  useEffect(()=> {
-    console.log(currentFolder);
-    console.log(father);
-  },[])
+  
 
   /* ROOT FOLDER */
-
-  // useEffect(()=> {
-  //   console.log(rootFolder);
-  //   console.log(currentFolder);
-  //   console.log(father);
-
-  // })
-
   useEffect(()=>{
     dispatch(setContentCurrentFolderRequest(rootFolder));
-    // setCurrentFolderId(rootFolder);
-    dispatch(setPrevFolder(0));
+
     setItemActive(0);
-    console.log('root',currentFolder);
   }, []);
   
   /* NEXT FOLDER */  
   useEffect(()=>{
     if(itemActive !== 0) {
-      console.log('next',nextFolder);
-
-      dispatch(setPrevFolder(currentFolder));
-
-      dispatch(setContentCurrentFolderRequest(nextFolder));
-      dispatch(setCurrentFolder(nextFolder));
-      // setCurrentFolderId(nextFolder);
+      // console.log('next',nextFolder);
       // console.log('current',currentFolder);
 
+      
+      dispatch(setContentCurrentFolderRequest(nextFolder));
+      dispatch(setCurrentFolder(nextFolder));   
       setItemActive(0);
     }
   },[nextFolder])
 
+  // useEffect(() => {
+  //   console.log('current', currentFolder);
+  //   console.log('next', nextFolder);
+  //   console.log('prev', prevFolder);
+  //   console.log('rootfolder', rootFolder);
+  //   console.log('father', father);
+  // }, [currentFolder]);
+
   /* BACK FOLDER */
-  function handleBackFolder(){
-    console.log('prev',prevFolder)
-    if(prevFolder !== 0) {
-      console.log('porev folder ', prevFolder);
-
-      dispatch(setContentCurrentFolderRequest(prevFolder));
-
-      dispatch(setCurrentFolder(prevFolder));
-      dispatch(setPrevFolder(father));
-      
-      // setCurrentFolderId(prevFolder);
-      // setNextFolder(0);
+  function handleBackFolder (){
+      console.log('father', father);
+      dispatch(setContentCurrentFolderRequest(father));
       setItemActive(0);
-    }
   }
 
   function handleClickContext(e) {
@@ -103,13 +85,14 @@ export default function FileArea({ showModal }) {
     setContextMenu(false);
   }
 
-  function handleDoubleClick(id) {
-    if(itemActive === id) {
-      setNextFolder(id);
-    }else {
-      setItemActive(id);
+  function handleDoubleClick (id) {
+      if(itemActive === id) {
+        dispatch(setNextFolder(id));
+        // setNextFolder(id);
+      }else {
+        setItemActive(id);
+      }
     }
-  }
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
