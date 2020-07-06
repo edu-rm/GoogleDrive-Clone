@@ -5,7 +5,7 @@ import { setContentCurrentFolderSuccess, createFolderSuccess, setFatherFolder, s
 
 export function* folderContent({ payload }) {
   try {
-    const { id, direction } = payload;
+    const { id } = payload;
     const response = yield call(api.get, 'folders', {
       params: {
         id
@@ -17,7 +17,7 @@ export function* folderContent({ payload }) {
     if(response.data.father){
       yield put(setFatherFolder(response.data.father));
     }
-    
+
   } catch(e) {
     console.log(e);
   }
@@ -25,10 +25,13 @@ export function* folderContent({ payload }) {
 
 export function* createFolder({ payload }) {
   try {
-    const { name, father } = payload;
+    const { name, current, rootFolder } = payload;
+
+    // const root = rootFolder === current;
+
     const response = yield call(api.post, 'folders', {
       name,
-      father: father || null
+      father: current,
     });
 
     yield put(createFolderSuccess(response.data));

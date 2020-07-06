@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { setContentCurrentFolderRequest, setCurrentFolder, setNextFolder } from '../../store/modules/folder/actions';
+import { setContentCurrentFolderRequest, setNextFolder } from '../../store/modules/folder/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,6 @@ export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
   const dispatch = useDispatch();
   /* FOLDERS */
-  const state = useSelector(state => state.folder);
   const currentFolderContent = useSelector(state => state.folder.folderContent);
   const rootFolder = useSelector(state => state.folder.rootFolder);
   const currentFolder = useSelector(state => state.folder.currentFolder);

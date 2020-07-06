@@ -26,7 +26,6 @@ export function* signIn({ payload }) {
    
 
     yield put(signInSuccess(token, user));
-    
     yield put(setRootFolder(response.data.folder));
     yield put(setCurrentFolder(response.data.folder));
 

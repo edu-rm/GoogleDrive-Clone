@@ -11,7 +11,11 @@ import { Container } from './styles';
 import folder from '../../store/modules/folder/reducer';
 
 function Modal({ showModal, setShowModal }) {
+  // const father = useSelector(state => state.folder.father);
   const currentFolder = useSelector(state => state.folder.currentFolder);
+  const rootFolder = useSelector(state => state.folder.rootFolder);
+
+
   // console.log(currentFolder);
 
   const dispatch = useDispatch();
@@ -23,11 +27,10 @@ function Modal({ showModal, setShowModal }) {
   }
 
   function handleCreateFolder() {
-
-    // dispatch(createFolderRequest(newFolderName, currentFolder));
-    console.log(newFolderName);
-    console.log(currentFolder);
-
+    console.log("current", currentFolder);
+    console.log("rootFolder", rootFolder);
+    
+    dispatch(createFolderRequest(newFolderName, currentFolder));
     // setShowModal(false);
   }
 
