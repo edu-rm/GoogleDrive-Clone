@@ -45,12 +45,9 @@ export const Header = styled.div`
   }
 
   ul {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
     
-    li + li{
-      margin-left: 25px;
-    } 
-
   }
   
    
@@ -58,7 +55,7 @@ export const Header = styled.div`
 
 
 export const ContextMenuStyle = styled.div`
-    height: auto;
+    /* height: auto; */
     /* overflow: hidden;
     max-height: 0; */
     background-color: white;
@@ -69,10 +66,10 @@ export const ContextMenuStyle = styled.div`
     box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     z-index: 10;
-    top: 0;
+    /* top: 0; */
     /* display: flex; */
     top: ${(props) => `${props.y}px`};
-    left: ${(props) => `${props.x + 5}px`};
+    left: ${(props) => `${props.x - 5}px`};
 
     button {
       background: none;

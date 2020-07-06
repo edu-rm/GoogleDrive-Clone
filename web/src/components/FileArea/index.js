@@ -41,34 +41,38 @@ export default function FileArea({ showModal }) {
 
   /* ROOT FOLDER */
   useEffect(()=>{
-    dispatch(setContentCurrentFolderRequest(rootFolder));
     setItemActive(0);
+    dispatch(setContentCurrentFolderRequest(rootFolder));
   }, []);
   
   /* NEXT FOLDER */  
   useEffect(()=>{
-    if(itemActive && itemActive !== 0) {
-      dispatch(setContentCurrentFolderRequest(nextFolder, "next"));
-      // dispatch(setCurrentFolder(Number(nextFolder)));
+    if(itemActive && itemActive !== 0 && nextFolder !== 0) {
       setItemActive(0);
+      dispatch(setContentCurrentFolderRequest(nextFolder));
     }
   },[nextFolder])
 
 
   /* BACK FOLDER */
-  const handleBackFolder = useCallback(()=>{
-      console.log('father', father);
+  function handleBackFolder(){
       if(father) {
         dispatch(setContentCurrentFolderRequest(father));
         // dispatch(setCurrentFolder(father));
+        dispatch(setNextFolder(0));
+
         setItemActive(0);
       }
-  }, [father, currentFolder])
+  }
 
   function handleClickContext(e) {
     e.preventDefault();
     setX(e.clientX);
     setY(e.clientY);
+
+    console.log(e.clientX)
+    console.log(e.clientY)
+
 
     setContextMenu(!contextMenu);
   }
@@ -77,14 +81,20 @@ export default function FileArea({ showModal }) {
     setContextMenu(false);
   }
 
-  const handleDoubleClick = useCallback((id)=>{
-    if(itemActive === id) {
+  function handleDoubleClick(id){
+    console.log('id',id);
+    console.log(itemActive)
+    if(itemActive == id) {
       dispatch(setNextFolder(id));
       // setNextFolder(id);
     }else {
       setItemActive(id);
     }
-  }, [itemActive])
+  }
+
+  function handleDeleteFolder() {
+
+  }
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -104,16 +114,19 @@ export default function FileArea({ showModal }) {
         </button>
         <h1>Armazenamento</h1>
         <ul>
-          <li>
-            <button>
-              <MdDelete size={24} />
-            </button>
-          </li>
-          <li>
+          { itemActive !== 0 
+            && 
+            <li>
+              <button onClick={handleDeleteFolder}>
+                <MdDelete size={24} />
+              </button>
+            </li>
+          }
+          {/* <li>
             <button>
               <MdViewHeadline size={24} />
             </button>
-          </li>
+          </li> */}
         </ul>
       </Header>
       <div className="dropzone">
