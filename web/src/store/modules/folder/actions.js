@@ -7,13 +7,12 @@ export function setContentCurrentFolderRequest(id) {
   }
 }
 
-export function setContentCurrentFolderSuccess(folders, father) {
+export function setContentCurrentFolderSuccess(folders) {
   // console.log(folders);
   return {
     type: '@folder/SET_FOLDER_CONTENT_SUCCESS',
     payload: {
       folderContent : folders,
-      father
     }
   }
 }
@@ -67,15 +66,15 @@ export function setFatherFolder(id) {
   }
 }
 
-export function setPrevFolder(id) {
-  // console.log(folders);
-  return {
-    type: '@folder/SET_PREV_FOLDER',
-    payload: {
-      id,
-    }
-  }
-}
+// export function setPrevFolder(id) {
+//   // console.log(folders);
+//   return {
+//     type: '@folder/SET_PREV_FOLDER',
+//     payload: {
+//       id,
+//     }
+//   }
+// }
 
 export function setNextFolder(id) {
   // console.log(folders);

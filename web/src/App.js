@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
 import Routes from './routes';
 import history from './services/history';

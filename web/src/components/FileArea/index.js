@@ -15,13 +15,12 @@ import {
 } from 'react-icons/md';
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
-import { current } from 'immer';
 
 export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
   const dispatch = useDispatch();
-
   /* FOLDERS */
+  const state = useSelector(state => state.folder);
   const currentFolderContent = useSelector(state => state.folder.folderContent);
   const rootFolder = useSelector(state => state.folder.rootFolder);
   const currentFolder = useSelector(state => state.folder.currentFolder);
@@ -37,6 +36,9 @@ export default function FileArea({ showModal }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   
+  // useEffect(()=>{
+  //   console.log(state);
+  // })
 
   /* ROOT FOLDER */
   useEffect(()=>{
@@ -46,22 +48,23 @@ export default function FileArea({ showModal }) {
   
   /* NEXT FOLDER */  
   useEffect(()=>{
-    if(itemActive !== 0) {
+    if(itemActive && itemActive !== 0) {
       dispatch(setContentCurrentFolderRequest(nextFolder));
-      dispatch(setCurrentFolder(nextFolder));   
+      dispatch(setCurrentFolder(nextFolder));
       setItemActive(0);
     }
   },[nextFolder])
 
 
   /* BACK FOLDER */
-  function handleBackFolder (){
+  const handleBackFolder = useCallback(()=>{
       console.log('father', father);
       if(father) {
         dispatch(setContentCurrentFolderRequest(father));
+        dispatch(setCurrentFolder(father));
         setItemActive(0);
       }
-  }
+  }, [father])
 
   function handleClickContext(e) {
     e.preventDefault();
@@ -75,14 +78,14 @@ export default function FileArea({ showModal }) {
     setContextMenu(false);
   }
 
-  function handleDoubleClick (id) {
-      if(itemActive === id) {
-        dispatch(setNextFolder(id));
-        // setNextFolder(id);
-      }else {
-        setItemActive(id);
-      }
+  const handleDoubleClick = useCallback((id)=>{
+    if(itemActive === id) {
+      dispatch(setNextFolder(id));
+      // setNextFolder(id);
+    }else {
+      setItemActive(id);
     }
+  }, [itemActive])
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
