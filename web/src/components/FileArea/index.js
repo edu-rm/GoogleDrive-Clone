@@ -49,8 +49,8 @@ export default function FileArea({ showModal }) {
   /* NEXT FOLDER */  
   useEffect(()=>{
     if(itemActive && itemActive !== 0) {
-      dispatch(setContentCurrentFolderRequest(nextFolder));
-      dispatch(setCurrentFolder(nextFolder));
+      dispatch(setContentCurrentFolderRequest(nextFolder, "next"));
+      // dispatch(setCurrentFolder(Number(nextFolder)));
       setItemActive(0);
     }
   },[nextFolder])
@@ -61,10 +61,10 @@ export default function FileArea({ showModal }) {
       console.log('father', father);
       if(father) {
         dispatch(setContentCurrentFolderRequest(father));
-        dispatch(setCurrentFolder(father));
+        // dispatch(setCurrentFolder(father));
         setItemActive(0);
       }
-  }, [father])
+  }, [father, currentFolder])
 
   function handleClickContext(e) {
     e.preventDefault();

@@ -1,8 +1,9 @@
-export function setContentCurrentFolderRequest(id) {
+export function setContentCurrentFolderRequest(id, direction) {
   return {
     type: '@folder/SET_FOLDER_CONTENT_REQUEST',
     payload: {
       id,
+      direction
     }
   }
 }

@@ -44,16 +44,8 @@ class FolderController {
       },
     });
 
-    // const folder = await Folder.findOne({
-    //   where: {
-    //     user_id: req.user_id,
-    //     father: null
-    //   }
-    // });
-
     const pastaAtual = await Folder.findByPk(id);
 
-    // console.log(father.id);
 
     return res.json({
       childrenFolders,

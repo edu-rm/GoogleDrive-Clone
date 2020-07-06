@@ -11,7 +11,7 @@ import { Container } from './styles';
 import folder from '../../store/modules/folder/reducer';
 
 function Modal({ showModal, setShowModal }) {
-  const currentFolder = useSelector(state => state.folder);
+  const currentFolder = useSelector(state => state.folder.currentFolder);
   // console.log(currentFolder);
 
   const dispatch = useDispatch();
@@ -26,6 +26,8 @@ function Modal({ showModal, setShowModal }) {
 
     // dispatch(createFolderRequest(newFolderName, currentFolder));
     console.log(newFolderName);
+    console.log(currentFolder);
+
     // setShowModal(false);
   }
 
