@@ -37,21 +37,27 @@ class FolderController {
     // Preciso exibir tanto as pastas da pasta que foi passada quanto os arquivos
     const { id } = req.query;
     console.log(id);
+
     const childrenFolders = await Folder.findAll({
       where: {
         father: id,
       },
     });
 
-    
+    // const folder = await Folder.findOne({
+    //   where: {
+    //     user_id: req.user_id,
+    //     father: null
+    //   }
+    // });
 
-    const { father } = await Folder.findByPk(id);
+    const pastaAtual = await Folder.findByPk(id);
 
     // console.log(father.id);
 
     return res.json({
       childrenFolders,
-      father,
+      father: pastaAtual.father ? pastaAtual.father : null,
     });
   }
 

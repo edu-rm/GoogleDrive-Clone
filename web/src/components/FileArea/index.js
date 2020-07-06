@@ -41,36 +41,26 @@ export default function FileArea({ showModal }) {
   /* ROOT FOLDER */
   useEffect(()=>{
     dispatch(setContentCurrentFolderRequest(rootFolder));
-
     setItemActive(0);
   }, []);
   
   /* NEXT FOLDER */  
   useEffect(()=>{
     if(itemActive !== 0) {
-      // console.log('next',nextFolder);
-      // console.log('current',currentFolder);
-
-      
       dispatch(setContentCurrentFolderRequest(nextFolder));
       dispatch(setCurrentFolder(nextFolder));   
       setItemActive(0);
     }
   },[nextFolder])
 
-  // useEffect(() => {
-  //   console.log('current', currentFolder);
-  //   console.log('next', nextFolder);
-  //   console.log('prev', prevFolder);
-  //   console.log('rootfolder', rootFolder);
-  //   console.log('father', father);
-  // }, [currentFolder]);
 
   /* BACK FOLDER */
   function handleBackFolder (){
       console.log('father', father);
-      dispatch(setContentCurrentFolderRequest(father));
-      setItemActive(0);
+      if(father) {
+        dispatch(setContentCurrentFolderRequest(father));
+        setItemActive(0);
+      }
   }
 
   function handleClickContext(e) {
