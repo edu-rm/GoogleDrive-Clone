@@ -30,13 +30,13 @@ routes.post('/files', AuthMiddleware, upload.array('files'), fileController.stor
 
 
 routes.post('/folders',AuthMiddleware, folderController.store);
+routes.delete('/folders',AuthMiddleware, folderController.delete);
 
 routes.get('/files', AuthMiddleware, fileController.index);
+routes.delete('/files',AuthMiddleware, fileController.delete);
 
 routes.get('/folders',AuthMiddleware, folderController.show);
-routes.delete('/folders/:id',AuthMiddleware, folderController.delete);
 
-routes.delete('/files/:id',AuthMiddleware, fileController.delete);
 
 
 

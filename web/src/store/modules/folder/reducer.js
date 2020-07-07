@@ -22,6 +22,11 @@ export default function folder(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@folder/DELETE_SUCCESS' : {
+        draft.folderContent = draft.folderContent.filter(folder => folder.id !== action.payload.id);
+        break;
+      }
+
       case '@folder/SET_ROOT_FOLDER' : {
         draft.rootFolder = action.payload.id;
         break;

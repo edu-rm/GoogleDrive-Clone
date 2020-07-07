@@ -37,6 +37,24 @@ export function createFolderSuccess(folder) {
   }
 }
 
+export function deleteFolderRequest(id) {
+  return {
+    type: '@folder/DELETE_REQUEST',
+    payload:{
+      id
+    },
+  }
+}
+
+export function deleteFolderSuccess(id) {
+  return {
+    type: '@folder/DELETE_SUCCESS',
+    payload:{
+      id
+    },
+  }
+}
+
 export function setRootFolder(id) {
   return {
     type: '@folder/SET_ROOT_FOLDER',

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { setContentCurrentFolderRequest, setNextFolder } from '../../store/modules/folder/actions';
+import { setContentCurrentFolderRequest, setNextFolder, deleteFolderRequest } from '../../store/modules/folder/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -93,7 +93,9 @@ export default function FileArea({ showModal }) {
   }
 
   function handleDeleteFolder() {
-
+    if(itemActive !== 0) {
+      dispatch(deleteFolderRequest(itemActive));
+    }
   }
 
   const onDrop = useCallback((acceptedFiles) => {

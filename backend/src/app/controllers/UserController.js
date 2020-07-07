@@ -10,7 +10,20 @@ class UserController {
     const { name, email, password } = req.body;
 
     const path = resolve(__dirname, '..', '..', '..', 'storage', 'users', email);
-    const rootFolder = `${path}/`;
+
+    /**
+     * LINUX
+     */
+
+    // const rootFolder = `${path}/`;
+
+    /**
+     * WINDOWS
+     */
+
+    let rootFolder = `${path}/`;
+    rootFolder = rootFolder.replace(/\\/g, '/');
+
 
     const user = await User.create({
       name,

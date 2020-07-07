@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { Op } from 'sequelize';
 
+import {resolve} from 'path';
+
 import Folder from '../models/Folder';
 import File from '../models/File';
 
@@ -11,9 +13,23 @@ class FolderController {
     const { name, father } = req.body;
 
     const { path, url } = await Folder.findByPk(father);
+
+
+    // console.log(newFolderPathh);
+
+    /**
+     * LINUX
+     */
+
+    // const newFolderPath = `${path}${name}/`;
+    // const newFolderUrl = `${url}${name}/`;
+
+    /**
+     * WINDOWS
+     */
+
     const newFolderPath = `${path}${name}/`;
     const newFolderUrl = `${url}${name}/`;
-
 
     const folder = await Folder.create({
       user_id: req.user_id,
@@ -54,7 +70,7 @@ class FolderController {
   }
 
   async delete(req,res) {
-    const { id } = req.params;
+    const { id } = req.query;
 
     // Encontra o caminho da pasta que foi solicitada para exclusão
     const { path } = await Folder.findOne({
@@ -64,15 +80,20 @@ class FolderController {
     });
 
     // Faz uma busca para pegar todas as pastas que possuem o mesmo caminho no path (a mesma e subpastas)
-    const query = `${path}%`;
+    let query = `${path}%`;
 
     const subfolders = await Folder.findAll({
       where: {
         path: {
-          [Op.like]: query
+          [Op.like]: String(query)
         },
       }
     });
+
+    /**
+     * Windows
+     */
+    const pathDelete = path.replace(/\//g, '\\');
 
     // Excluir todos os arquivos usando o array de id
 
@@ -95,7 +116,9 @@ class FolderController {
     });
 
 
-    return res.json(ids);
+    return res.json({
+      success: ids
+    });
   }
 }
 

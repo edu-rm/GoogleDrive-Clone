@@ -1,7 +1,13 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
 
-import { setContentCurrentFolderSuccess, createFolderSuccess, setFatherFolder, setCurrentFolder } from './actions';
+import { 
+  setContentCurrentFolderSuccess, 
+  createFolderSuccess, 
+  setFatherFolder, 
+  setCurrentFolder,
+  deleteFolderSuccess
+} from './actions';
 
 export function* folderContent({ payload }) {
   try {
@@ -41,7 +47,27 @@ export function* createFolder({ payload }) {
   }
 }
 
+export function* deleteFolder({ payload }) {
+  try {
+    const { id } = payload;
+
+    // const root = rootFolder === current;
+
+    const response = yield call(api.delete, 'folders', {
+      params: {
+        id
+      }
+    });
+
+    yield put(deleteFolderSuccess(id));
+
+  }catch (e) {
+    console.log(e);
+  }
+}
+
 export default all([
   takeLatest('@folder/SET_FOLDER_CONTENT_REQUEST', folderContent),
-  takeLatest('@folder/CREATE_REQUEST', createFolder)
+  takeLatest('@folder/CREATE_REQUEST', createFolder),
+  takeLatest('@folder/DELETE_REQUEST', deleteFolder),
 ]);
