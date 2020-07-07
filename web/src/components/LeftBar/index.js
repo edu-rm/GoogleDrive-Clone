@@ -10,7 +10,7 @@ function LeftBar({ setShowModal }) {
   const [activeMenu, setActiveMenu] = useState(false);
 
 
-  function handleNewClick() {
+  function handleMenuVisibility() {
     setActiveMenu(!activeMenu);
   }
 
@@ -22,13 +22,13 @@ function LeftBar({ setShowModal }) {
     <>
     <Container >
       <div className="new-button">
-        <button onClick={(e) => handleNewClick(e)}>
+        <button onClick={handleMenuVisibility}>
           <MdAdd size={24} />
           Novo
         </button>
         <div className="menu" id={activeMenu ? 'visible' : 'invisible'}>
           <ul>
-            <li onClick={handleShowModal}>
+            <li onMouseOut={handleMenuVisibility} onClick={handleShowModal}>
               <MdCreateNewFolder size={24} />
               Criar nova pasta
             </li>

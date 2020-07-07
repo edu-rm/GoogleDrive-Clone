@@ -31,7 +31,7 @@ function Modal({ showModal, setShowModal }) {
     console.log("rootFolder", rootFolder);
     
     dispatch(createFolderRequest(newFolderName, currentFolder));
-    // setShowModal(false);
+    setShowModal(false);
   }
 
   return (
