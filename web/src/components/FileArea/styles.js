@@ -45,9 +45,12 @@ export const Header = styled.div`
   }
 
   ul {
-    display: grid;
-    grid-template-columns: 1fr 200px 1fr;
+    display: flex;
+    /* grid-template-columns: 1fr 200px 1fr; */
     
+    #invisible {
+      visibility: hidden;
+    }
   }
   
    

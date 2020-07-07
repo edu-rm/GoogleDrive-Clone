@@ -40,8 +40,8 @@ export const Container = styled.div`
   .menu {
     position: absolute;
     z-index: 10;
-    bottom: -40px;
-    left: 20px;
+    bottom: 8px;
+    left: 8px;
     box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.2);
     /* border: 1px solid black; */
     border-radius: 8px;

@@ -95,6 +95,7 @@ export default function FileArea({ showModal }) {
   function handleDeleteFolder() {
     if(itemActive !== 0) {
       dispatch(deleteFolderRequest(itemActive));
+      setItemActive(0);
     }
   }
 
@@ -116,14 +117,11 @@ export default function FileArea({ showModal }) {
         </button>
         <h1>Armazenamento</h1>
         <ul>
-          { itemActive !== 0 
-            && 
-            <li>
-              <button onClick={handleDeleteFolder}>
-                <MdDelete size={24} />
-              </button>
-            </li>
-          }
+          <li id={itemActive !== 0 ? 'visible' : 'invisible'}>
+            <button onClick={handleDeleteFolder}>
+              <MdDelete size={24} />
+            </button>
+          </li>
           {/* <li>
             <button>
               <MdViewHeadline size={24} />
