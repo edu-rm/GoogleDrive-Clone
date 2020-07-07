@@ -1,6 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { setContentCurrentFolderRequest, setNextFolder, deleteFolderRequest } from '../../store/modules/folder/actions';
+import { 
+  setContentCurrentFolderRequest, 
+  setNextFolder, 
+  deleteFolderRequest,
+} from '../../store/modules/folder/actions';
+
+import {
+  setUploadFile
+} from '../../store/modules/file/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,6 +33,8 @@ export default function FileArea({ showModal }) {
   const currentFolder = useSelector(state => state.folder.currentFolder);
   const father = useSelector(state => state.folder.father);
   const nextFolder = useSelector(state => state.folder.nextFolder);
+  const files = useSelector(state => state.file.fileProgress);
+
 
   // const [nextFolder, setNextFolder] = useState(0);
 
@@ -100,10 +110,10 @@ export default function FileArea({ showModal }) {
   }
 
   const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      console.log(file);
-    })
-    
+   
+    console.log(acceptedFiles);
+    dispatch(setUploadFile(acceptedFiles));
+    console.log(files);
 
   }, [])
 

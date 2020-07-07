@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { modify } from './utils/modify';
 
 const INITIAL_STATE = {
   fileProgress: {
@@ -11,10 +12,16 @@ const INITIAL_STATE = {
 }
 
 export default function file(state = INITIAL_STATE, action){
+  console.log(action.payload);
   switch(action.type){
-    case 'x' : {
-
-      break;
+    case '@file/SET_UPLOAD_FILE' : {
+      return {
+        ...state,
+        fileProgress : {
+          ...state.fileProgress,
+          ...modify(state.fileProgress, action.payload),
+        }
+      }
     }
     default:
       return state;
