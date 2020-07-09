@@ -1,21 +1,22 @@
 import multer from 'multer';
-import { extname, resolve,  } from 'path';
+import { extname, resolve  } from 'path';
 import fs from 'fs';
 
-import File from '../app/models/File';
 import Folder from '../app/models/Folder';
 
-import PathConvert from '../utils/PathConvert';
 
 export default {
   storage: multer.diskStorage({
     destination: async (req, file, cb) => {
       const { folder_id } = req.query;
+      
+      const { path } = await Folder.findByPk(folder_id);
 
-      const { path, url } = await Folder.findByPk(folder_id);
+      console.log(path)
 
-      const fileUrl = `${url}${file.originalname}`;
-      const filePathConverted = PathConvert.sToBs(`${path}${file.originalname}`);
+      // const fileUrl = `${url}${file.originalname}`;
+      // const filePathConverted = PathConvert.sToBs(`${path}${file.originalname}`);
+
 
       // req.fileList = {
       //   ...req.files,
@@ -30,18 +31,18 @@ export default {
        * Size in Bytes
        */
 
-      const {size} = fs.statSync(filePathConverted);
-      console.log(size);
+      // const {size} = fs.statSync(filePathConverted);
+      // console.log(size);
 
-      const newFile = await File.create({ 
-        name: file.originalname,
-        path: `${path}${file.originalname}`, 
-        user_id: req.user_id,
-        folder_id,
-        url: fileUrl,
-        extension: extname(file.originalname),
-        size,
-      });
+      // const newFile = await File.create({ 
+      //   name: file.originalname,
+      //   path: `${path}${file.originalname}`, 
+      //   user_id: req.user_id,
+      //   folder_id,
+      //   url: fileUrl,
+      //   extension: extname(file.originalname),
+      //   size,
+      // });
 
       // console.log(file.originalname)
 

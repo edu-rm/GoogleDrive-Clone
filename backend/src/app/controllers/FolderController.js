@@ -6,7 +6,6 @@ import PathConvert from '../../utils/PathConvert';
 import Folder from '../models/Folder';
 import File from '../models/File';
 
-
 class FolderController {
   async store(req, res) {
     // Path da pasta pai
