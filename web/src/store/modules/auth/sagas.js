@@ -1,12 +1,11 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '../../../services/api';
 
-import { push } from 'react-router-redux';
 import history from '../../../services/history';
 
 import { signInSuccess, signFailure } from './actions';
 import { setRootFolder, setCurrentFolder } from '../folder/actions';
-
+import { setStorage } from '../storage/actions';
 
 export function* signIn({ payload }) {
 
@@ -24,10 +23,10 @@ export function* signIn({ payload }) {
 
     console.log(api.defaults.headers.authorization);
    
-
     yield put(signInSuccess(token, user));
     yield put(setRootFolder(response.data.folder));
     yield put(setCurrentFolder(response.data.folder));
+    yield put(setStorage(response.data.storage));
 
 
   }catch(e){
