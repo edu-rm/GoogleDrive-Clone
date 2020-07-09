@@ -1,6 +1,7 @@
 import Router from 'express';
 import multer from 'multer';
-import authMiddleware from './app/middlewares/AuthMiddleware';
+
+
 
 import multerConfig from './config/multer';
 
@@ -11,7 +12,9 @@ import FileController from './app/controllers/FileController';
 import UserController from './app/controllers/UserController';
 import FolderController from './app/controllers/FolderController';
 import SessionController from './app/controllers/SessionController';
+
 import AuthMiddleware from './app/middlewares/AuthMiddleware';
+import StorageMiddleware from './app/middlewares/StorageMiddleware';
 
 
 const folderController = new FolderController();
@@ -26,7 +29,7 @@ routes.post('/sessions', sessionController.store);
 
 //Privates
 
-routes.post('/files', AuthMiddleware, upload.array('files'), fileController.store);
+routes.post('/files', AuthMiddleware, StorageMiddleware, upload.array('files'), fileController.store);
 
 
 routes.post('/folders',AuthMiddleware, folderController.store);
