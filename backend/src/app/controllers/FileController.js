@@ -5,8 +5,7 @@ import { promisify } from 'util';
 class FileController {
   async store(req, res){
 
-    console.log(req.file_path, req.file_id);
-
+    // console.log(req.files);
     // const file = await File.create({ path, user_id, folder_id });
     return res.json({ msg: 'Success' });
   }

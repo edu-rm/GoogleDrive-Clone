@@ -1,11 +1,11 @@
 import multer from 'multer';
 import { extname, resolve,  } from 'path';
-
 import fs from 'fs';
 
 import File from '../app/models/File';
 import Folder from '../app/models/Folder';
 
+import PathConvert from '../utils/PathConvert';
 
 export default {
   storage: multer.diskStorage({
@@ -15,6 +15,23 @@ export default {
       const { path, url } = await Folder.findByPk(folder_id);
 
       const fileUrl = `${url}${file.originalname}`;
+      const filePathConverted = PathConvert.sToBs(`${path}${file.originalname}`);
+
+      // req.fileList = {
+      //   ...req.files,
+      //   [file.originalname] : {
+      //     filePathConverted,
+      //     fileUrl
+      //   }
+      // }
+
+      
+      /**
+       * Size in Bytes
+       */
+
+      const {size} = fs.statSync(filePathConverted);
+      console.log(size);
 
       const newFile = await File.create({ 
         name: file.originalname,
@@ -23,10 +40,10 @@ export default {
         folder_id,
         url: fileUrl,
         extension: extname(file.originalname),
+        size,
       });
 
-      req.file_path = `${path}\\${file.originalname}`;
-      req.file_id = newFile.id;
+      // console.log(file.originalname)
 
       return cb(null, resolve(path));
     },
