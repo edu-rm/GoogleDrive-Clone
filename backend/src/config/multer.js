@@ -1,5 +1,7 @@
 import multer from 'multer';
-import { extname, resolve } from 'path';
+import { extname, resolve,  } from 'path';
+
+import fs from 'fs';
 
 import File from '../app/models/File';
 import Folder from '../app/models/Folder';
@@ -13,7 +15,7 @@ export default {
       const { path, url } = await Folder.findByPk(folder_id);
 
       const fileUrl = `${url}${file.originalname}`;
-      
+
       const newFile = await File.create({ 
         name: file.originalname,
         path: `${path}${file.originalname}`, 
@@ -23,6 +25,8 @@ export default {
         extension: extname(file.originalname),
       });
 
+      req.file_path = `${path}\\${file.originalname}`;
+      req.file_id = newFile.id;
 
       return cb(null, resolve(path));
     },

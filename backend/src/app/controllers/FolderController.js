@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { Op } from 'sequelize';
 
-import {resolve} from 'path';
+import PathConvert from '../../utils/PathConvert';
 
 import Folder from '../models/Folder';
 import File from '../models/File';
@@ -93,7 +93,7 @@ class FolderController {
     /**
      * Windows
      */
-    const pathDelete = path.replace(/\//g, '\\');
+    const pathDelete = PathConvert.sToBs(path);
 
     // Excluir todos os arquivos usando o array de id
 

@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      size: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       user_id :{
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'},
