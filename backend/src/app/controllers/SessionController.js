@@ -1,7 +1,12 @@
 import jwt from 'jsonwebtoken';
+import { fn, col } from 'sequelize';
+
 import config from '../../config/authToken';
 import User from '../models/User';
+
 import Folder from '../models/Folder';
+import File from '../models/File';
+
 
 class SessionController {
   async store(req, res) {
@@ -30,6 +35,21 @@ class SessionController {
       }
     });
 
+    /**
+     * Total storage
+     */
+
+    const file = await File.findAll({
+      where : {
+        user_id: user.id
+      },
+      attributes : [
+        [fn('sum', col('size')), 'total_size']
+      ],
+    });
+
+    const total_size = file[0].dataValues.total_size * 0.000001;
+
     return res.json({
       user :{
         id,
@@ -37,6 +57,7 @@ class SessionController {
         email,
       },
       folder : rootFolder,
+      storage: total_size,
       token: jwt.sign({ id }, config.secret, {
         expiresIn: config.expiresIn,
       }),
