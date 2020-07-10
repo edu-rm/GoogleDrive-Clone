@@ -11,7 +11,6 @@ function LeftBar({ setShowModal }) {
 
 
   function handleMenuVisibility() {
-    console.log('here')
     setActiveMenu(!activeMenu);
   }
 

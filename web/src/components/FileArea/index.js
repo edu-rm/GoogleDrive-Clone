@@ -51,10 +51,7 @@ export default function FileArea({ showModal }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   
-  // useEffect(()=>{
-  //   console.log(state);
-  // })
-
+  
   /* ROOT FOLDER */
   useEffect(()=>{
     setItemActive(0);
@@ -124,11 +121,11 @@ export default function FileArea({ showModal }) {
         onUploadProgress: progress => {
           const { loaded, total } = progress;
           const percentageProgress = Math.floor((loaded/total) * 100)
-          console.log(percentageProgress);
+          // console.log(percentageProgress);
         }
       });
 
-      console.log('fileaarea',response.data.storage);
+      // console.log('fileaarea',response.data.storage);
 
       dispatch(setStorage(response.data.storage));
     }catch(e) {

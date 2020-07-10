@@ -15,9 +15,6 @@ function Modal({ showModal, setShowModal }) {
   const currentFolder = useSelector(state => state.folder.currentFolder);
   const rootFolder = useSelector(state => state.folder.rootFolder);
 
-
-  // console.log(currentFolder);
-
   const dispatch = useDispatch();
 
   const [newFolderName, setNewFolderName] = useState('Pasta sem nome');
@@ -27,9 +24,6 @@ function Modal({ showModal, setShowModal }) {
   }
 
   function handleCreateFolder() {
-    console.log("current", currentFolder);
-    console.log("rootFolder", rootFolder);
-    
     dispatch(createFolderRequest(newFolderName, currentFolder));
     setShowModal(false);
   }
