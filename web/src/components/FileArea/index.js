@@ -1,4 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {useDropzone} from 'react-dropzone';
+
+import api from '../../services/api';
+
+import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
+
 
 import { 
   setContentCurrentFolderRequest, 
@@ -10,16 +17,13 @@ import {
   setStorage
 } from '../../store/modules/storage/actions';
 
-import api from '../../services/api';
 
 import {
-  setFiles,
+  setFilesUpload,
   setUploadProgress
 } from '../../store/modules/file/actions';
 
-import { useDispatch, useSelector } from 'react-redux';
 
-import {useDropzone} from 'react-dropzone'
 import { 
   MdDelete, 
   MdGetApp, 
@@ -28,7 +32,6 @@ import {
   MdCreateNewFolder
 } from 'react-icons/md';
 
-import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
 export default function FileArea({ showModal }) {
   /* FLOW CONTROL */
@@ -106,7 +109,7 @@ export default function FileArea({ showModal }) {
   }
 
   const onDrop = useCallback(async (acceptedFiles) => {
-    dispatch(setFiles(acceptedFiles));
+    dispatch(setFilesUpload(acceptedFiles));
     const formPayload = new FormData();
 
     for(let i = 0 ; i < acceptedFiles.length; i++) {

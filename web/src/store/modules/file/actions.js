@@ -9,7 +9,7 @@ export function setUploadProgress(id, progress) {
 }
 
 
-export function setFiles(data) {
+export function setFilesUpload(data) {
   return {
     type: '@file/SET_UPLOAD_FILE',
     payload: {

@@ -2,7 +2,8 @@ import produce from 'immer';
 import { modify } from './utils/modify';
 
 const INITIAL_STATE = {
-  files: []
+  files: [],
+  isUploading: []
 }
 
 export default function file(state = INITIAL_STATE, action){
@@ -12,6 +13,7 @@ export default function file(state = INITIAL_STATE, action){
     switch(action.type) {
       case '@file/SET_UPLOAD_FILE' : {
           draft.files = action.payload.files;
+          draft.isUploading = action.payload.files;
           break;
       }
 

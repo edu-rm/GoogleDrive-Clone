@@ -11,9 +11,7 @@ import LeftBar from '../../components/LeftBar';
 import Storage from '../../components/Storage';
 import FileArea from '../../components/FileArea';
 import Modal from '../../components/Modal';
-
-
-
+import FileUploader from '../../components/FileUploader';
 
 function Dashboard() {
 
@@ -49,6 +47,7 @@ function Dashboard() {
         showModal={modalShow} 
         setShowModal={setModalShow} 
       />
+      <FileUploader />
     </Container>
   );
 }
