@@ -6,6 +6,10 @@ import {
   deleteFolderRequest,
 } from '../../store/modules/folder/actions';
 
+import { 
+  setStorage
+} from '../../store/modules/storage/actions';
+
 import api from '../../services/api';
 
 import {
@@ -18,7 +22,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useDropzone} from 'react-dropzone'
 import { 
   MdDelete, 
-  MdViewHeadline, 
   MdGetApp, 
   MdFolder,
   MdArrowBack,
@@ -113,9 +116,8 @@ export default function FileArea({ showModal }) {
       formPayload.append('files', acceptedFiles[i]);
     }
 
-    
     try {
-      await api.post('files', formPayload, {
+      const response = await api.post('files', formPayload, {
         params: {
           folder_id: currentFolder,
         },
@@ -125,11 +127,16 @@ export default function FileArea({ showModal }) {
           console.log(percentageProgress);
         }
       });
+
+      console.log('fileaarea',response.data.storage);
+
+      dispatch(setStorage(response.data.storage));
     }catch(e) {
       console.log(e);
     }
 
-  }, [currentFolder])
+
+  }, [currentFolder, dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 

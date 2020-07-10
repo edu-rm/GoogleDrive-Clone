@@ -40,17 +40,15 @@ class FileController {
     /**
      * Inserindo
      */
-
     const { folder_id } = req.query;
     const { path, url } = await Folder.findByPk(folder_id);
-
-
+    let newFilesSize = 0;
     for(const file of req.files){
       const fileUrl = `${url}${file.originalname}`;
       const filePathConverted = PathConvert.sToBs(`${path}${file.originalname}`);
 
       const {size} = fs.statSync(filePathConverted);
-
+      newFilesSize += size;
       const newFile = await File.create({ 
           name: file.originalname,
           path: `${path}${file.originalname}`, 
@@ -60,9 +58,9 @@ class FileController {
           extension: extname(file.originalname),
           size,
         });
-    }
+    }    
 
-    return res.json({ msg: 'Success' });
+    return res.json({ storage: total_size + (newFilesSize*0.000001) });
   }
 
   async index(req,res){
