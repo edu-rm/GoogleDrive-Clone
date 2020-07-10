@@ -113,8 +113,7 @@ export default function FileArea({ showModal }) {
       formPayload.append('files', acceptedFiles[i]);
     }
 
-
-
+    
     try {
       await api.post('files', formPayload, {
         params: {
@@ -130,7 +129,7 @@ export default function FileArea({ showModal }) {
       console.log(e);
     }
 
-  }, [])
+  }, [currentFolder])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 

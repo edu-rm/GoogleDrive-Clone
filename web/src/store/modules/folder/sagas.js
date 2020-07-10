@@ -12,6 +12,7 @@ import {
 export function* folderContent({ payload }) {
   try {
     const { id } = payload;
+    console.log(id);
     const response = yield call(api.get, 'folders', {
       params: {
         id

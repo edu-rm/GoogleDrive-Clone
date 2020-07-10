@@ -11,7 +11,6 @@ export default function file(state = INITIAL_STATE, action){
     
     switch(action.type) {
       case '@file/SET_UPLOAD_FILE' : {
-          console.log(action.payload.files)
           draft.files = action.payload.files;
           break;
       }
