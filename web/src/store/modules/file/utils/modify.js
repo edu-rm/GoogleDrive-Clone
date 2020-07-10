@@ -3,7 +3,7 @@ import { size } from 'lodash';
 export const modify = (existingFiles, files)  => {
   let fileToUpload = {}
 
-  for(let i = 0 ; files.lenght ; i++) {
+  for(let i = 0 ; i< files.length; i++) {
     const id = size(existingFiles) + i + 1;
     fileToUpload = {
       ...fileToUpload,
@@ -14,6 +14,10 @@ export const modify = (existingFiles, files)  => {
       }
     }
   }
+
+  console.log(fileToUpload);
+  
+
   return fileToUpload;
 
 }

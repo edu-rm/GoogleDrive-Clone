@@ -2,28 +2,26 @@ import produce from 'immer';
 import { modify } from './utils/modify';
 
 const INITIAL_STATE = {
-  fileProgress: {
-    // 1: {  
-    //   id: 1,
-    //   file,
-    //   progress: 0,
-    // },
-  }
+  files: []
 }
 
 export default function file(state = INITIAL_STATE, action){
-  console.log(action.payload);
-  switch(action.type){
-    case '@file/SET_UPLOAD_FILE' : {
-      return {
-        ...state,
-        fileProgress : {
-          ...state.fileProgress,
-          ...modify(state.fileProgress, action.payload),
-        }
+
+  return produce(state, draft => {
+    
+    switch(action.type) {
+      case '@file/SET_UPLOAD_FILE' : {
+          console.log(action.payload.files)
+          draft.files = action.payload.files;
+          break;
       }
+
+      case '@file/SET_PROGRESS' : {   
+        break;
+      }
+
+      default:
+
     }
-    default:
-      return state;
-  }
+  })
 }

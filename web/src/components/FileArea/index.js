@@ -6,8 +6,11 @@ import {
   deleteFolderRequest,
 } from '../../store/modules/folder/actions';
 
+import api from '../../services/api';
+
 import {
-  setUploadFile
+  setFiles,
+  setUploadProgress
 } from '../../store/modules/file/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,11 +82,6 @@ export default function FileArea({ showModal }) {
     e.preventDefault();
     setX(e.clientX);
     setY(e.clientY);
-
-    console.log(e.clientX)
-    console.log(e.clientY)
-
-
     setContextMenu(!contextMenu);
   }
 
@@ -92,9 +90,7 @@ export default function FileArea({ showModal }) {
   }
 
   function handleDoubleClick(id){
-    console.log('id',id);
-    console.log(itemActive)
-    if(itemActive == id) {
+    if(itemActive === id) {
       dispatch(setNextFolder(id));
       // setNextFolder(id);
     }else {
@@ -109,11 +105,30 @@ export default function FileArea({ showModal }) {
     }
   }
 
-  const onDrop = useCallback((acceptedFiles) => {
-   
-    console.log(acceptedFiles);
-    dispatch(setUploadFile(acceptedFiles));
-    console.log(files);
+  const onDrop = useCallback(async (acceptedFiles) => {
+    dispatch(setFiles(acceptedFiles));
+    const formPayload = new FormData();
+
+    for(let i = 0 ; i < acceptedFiles.length; i++) {
+      formPayload.append('files', acceptedFiles[i]);
+    }
+
+
+
+    try {
+      await api.post('files', formPayload, {
+        params: {
+          folder_id: currentFolder,
+        },
+        onUploadProgress: progress => {
+          const { loaded, total } = progress;
+          const percentageProgress = Math.floor((loaded/total) * 100)
+          console.log(percentageProgress);
+        }
+      });
+    }catch(e) {
+      console.log(e);
+    }
 
   }, [])
 
