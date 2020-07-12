@@ -28,7 +28,7 @@ function FileUploader() {
       
       async function requestUploadFile () {
 
-        for(const file of filesArray ){
+        filesArray.forEach(async (file) => {
           const formPayload = new FormData();
           formPayload.append('files', file.file);
           
@@ -50,7 +50,7 @@ function FileUploader() {
             console.log(e);
           }
         
-        } 
+        });
       }
 
       requestUploadFile();

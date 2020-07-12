@@ -22,6 +22,7 @@ export default function file(state = INITIAL_STATE, action){
       }
 
       case '@file/SET_PROGRESS' : {
+        console.log(action.payload.progress);
         draft.files = {
           ...draft.files,
           [action.payload.id] : {
