@@ -15,9 +15,6 @@ export const modify = (existingFiles, files)  => {
     }
   }
 
-  console.log(fileToUpload);
-  
-
   return fileToUpload;
 
 }

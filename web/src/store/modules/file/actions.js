@@ -2,7 +2,7 @@ export function setUploadProgress(id, progress) {
   return {
     type: '@file/SET_PROGRESS',
     payload: {
-      id, 
+      id,
       progress
     }
   }
@@ -15,5 +15,11 @@ export function setFilesUpload(data) {
     payload: {
       files: data,
     }
+  }
+}
+
+export function setFileUploadSuccess() {
+  return {
+    type: '@file/SET_UPLOAD_FILE_SUCCESS',
   }
 }

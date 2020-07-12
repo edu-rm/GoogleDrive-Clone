@@ -20,7 +20,8 @@ import {
 
 import {
   setFilesUpload,
-  setUploadProgress
+  setUploadProgress,
+  setFileUploadSuccess
 } from '../../store/modules/file/actions';
 
 
@@ -110,33 +111,8 @@ export default function FileArea({ showModal }) {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
-    const formPayload = new FormData();
 
-    for(let i = 0 ; i < acceptedFiles.length; i++) {
-      formPayload.append('files', acceptedFiles[i]);
-    }
-
-    try {
-      const response = await api.post('files', formPayload, {
-        params: {
-          folder_id: currentFolder,
-        },
-        onUploadProgress: progress => {
-          const { loaded, total } = progress;
-          const percentageProgress = Math.floor((loaded/total) * 100)
-          // console.log(percentageProgress);
-        }
-      });
-
-      // console.log('fileaarea',response.data.storage);
-
-      dispatch(setStorage(response.data.storage));
-    }catch(e) {
-      console.log(e);
-    }
-
-
-  }, [currentFolder, dispatch])
+  }, [dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
