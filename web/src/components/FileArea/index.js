@@ -21,7 +21,8 @@ import {
 import {
   setFilesUpload,
   setUploadProgress,
-  setFileUploadSuccess
+  setFileUploadSuccess,
+  setFileExists
 } from '../../store/modules/file/actions';
 
 
@@ -111,7 +112,7 @@ export default function FileArea({ showModal }) {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
-
+    dispatch(setFileExists(true));
   }, [dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});

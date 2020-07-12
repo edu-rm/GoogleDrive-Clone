@@ -1,11 +1,12 @@
 import produce from 'immer';
 import { modify } from './utils/modify';
-import { toArray } from 'lodash';
+// import { toArray } from 'lodash';
 
 const INITIAL_STATE = {
   files: {},
   isUploading: [],
   progress: null,
+  fileExists: false,
 }
 
 export default function file(state = INITIAL_STATE, action){
@@ -23,13 +24,20 @@ export default function file(state = INITIAL_STATE, action){
       case '@file/SET_PROGRESS' : {
         draft.files = {
           ...draft.files,
-          [action.payload.id] : action.payload.progress
+          [action.payload.id] : {
+            progress: action.payload.progress
+          }
         }
         break;
       }
 
       case '@file/SET_UPLOAD_FILE_SUCCESS' : {
         draft.isUploading = []
+        break;
+      }
+
+      case '@file/FILE_EXISTS' : {
+        draft.fileExists = action.payload.exists;
         break;
       }
 

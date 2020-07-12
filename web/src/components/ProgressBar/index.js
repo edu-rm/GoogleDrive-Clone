@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
+import { toArray } from 'lodash';
 
 import { AiOutlineFile, AiFillCheckCircle } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -6,6 +8,9 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { Container } from './styles';
 
 function ProgressBar() {
+  // const progress = useSelector((state)=>state.file.progress);
+  const files = useSelector((state)=>state.file.files);
+  
   const [menu, setMenu] = useState(true);
 
   return (
@@ -17,13 +22,13 @@ function ProgressBar() {
         </button>
       </div>
       <div className="body" id={menu ? "visible" : "invisible"}>
-        {/* {files.map(file => 
+        {/* {files.toArray().map(file => 
           <div className="item">
             <div className="name-icon">
               <AiOutlineFile size={24} />
               <p>{file.name}</p>
             </div>
-            {progress}
+            {file.progress}
             <AiFillCheckCircle size={24} color="green"/>
           </div>  
         )} */}

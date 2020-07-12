@@ -8,6 +8,15 @@ export function setUploadProgress(id, progress) {
   }
 }
 
+export function setFileExists(exists) {
+  return {
+    type: '@file/FILE_EXISTS',
+    payload: {
+      exists,
+    }
+  }
+}
+
 
 export function setFilesUpload(data) {
   return {
