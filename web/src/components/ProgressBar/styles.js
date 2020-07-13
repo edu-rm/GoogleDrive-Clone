@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.4);
     .header {
     color: white;
     background-color: #323232;

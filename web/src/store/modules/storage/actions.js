@@ -5,4 +5,5 @@ export function setStorage(storage) {
       storage,
     }
   }
-} ;
+} 
+

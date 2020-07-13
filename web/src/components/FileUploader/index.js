@@ -17,15 +17,16 @@ function FileUploader() {
   const dispatch = useDispatch();
   const files = useSelector((state)=>state.file.files);
   const fileExists = useSelector((state)=>state.file.fileExists);
-
   const currentFolder = useSelector((state)=>state.folder.currentFolder);
+
+  const [showProgress, setShowProgress] = useState(false);
 
 
   useEffect(()=>{
     const filesArray = toArray(files);
 
     if(filesArray.length && fileExists) {
-      
+      setShowProgress(true);
       async function requestUploadFile () {
 
         filesArray.forEach(async (file) => {
@@ -43,8 +44,10 @@ function FileUploader() {
                 dispatch(setUploadProgress(file.id, percentageProgress));
               }
             });
+
+            // console.log(response.data.storage);
       
-            // dispatch(setStorage(response.data.storage));
+            dispatch(setStorage(response.data.storage));
 
           }catch(e) {
             console.log(e);
@@ -61,7 +64,7 @@ function FileUploader() {
 
   return (
     <Container>
-      <ProgressBar />
+      {showProgress && <ProgressBar />}
     </Container>
   );
 }

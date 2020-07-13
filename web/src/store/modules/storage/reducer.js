@@ -8,7 +8,7 @@ export default function storage(state = INITIAL_STATE, action) {
 
     switch(action.type) {
       case '@storage/SET_STORAGE': {
-        console.log('reducer',action.payload);
+        // console.log('reducer',action.payload);
         draft.amount = action.payload.storage.toFixed(2);
         break;
       }
