@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useMemo} from 'react';
 import { useSelector } from 'react-redux';
 import { toArray } from 'lodash';
 import { CircularProgress } from '@material-ui/core';
@@ -11,6 +11,7 @@ import { Container } from './styles';
 function ProgressBar({ show }) {
   // const progress = useSelector((state)=>state.file.progress);
   const files = useSelector((state)=>state.file.files);
+  const fileExists = useSelector((state)=>state.file.fileExists);
   
   useEffect(()=> {
     const array = toArray(files);
@@ -18,11 +19,18 @@ function ProgressBar({ show }) {
   }, [files])
   const [menu, setMenu] = useState(true);
 
+  const toUploadSize = useMemo(()=> toArray(files).length, [files]);
+  const uploadFinished = useMemo(() => toArray(files).every((file) => file.progress === 100), [files]);
+
   return (
     
     <Container>
       <div className="header">
-        <p>1 upload concluido</p>
+        {uploadFinished ?
+          <p>{toUploadSize} concluídos</p>
+          :
+          <p>Fazendo o upload de {toUploadSize} arquivos</p>
+        }
         <button onClick={(e) => setMenu(!menu)}>
         {menu ? <IoIosArrowDown size={24} /> : <IoIosArrowUp size={24} />}
         </button>
@@ -34,13 +42,14 @@ function ProgressBar({ show }) {
               <AiOutlineFile size={24} />
               <p>{file.file.name}</p>
             </div>
-            {file.progress}
-            {
-              file.progress < 100 ?
-              <CircularProgress size={24} variant="static" value={file.progress} />
-              :
-              <AiFillCheckCircle size={24} color="green"/>
-            }
+            <div className="progress">
+              {
+                file.progress < 100 ?
+                <CircularProgress size={24} variant="static" value={file.progress} />
+                :
+                <AiFillCheckCircle size={24} color="green"/>
+              }
+            </div> 
           </div>  
         )}
       </div>
