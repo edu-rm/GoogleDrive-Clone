@@ -13,7 +13,8 @@ function ProgressBar({ show }) {
   const files = useSelector((state)=>state.file.files);
   
   useEffect(()=> {
-    console.log(toArray(files))
+    const array = toArray(files);
+    console.log(array)
   }, [files])
   const [menu, setMenu] = useState(true);
 
@@ -31,7 +32,7 @@ function ProgressBar({ show }) {
           <div className="item">
             <div className="name-icon">
               <AiOutlineFile size={24} />
-              <p>{file.name}</p>
+              <p>{file.file.name}</p>
             </div>
             {file.progress}
             {
