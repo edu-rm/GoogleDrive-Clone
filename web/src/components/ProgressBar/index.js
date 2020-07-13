@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { toArray } from 'lodash';
+import { CircularProgress } from '@material-ui/core';
 
 import { AiOutlineFile, AiFillCheckCircle } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -33,7 +34,12 @@ function ProgressBar({ show }) {
               <p>{file.name}</p>
             </div>
             {file.progress}
-            <AiFillCheckCircle size={24} color="green"/>
+            {
+              file.progress < 100 ?
+              <CircularProgress size={24} variant="static" value={file.progress} />
+              :
+              <AiFillCheckCircle size={24} color="green"/>
+            }
           </div>  
         )}
       </div>
