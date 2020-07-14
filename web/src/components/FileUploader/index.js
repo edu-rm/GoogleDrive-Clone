@@ -64,7 +64,7 @@ function FileUploader() {
 
   return (
     <Container>
-      {showProgress && <ProgressBar />}
+      {showProgress && <ProgressBar setShow={setShowProgress} />}
     </Container>
   );
 }

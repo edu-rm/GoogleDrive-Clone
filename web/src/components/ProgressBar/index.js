@@ -4,14 +4,13 @@ import { toArray } from 'lodash';
 import { CircularProgress } from '@material-ui/core';
 
 import { AiOutlineFile, AiFillCheckCircle } from 'react-icons/ai';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp, IoIosClose } from 'react-icons/io';
 
 import { Container } from './styles';
 
-function ProgressBar({ show }) {
+function ProgressBar({ setShow }) {
   // const progress = useSelector((state)=>state.file.progress);
   const files = useSelector((state)=>state.file.files);
-  const fileExists = useSelector((state)=>state.file.fileExists);
   
   useEffect(()=> {
     const array = toArray(files);
@@ -31,9 +30,16 @@ function ProgressBar({ show }) {
           :
           <p>Fazendo o upload de {toUploadSize} arquivos</p>
         }
-        <button onClick={(e) => setMenu(!menu)}>
-        {menu ? <IoIosArrowDown size={24} /> : <IoIosArrowUp size={24} />}
-        </button>
+        <div className="buttons">
+
+          <button onClick={(e) => setMenu(!menu)}>
+            {menu ? <IoIosArrowDown size={24} /> : <IoIosArrowUp size={24} />}
+          </button>
+          <button onClick={(e) => setShow(false)}>
+            <IoIosClose size={24} />
+          </button>
+        </div>
+       
       </div>
       <div className="body" id={menu ? "visible" : "invisible"}>
         {toArray(files).map(file => 
