@@ -14,7 +14,8 @@ import {
 import {
   setFilesUpload,
   setFileExists,
-  getFilesIntoFolderRequest
+  getFilesIntoFolderRequest,
+  deleteFileRequest
 } from '../../store/modules/file/actions';
 
 import { AiOutlineFile, AiFillCheckCircle } from 'react-icons/ai';
@@ -113,8 +114,8 @@ export default function FileArea({ showModal }) {
       setFolderActive(0);
     }
     if(fileActive !== 0) {
-      // dispatch(deleteFolderRequest(folderActive));
-      console.log('Eliminei arquivo')
+      dispatch(deleteFileRequest(fileActive));
+      console.log(fileActive);
       setFolderActive(0);
     }
   }

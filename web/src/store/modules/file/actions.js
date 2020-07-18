@@ -44,3 +44,21 @@ export function getFilesIntoFolderSuccess(data) {
     }
   }
 }
+
+export function deleteFileRequest(id) {
+  return {
+    type: '@file/DELETE_REQUEST',
+    payload: {
+      id
+    },
+  }
+}
+
+export function deleteFileSuccess(id){
+  return {
+    type: '@file/DELETE_SUCCESS',
+    payload: {
+      id
+    },
+  }
+}

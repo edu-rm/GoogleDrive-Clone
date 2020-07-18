@@ -53,6 +53,11 @@ export default function file(state = INITIAL_STATE, action){
         break;
       }
 
+      case '@file/DELETE_SUCCESS' : {
+        draft.filesAlreadyExists = draft.filesAlreadyExists.filter(file => file.id !== action.payload.id);
+        break;
+      }
+
       default:
 
     }

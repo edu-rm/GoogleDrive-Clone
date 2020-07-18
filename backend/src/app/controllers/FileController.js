@@ -78,23 +78,25 @@ class FileController {
   }
 
   async delete(req, res) {
-    const { id } = req.params;
-    const { path } = await File.findByPk(id);
-    try {
+    const { file_id } = req.query;
 
+    try {
+      const { path } = await File.findByPk(file_id);
+
+      console.log('aqui')
       await File.destroy({
         where: {
-          id,
+          id:file_id,
         }
       });    
 
       await promisify(fs.unlink)(path);
+      return res.json({ msg : 'Deletado com sucesso '});
       
     } catch (e) {
       return res.json(e);
     }
 
-    return res.json({ msg : 'Deletado com sucesso '});
   }
 
 }
