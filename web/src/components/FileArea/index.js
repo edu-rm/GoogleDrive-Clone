@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {useDropzone} from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 
 import api from '../../services/api';
+
 
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
@@ -19,6 +20,7 @@ import {
   getFilesIntoFolderRequest
 } from '../../store/modules/file/actions';
 
+import { AiOutlineFile, AiFillCheckCircle } from 'react-icons/ai';
 
 import { 
   MdDelete, 
@@ -175,26 +177,24 @@ export default function FileArea({ showModal }) {
                 </div>
               ))
               }
-              {/* {
+              {
                 currentFolderFiles
                 &&
                 currentFolderFiles.map(file => file && (
                   <div 
-                    key={folder.id} 
+                    key={file.id} 
                     className="row"
-                    onClick={()=>handleDoubleClick(folder.id)}
-                    id={itemActive === folder.id ? 'active' : 'normal'}
                   >
                     <div id="name">
-                      <MdFolder size={24} />
-                      {folder.name}
+                      <AiOutlineFile size={24} />
+                      {file.name}
                     </div>
                     <div id="owner">Eu</div>
-                    <div id="createdAt">{folder.createdAt}</div>
-                    <div id="size">1mb</div>
+                    <div id="createdAt">{file.createdAt}</div>
+                    <div id="size">{file.size}</div>
                   </div>
                 ))
-              } */}
+              }
           </Scroll>
         </Files>
         }
