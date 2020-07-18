@@ -113,12 +113,18 @@ export default function FileArea({ showModal }) {
     }
   }
 
+  function handleClickInFile (url) {
+    window.open(url, "_blank") 
+  }
+
   const onDrop = useCallback((acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
     dispatch(setFileExists(true));
   }, [dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+
+
 
   return (
     <Container>
@@ -183,6 +189,7 @@ export default function FileArea({ showModal }) {
                 <div 
                   key={file.id} 
                   className="row"
+                  onClick={()=>handleClickInFile(file.url)}
                 >
                   <div id="name">
                     <AiOutlineFile size={24} />
