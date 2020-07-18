@@ -72,7 +72,7 @@ export default function FileArea({ showModal }) {
       setItemActive(0);
       dispatch(setContentCurrentFolderRequest(nextFolder));
     }
-  },[dispatch, itemActive, nextFolder])
+  },[nextFolder])
 
 
   /* BACK FOLDER */
@@ -113,7 +113,7 @@ export default function FileArea({ showModal }) {
     }
   }
 
-  const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
     dispatch(setFileExists(true));
   }, [dispatch])
@@ -158,7 +158,7 @@ export default function FileArea({ showModal }) {
               <p id="size">Tamanho</p>
             </div>
             <Scroll>
-              {currentFolderContent 
+              {currentFolderContent.length > 0
               && 
               currentFolderContent.map(folder => folder && (
                 <div 
@@ -177,24 +177,23 @@ export default function FileArea({ showModal }) {
                 </div>
               ))
               }
-              {
-                currentFolderFiles
-                &&
-                currentFolderFiles.map(file => file && (
-                  <div 
-                    key={file.id} 
-                    className="row"
-                  >
-                    <div id="name">
-                      <AiOutlineFile size={24} />
-                      {file.name}
-                    </div>
-                    <div id="owner">Eu</div>
-                    <div id="createdAt">{file.createdAt}</div>
-                    <div id="size">{file.size}</div>
+              {currentFolderFiles
+              &&
+              currentFolderFiles.map(file => file && (
+                <div 
+                  key={file.id} 
+                  className="row"
+                >
+                  <div id="name">
+                    <AiOutlineFile size={24} />
+                    {file.name}
                   </div>
-                ))
-              }
+                  <div id="owner">Eu</div>
+                  <div id="createdAt">{file.createdAt}</div>
+                  <div id="size">{file.size}</div>
+                </div>
+              ))
+            }
           </Scroll>
         </Files>
         }
