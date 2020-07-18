@@ -15,9 +15,8 @@ import {
 
 import {
   setFilesUpload,
-  setUploadProgress,
-  setFileUploadSuccess,
-  setFileExists
+  setFileExists,
+  getFilesIntoFolderRequest
 } from '../../store/modules/file/actions';
 
 
@@ -35,6 +34,8 @@ export default function FileArea({ showModal }) {
   const dispatch = useDispatch();
   /* FOLDERS */
   const currentFolderContent = useSelector(state => state.folder.folderContent);
+  const currentFolderFiles = useSelector(state => state.file.filesAlreadyExists);
+
   const rootFolder = useSelector(state => state.folder.rootFolder);
   const currentFolder = useSelector(state => state.folder.currentFolder);
   const father = useSelector(state => state.folder.father);
@@ -54,23 +55,8 @@ export default function FileArea({ showModal }) {
   /*FILES */
 
   useEffect(()=>{
-    console.log('here')
-    async function requestFiles() {
-      try {
-        const response = await api.get('folders', {
-          params: {
-            folder_id: currentFolder,
-          }
-        });
-
-        console.log(response);
-      }catch (e) {
-        console.log(e);
-      }
-    }
-
-    requestFiles();
-  },[]);
+    dispatch(getFilesIntoFolderRequest(currentFolder));
+  },[currentFolder, dispatch]);
 
   /* ROOT FOLDER */
   useEffect(()=>{
@@ -84,7 +70,7 @@ export default function FileArea({ showModal }) {
       setItemActive(0);
       dispatch(setContentCurrentFolderRequest(nextFolder));
     }
-  },[nextFolder])
+  },[dispatch, itemActive, nextFolder])
 
 
   /* BACK FOLDER */
@@ -169,7 +155,7 @@ export default function FileArea({ showModal }) {
               <p id="createdAt">Criação</p>
               <p id="size">Tamanho</p>
             </div>
-            <Scroll >
+            <Scroll>
               {currentFolderContent 
               && 
               currentFolderContent.map(folder => folder && (
@@ -188,7 +174,27 @@ export default function FileArea({ showModal }) {
                   <div id="size">1mb</div>
                 </div>
               ))
-            }
+              }
+              {/* {
+                currentFolderFiles
+                &&
+                currentFolderFiles.map(file => file && (
+                  <div 
+                    key={folder.id} 
+                    className="row"
+                    onClick={()=>handleDoubleClick(folder.id)}
+                    id={itemActive === folder.id ? 'active' : 'normal'}
+                  >
+                    <div id="name">
+                      <MdFolder size={24} />
+                      {folder.name}
+                    </div>
+                    <div id="owner">Eu</div>
+                    <div id="createdAt">{folder.createdAt}</div>
+                    <div id="size">1mb</div>
+                  </div>
+                ))
+              } */}
           </Scroll>
         </Files>
         }

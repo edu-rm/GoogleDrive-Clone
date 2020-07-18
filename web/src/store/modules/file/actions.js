@@ -27,8 +27,20 @@ export function setFilesUpload(data) {
   }
 }
 
-export function setFileUploadSuccess() {
+export function getFilesIntoFolderRequest(id) {
   return {
-    type: '@file/SET_UPLOAD_FILE_SUCCESS',
+    type: '@file/GET_FILES_INTO_FOLDER_REQUEST',
+    payload: {
+      id,
+    }
+  }
+}
+
+export function getFilesIntoFolderSuccess(data) {
+  return {
+    type: '@file/GET_FILES_INTO_FOLDER_SUCCESS',
+    payload: {
+      files: data,
+    }
   }
 }

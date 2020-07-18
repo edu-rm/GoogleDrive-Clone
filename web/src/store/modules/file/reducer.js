@@ -3,6 +3,7 @@ import { modify } from './utils/modify';
 // import { toArray } from 'lodash';
 
 const INITIAL_STATE = {
+  filesAlreadyExists: [],
   files: {},
   isUploading: [],
   progress: null,
@@ -38,6 +39,11 @@ export default function file(state = INITIAL_STATE, action){
 
       case '@file/FILE_EXISTS' : {
         draft.fileExists = action.payload.exists;
+        break;
+      }
+
+      case '@file/GET_FILES_INTO_FOLDER_SUCCESS' : {
+        draft.filesAlreadyExists = action.payload.files;
         break;
       }
 
