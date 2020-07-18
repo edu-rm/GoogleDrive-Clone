@@ -73,6 +73,7 @@ class FileController {
         folder_id
       },
     });
+    
     return res.json(files)
   }
 
