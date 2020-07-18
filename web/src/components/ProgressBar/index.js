@@ -36,14 +36,14 @@ function ProgressBar({ setShow }) {
             {menu ? <IoIosArrowDown size={24} /> : <IoIosArrowUp size={24} />}
           </button>
           <button onClick={(e) => setShow(false)}>
-            <IoIosClose size={24} />
+            <IoIosClose size={30} />
           </button>
         </div>
-       
       </div>
+       
       <div className="body" id={menu ? "visible" : "invisible"}>
         {toArray(files).map(file => 
-          <div className="item">
+          <div key={file.name} className="item">
             <div className="name-icon">
               <AiOutlineFile size={24} />
               <p>{file.file.name}</p>

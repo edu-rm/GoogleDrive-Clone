@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom'
 import { Container } from './styles';
 
 function Storage() {
-  const storage = useSelector((state)=> state.storage.amount);
+  const storage = useSelector((state)=> state.storage.storage);
   const [percentage, setPercentage] = useState((100 * storage )/3);
 
   useEffect(()=>{
+    console.log(storage);
     setPercentage((100 * storage )/3);
   }, [storage]);
 

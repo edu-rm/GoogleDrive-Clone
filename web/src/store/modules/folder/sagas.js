@@ -12,7 +12,6 @@ import {
 export function* folderContent({ payload }) {
   try {
     const { id } = payload;
-    console.log(id);
     const response = yield call(api.get, 'folders', {
       params: {
         id
@@ -32,7 +31,7 @@ export function* folderContent({ payload }) {
 
 export function* createFolder({ payload }) {
   try {
-    const { name, current, rootFolder } = payload;
+    const { name, current } = payload;
 
     // const root = rootFolder === current;
 

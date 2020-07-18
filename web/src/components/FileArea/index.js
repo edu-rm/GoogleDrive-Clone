@@ -13,11 +13,6 @@ import {
   deleteFolderRequest,
 } from '../../store/modules/folder/actions';
 
-import { 
-  setStorage
-} from '../../store/modules/storage/actions';
-
-
 import {
   setFilesUpload,
   setUploadProgress,
@@ -44,7 +39,7 @@ export default function FileArea({ showModal }) {
   const currentFolder = useSelector(state => state.folder.currentFolder);
   const father = useSelector(state => state.folder.father);
   const nextFolder = useSelector(state => state.folder.nextFolder);
-  const files = useSelector(state => state.file.fileProgress);
+  // const files = useSelector(state => state.file.fileProgress);
 
 
   // const [nextFolder, setNextFolder] = useState(0);
@@ -56,7 +51,27 @@ export default function FileArea({ showModal }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   
-  
+  /*FILES */
+
+  useEffect(()=>{
+    console.log('here')
+    async function requestFiles() {
+      try {
+        const response = await api.get('folders', {
+          params: {
+            folder_id: currentFolder,
+          }
+        });
+
+        console.log(response);
+      }catch (e) {
+        console.log(e);
+      }
+    }
+
+    requestFiles();
+  },[]);
+
   /* ROOT FOLDER */
   useEffect(()=>{
     setItemActive(0);

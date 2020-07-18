@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 const INITIAL_STATE = {
-  amount: null,
+  storage: null,
 }
 
 export default function storage(state = INITIAL_STATE, action) {
@@ -8,8 +8,8 @@ export default function storage(state = INITIAL_STATE, action) {
 
     switch(action.type) {
       case '@storage/SET_STORAGE': {
-        // console.log('reducer',action.payload);
-        draft.amount = action.payload.storage.toFixed(2);
+        console.log('action', action.payload.storage)
+        draft.storage = action.payload.storage && Number(action.payload.storage).toFixed(2);
         break;
       }
       default:

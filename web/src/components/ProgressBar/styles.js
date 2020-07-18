@@ -5,11 +5,16 @@ export const Container = styled.div`
     .header {
       color: white;
       background-color: #323232;
-      padding: 20px 20px;
+      padding: 20px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       
+      .buttons {
+        display: flex; 
+        align-items: center;
+      }
+
       button {
         margin: 0;
         background: transparent;

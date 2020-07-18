@@ -21,6 +21,20 @@ function FileUploader() {
 
   const [showProgress, setShowProgress] = useState(false);
 
+  useEffect(()=>{
+    async function getStorage() {
+      try {
+        const response = await api.get('/storage');
+        dispatch(setStorage(response.data.storage));
+      }catch (e) {
+        console.log(e);
+      }
+    }
+
+    if(!fileExists) {
+      getStorage();
+    }
+  },[dispatch, fileExists])
 
   useEffect(()=>{
     const filesArray = toArray(files);
@@ -34,7 +48,7 @@ function FileUploader() {
           formPayload.append('files', file.file);
           
           try {
-            const response = await api.post('files', formPayload, {
+            await api.post('files', formPayload, {
               params: {
                 folder_id: currentFolder,
               },
@@ -44,11 +58,7 @@ function FileUploader() {
                 dispatch(setUploadProgress(file.id, percentageProgress));
               }
             });
-
-            // console.log(response.data.storage);
-      
-            dispatch(setStorage(response.data.storage));
-
+    
           }catch(e) {
             console.log(e);
           }
@@ -56,8 +66,25 @@ function FileUploader() {
         });
       }
 
-      requestUploadFile();
+      async function getStorage() {
+        try {
+          const response = await api.get('/storage');
+          dispatch(setStorage(response.data.storage));
+        }catch (e) {
+          console.log(e);
+        }
+      }
+
+      requestUploadFile(); 
+
+      const timer = setTimeout(()=> {
+        console.log('atualizei')
+        getStorage();
+      }, 2000) 
+
       dispatch(setFileExists(false))
+
+      return () => clearTimeout(timer);
     }
     
   },[files, dispatch, currentFolder, fileExists]);

@@ -28,7 +28,6 @@ export function* signIn({ payload }) {
     yield put(setCurrentFolder(response.data.folder));
     yield put(setStorage(response.data.storage));
 
-
   }catch(e){
     yield put(signFailure());
     // yield put(push('/'));

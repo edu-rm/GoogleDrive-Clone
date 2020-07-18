@@ -12,8 +12,10 @@ class StorageController {
       ],
     });
 
+    const total_size = file.dataValues.total_size * 0.000001;
+
     return res.json({
-      storage: file.dataValues.total_size,
+      storage: total_size,
     })
   }
 }
