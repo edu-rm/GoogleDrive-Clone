@@ -43,7 +43,13 @@ export default function file(state = INITIAL_STATE, action){
       }
 
       case '@file/GET_FILES_INTO_FOLDER_SUCCESS' : {
-        draft.filesAlreadyExists = action.payload.files;
+          const files = action.payload.files.map(file=> {
+            return {
+              ...file,
+              size: file.size * 0.000001,
+            }
+          })
+        draft.filesAlreadyExists = files;
         break;
       }
 

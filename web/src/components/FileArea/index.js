@@ -190,7 +190,7 @@ export default function FileArea({ showModal }) {
                   </div>
                   <div id="owner">Eu</div>
                   <div id="createdAt">{file.createdAt}</div>
-                  <div id="size">{file.size}</div>
+                  <div id="size">{file.size} mb</div>
                 </div>
               ))
             }
