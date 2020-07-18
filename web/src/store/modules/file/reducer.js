@@ -46,7 +46,7 @@ export default function file(state = INITIAL_STATE, action){
           const files = action.payload.files.map(file=> {
             return {
               ...file,
-              size: file.size * 0.000001,
+              size: Number(file.size * 0.000001).toFixed(3),
             }
           })
         draft.filesAlreadyExists = files;

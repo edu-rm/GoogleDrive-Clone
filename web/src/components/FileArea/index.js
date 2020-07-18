@@ -75,13 +75,13 @@ export default function FileArea({ showModal }) {
 
   /* BACK FOLDER */
   function handleBackFolder(){
-      if(father) {
-        dispatch(setContentCurrentFolderRequest(father));
-        // dispatch(setCurrentFolder(father));
-        dispatch(setNextFolder(0));
+    if(father) {
+      dispatch(setContentCurrentFolderRequest(father));
+      // dispatch(setCurrentFolder(father));
+      dispatch(setNextFolder(0));
 
-        setFolderActive(0);
-      }
+      setFolderActive(0);
+    }
   }
 
   function handleClickContext(e) {
@@ -100,13 +100,21 @@ export default function FileArea({ showModal }) {
       dispatch(setNextFolder(id));
       // setNextFolder(id);
     }else {
+      if(fileActive !== 0) {
+        setFileActive(0);
+      }
       setFolderActive(id);
     }
   }
 
-  function handleDeleteFolder() {
+  function handleDeleteItem() {
     if(folderActive !== 0) {
       dispatch(deleteFolderRequest(folderActive));
+      setFolderActive(0);
+    }
+    if(fileActive !== 0) {
+      // dispatch(deleteFolderRequest(folderActive));
+      console.log('Eliminei arquivo')
       setFolderActive(0);
     }
   }
@@ -115,10 +123,13 @@ export default function FileArea({ showModal }) {
     if(fileActive === id) {
       window.open(url, "_blank") 
     }else {
+      if(folderActive !== 0) {
+        setFolderActive(0);
+      }
       setFileActive(id);
     }
   }
-  
+
   const onDrop = useCallback((acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
     dispatch(setFileExists(true));
@@ -136,8 +147,8 @@ export default function FileArea({ showModal }) {
         </button>
         <h1>Armazenamento</h1>
         <ul>
-          <li id={folderActive !== 0 ? 'visible' : 'invisible'}>
-            <button onClick={handleDeleteFolder}>
+          <li id={folderActive !== 0 || fileActive !== 0  ? 'visible' : 'invisible'}>
+            <button onClick={handleDeleteItem}>
               <MdDelete size={24} />
             </button>
           </li>
