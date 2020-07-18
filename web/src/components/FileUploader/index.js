@@ -48,7 +48,7 @@ function FileUploader() {
           formPayload.append('files', file.file);
           
           try {
-            await api.post('files', formPayload, {
+            const response = await api.post('files', formPayload, {
               params: {
                 folder_id: currentFolder,
               },
@@ -66,25 +66,9 @@ function FileUploader() {
         });
       }
 
-      async function getStorage() {
-        try {
-          const response = await api.get('/storage');
-          dispatch(setStorage(response.data.storage));
-        }catch (e) {
-          console.log(e);
-        }
-      }
-
       requestUploadFile(); 
-
-      const timer = setTimeout(()=> {
-        console.log('atualizei')
-        getStorage();
-      }, 2000) 
-
       dispatch(setFileExists(false))
 
-      return () => clearTimeout(timer);
     }
     
   },[files, dispatch, currentFolder, fileExists]);
