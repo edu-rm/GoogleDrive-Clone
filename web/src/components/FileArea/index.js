@@ -2,9 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 
-import api from '../../services/api';
-
-
 import { Container, Header, Files, ContextMenuStyle, Scroll, ContainerDrag } from './styles';
 
 
@@ -47,7 +44,8 @@ export default function FileArea({ showModal }) {
 
   // const [nextFolder, setNextFolder] = useState(0);
 
-  const [itemActive, setItemActive] = useState(0);
+  const [folderActive, setFolderActive] = useState(0);
+  const [fileActive, setFileActive] = useState(0);
 
   /*For Context */
   const [contextMenu, setContextMenu] = useState(false);
@@ -62,14 +60,14 @@ export default function FileArea({ showModal }) {
 
   /* ROOT FOLDER */
   useEffect(()=>{
-    setItemActive(0);
+    setFolderActive(0);
     dispatch(setContentCurrentFolderRequest(rootFolder));
   }, []);
   
   /* NEXT FOLDER */  
   useEffect(()=>{
-    if(itemActive && itemActive !== 0 && nextFolder !== 0) {
-      setItemActive(0);
+    if(folderActive && folderActive !== 0 && nextFolder !== 0) {
+      setFolderActive(0);
       dispatch(setContentCurrentFolderRequest(nextFolder));
     }
   },[nextFolder])
@@ -82,7 +80,7 @@ export default function FileArea({ showModal }) {
         // dispatch(setCurrentFolder(father));
         dispatch(setNextFolder(0));
 
-        setItemActive(0);
+        setFolderActive(0);
       }
   }
 
@@ -98,25 +96,29 @@ export default function FileArea({ showModal }) {
   }
 
   function handleDoubleClick(id){
-    if(itemActive === id) {
+    if(folderActive === id) {
       dispatch(setNextFolder(id));
       // setNextFolder(id);
     }else {
-      setItemActive(id);
+      setFolderActive(id);
     }
   }
 
   function handleDeleteFolder() {
-    if(itemActive !== 0) {
-      dispatch(deleteFolderRequest(itemActive));
-      setItemActive(0);
+    if(folderActive !== 0) {
+      dispatch(deleteFolderRequest(folderActive));
+      setFolderActive(0);
     }
   }
 
-  function handleClickInFile (url) {
-    window.open(url, "_blank") 
+  function handleClickInFile (id,url) {
+    if(fileActive === id) {
+      window.open(url, "_blank") 
+    }else {
+      setFileActive(id);
+    }
   }
-
+  
   const onDrop = useCallback((acceptedFiles) => {
     dispatch(setFilesUpload(acceptedFiles));
     dispatch(setFileExists(true));
@@ -134,7 +136,7 @@ export default function FileArea({ showModal }) {
         </button>
         <h1>Armazenamento</h1>
         <ul>
-          <li id={itemActive !== 0 ? 'visible' : 'invisible'}>
+          <li id={folderActive !== 0 ? 'visible' : 'invisible'}>
             <button onClick={handleDeleteFolder}>
               <MdDelete size={24} />
             </button>
@@ -171,7 +173,7 @@ export default function FileArea({ showModal }) {
                   key={folder.id} 
                   className="row"
                   onClick={()=>handleDoubleClick(folder.id)}
-                  id={itemActive === folder.id ? 'active' : 'normal'}
+                  id={folderActive === folder.id ? 'active' : 'normal'}
                 >
                   <div id="name">
                     <MdFolder size={24} />
@@ -189,7 +191,8 @@ export default function FileArea({ showModal }) {
                 <div 
                   key={file.id} 
                   className="row"
-                  onClick={()=>handleClickInFile(file.url)}
+                  onClick={()=>handleClickInFile(file.id, file.url)}
+                  id={fileActive === Number(file.id) ? 'active' : 'normal'}
                 >
                   <div id="name">
                     <AiOutlineFile size={24} />
