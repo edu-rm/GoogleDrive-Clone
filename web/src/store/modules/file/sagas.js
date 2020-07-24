@@ -26,6 +26,7 @@ export function* filesInFolder({ payload }) {
 
 export function* fileDelete({ payload }) {
   const { id } = payload;
+  
   try {
     const response = yield call(api.delete, 'files', {
       params: {

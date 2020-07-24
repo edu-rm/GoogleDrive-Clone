@@ -60,7 +60,8 @@ export function* deleteFolder({ payload }) {
         id
       }
     });
-
+    
+    yield put(setStorage(response.data.storage));
     yield put(deleteFolderSuccess(id));
 
   }catch (e) {

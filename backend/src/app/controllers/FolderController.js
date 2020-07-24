@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { Op } from 'sequelize';
+import { fn, col } from 'sequelize';
 
 import PathConvert from '../../utils/PathConvert';
 
@@ -113,10 +114,20 @@ class FolderController {
     fs.rmdirSync(path, {
       recursive: true,
     });
+    
+    const file = await File.findOne({
+      where : {
+        user_id: req.user_id
+      },
+      attributes : [
+        [fn('sum', col('size')), 'total_size']
+      ],
+    });
 
+    const total_size = file.dataValues.total_size * 0.000001; 
 
     return res.json({
-      success: ids
+      storage: total_size,
     });
   }
 }

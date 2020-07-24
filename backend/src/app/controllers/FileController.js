@@ -50,17 +50,21 @@ class FileController {
       const {size} = fs.statSync(filePathConverted);
       newFilesSize += size;
       const newFile = await File.create({ 
-          name: file.originalname,
-          path: `${path}${file.originalname}`, 
-          user_id: req.user_id,
-          folder_id,
-          url: fileUrl,
-          extension: extname(file.originalname),
-          size,
-        });
+        name: file.originalname,
+        path: `${path}${file.originalname}`, 
+        user_id: req.user_id,
+        folder_id,
+        url: fileUrl,
+        extension: extname(file.originalname),
+        size,
+      });
+      return res.json({ 
+        file: newFile,
+        storage: total_size + (newFilesSize * 0.000001) 
+      });
     }    
 
-    return res.json({ storage: total_size + (newFilesSize*0.000001) });
+
   }
 
   async index(req,res){
@@ -88,10 +92,23 @@ class FileController {
         where: {
           id:file_id,
         }
-      });    
+      });
+
+      const file = await File.findOne({
+        where : {
+          user_id: req.user_id
+        },
+        attributes : [
+          [fn('sum', col('size')), 'total_size']
+        ],
+      });
+  
+      const total_size = file.dataValues.total_size * 0.000001;  
 
       await promisify(fs.unlink)(path);
-      return res.json({ msg : 'Deletado com sucesso '});
+      return res.json({
+        storage: total_size,
+      });
       
     } catch (e) {
       return res.json(e);
