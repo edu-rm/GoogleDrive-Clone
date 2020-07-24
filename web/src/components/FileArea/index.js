@@ -27,6 +27,7 @@ import {
   MdArrowBack,
   MdCreateNewFolder
 } from 'react-icons/md';
+import { setStorage } from '../../store/modules/storage/actions';
 
 
 export default function FileArea({ showModal }) {
@@ -115,7 +116,6 @@ export default function FileArea({ showModal }) {
     }
     if(fileActive !== 0) {
       dispatch(deleteFileRequest(fileActive));
-      console.log(fileActive);
       setFolderActive(0);
     }
   }
