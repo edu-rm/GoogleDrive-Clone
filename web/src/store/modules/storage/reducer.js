@@ -8,8 +8,8 @@ export default function storage(state = INITIAL_STATE, action) {
 
     switch(action.type) {
       case '@storage/SET_STORAGE': {
-        console.log('action', action.payload.storage)
-        draft.storage = action.payload.storage && Number(action.payload.storage).toFixed(2);
+        console.log(action.payload.storage);
+        draft.storage = Number(action.payload.storage ).toFixed(2);
         break;
       }
       default:

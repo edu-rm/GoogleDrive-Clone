@@ -20,9 +20,6 @@ export function* folderContent({ payload }) {
       }
     });
 
-    const storage = yield call(api.get, 'storage');
-    yield put(setStorage(storage.data.storage));
-
     yield put(setContentCurrentFolderSuccess(response.data.childrenFolders));
     yield put(setCurrentFolder(id));
     if(response.data.father){

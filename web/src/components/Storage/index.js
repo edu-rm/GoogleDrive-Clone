@@ -13,7 +13,6 @@ function Storage() {
   const [percentage, setPercentage] = useState((100 * storage )/3);
 
   useEffect(()=>{
-    console.log(storage);
     setPercentage((100 * storage )/3);
   }, [storage]);
 

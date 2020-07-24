@@ -7,3 +7,13 @@ export function setStorage(storage) {
   }
 } 
 
+export function setStoragePlus(storage) {
+  return {
+    type: '@storage/SET_STORAGE_PLUS',
+    payload: {
+      storage,
+    }
+  }
+} 
+
+

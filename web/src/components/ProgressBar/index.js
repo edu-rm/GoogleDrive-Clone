@@ -12,14 +12,17 @@ function ProgressBar({ setShow }) {
   // const progress = useSelector((state)=>state.file.progress);
   const files = useSelector((state)=>state.file.files);
   
-  useEffect(()=> {
-    const array = toArray(files);
-    console.log(array)
-  }, [files])
+  // useEffect(()=> {
+  //   const array = toArray(files);
+  //   console.log(array)
+  // }, [files])
+
   const [menu, setMenu] = useState(true);
 
   const toUploadSize = useMemo(()=> toArray(files).length, [files]);
   const uploadFinished = useMemo(() => toArray(files).every((file) => file.progress === 100), [files]);
+
+
 
   return (
     
@@ -43,7 +46,7 @@ function ProgressBar({ setShow }) {
        
       <div className="body" id={menu ? "visible" : "invisible"}>
         {toArray(files).map(file => 
-          <div key={file.name} className="item">
+          <div key={file.path} className="item">
             <div className="name-icon">
               <AiOutlineFile size={24} />
               <p>{file.file.name}</p>

@@ -18,6 +18,7 @@ function FileUploader() {
   const files = useSelector((state)=>state.file.files);
   const fileExists = useSelector((state)=>state.file.fileExists);
   const currentFolder = useSelector((state)=>state.folder.currentFolder);
+  const [newFiles, setNewFiles] = useState({});
 
   const [showProgress, setShowProgress] = useState(false);
 
@@ -42,7 +43,6 @@ function FileUploader() {
     if(filesArray.length && fileExists) {
       setShowProgress(true);
       async function requestUploadFile () {
-
         filesArray.forEach(async (file) => {
           const formPayload = new FormData();
           formPayload.append('files', file.file);
@@ -58,7 +58,11 @@ function FileUploader() {
                 dispatch(setUploadProgress(file.id, percentageProgress));
               }
             });
-    
+            dispatch(setStorage(response.data.storage));
+            setNewFiles({
+              resonse: response.data,
+            });
+          
           }catch(e) {
             console.log(e);
           }
@@ -72,6 +76,10 @@ function FileUploader() {
     }
     
   },[files, dispatch, currentFolder, fileExists]);
+
+  useEffect(()=>{
+    console.log(newFiles)
+  },[newFiles])
 
   return (
     <Container>

@@ -4,6 +4,8 @@ import api from '../../../services/api';
 
 import { getFilesIntoFolderSuccess, deleteFileSuccess } from './actions';
 
+import { setStorage } from '../storage/actions';
+
 export function* filesInFolder({ payload }) {
   try {
     const { id } = payload;
@@ -12,8 +14,9 @@ export function* filesInFolder({ payload }) {
         folder_id: id,
       }
     })
+    const storage = yield call(api.get, 'storage');
+    yield put(setStorage(storage.data.storage));
 
-    console.log(response.data);
     yield put(getFilesIntoFolderSuccess(response.data));
 
   }catch(e){
@@ -23,7 +26,6 @@ export function* filesInFolder({ payload }) {
 
 export function* fileDelete({ payload }) {
   const { id } = payload;
-  console.log('sagas', id)
   try {
     yield call(api.delete, 'files', {
       params: {
@@ -39,8 +41,11 @@ export function* fileDelete({ payload }) {
 
 }
 
+// export function fileUpload({ payload }){
+//   const 
+// }
+
 export default all([
   takeLatest('@file/GET_FILES_INTO_FOLDER_REQUEST', filesInFolder),
   takeLatest('@file/DELETE_REQUEST', fileDelete),
-
 ]);

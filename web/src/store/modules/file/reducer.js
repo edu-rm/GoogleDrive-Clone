@@ -16,12 +16,15 @@ export default function file(state = INITIAL_STATE, action){
     
     switch(action.type) {
       case '@file/SET_UPLOAD_FILE' : {
-        
+        console.log(draft.files)
         draft.files = modify(draft.files, action.payload.files)
         break;
       }
 
       case '@file/SET_PROGRESS' : {
+        if(action.payload.progress === 100) {
+          // draft.filesAlreadyExists.push(draft.files[action.payload.id]);
+        }
         draft.files = {
           ...draft.files,
           [action.payload.id] : {
